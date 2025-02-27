@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { IMaskInput } from 'react-imask';
+import axios from 'axios';
 
 interface FormData {
   fullName: string;
@@ -45,8 +46,18 @@ function Formulario() {
     setCurrentStep((prev) => prev - 1);
   };
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     console.log('Dados do formulário:', data);
+
+    const makeWebHookURL = 'https://hook.us2.make.com/47xe9i36md8271us1rqxutf1wem8xhnw';
+
+    try {
+      await axios.post(makeWebHookURL, data);
+      alert('Formulário enviado com sucesso!');
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
