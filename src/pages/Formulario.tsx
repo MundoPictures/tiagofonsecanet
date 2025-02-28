@@ -14,6 +14,8 @@ interface FormData {
   eventPain: string;
   digitalStage: string;
   jobTitle: string;
+  companyName: string;
+  rg: string;
 }
 
 function Formulario() {
@@ -344,6 +346,47 @@ function Formulario() {
                 {currentStep === 2 && (
                   <>
                     <div className="space-y-6">
+                      <div className="form-group">
+                        <label className="block text-white font-medium mb-2">Nome da Empresa</label>
+                        <input
+                          type="text"
+                          {...register('companyName', { required: 'Nome da empresa é obrigatório' })}
+                          className={`w-full px-4 py-3 border rounded-xl bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                            errors.companyName
+                              ? 'border-red-500/50 focus:ring-red-500/50'
+                              : 'border-white/20 focus:ring-purple-500/50 hover:border-purple-400/50'
+                          }`}
+                          placeholder="Digite o nome da sua empresa"
+                        />
+                        {errors.companyName && (
+                          <p className="text-red-400 text-sm mt-2">{errors.companyName.message as string}</p>
+                        )}
+                      </div>
+
+                      <div className="form-group">
+                        <label className="block text-white font-medium mb-2">RG</label>
+                        <Controller
+                          name="rg"
+                          control={control}
+                          rules={{ required: 'RG é obrigatório' }}
+                          render={({ field }) => (
+                            <IMaskInput
+                              mask="00.000.000-0"
+                              {...field}
+                              className={`w-full px-4 py-3 border rounded-xl bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                                errors.rg
+                                  ? 'border-red-500/50 focus:ring-red-500/50'
+                                  : 'border-white/20 focus:ring-purple-500/50 hover:border-purple-400/50'
+                              }`}
+                              placeholder="00.000.000-0"
+                            />
+                          )}
+                        />
+                        {errors.rg && (
+                          <p className="text-red-400 text-sm mt-2">{errors.rg.message as string}</p>
+                        )}
+                      </div>
+
                       <div className="form-group">
                         <p className="block text-white font-medium mb-4">Qual seu faturamento anual?</p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
