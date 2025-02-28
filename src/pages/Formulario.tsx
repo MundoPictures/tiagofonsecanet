@@ -373,8 +373,8 @@ function Formulario() {
                             <IMaskInput
                               mask="00.000.000-0"
                               unmask={true}
-                              onAccept={(value, mask) => {
-                                field.onChange(mask.masked.value);
+                              onAccept={(value) => {
+                                field.onChange(value);
                               }}
                               {...field}
                               className={`w-full px-4 py-3 border rounded-xl bg-white/10 text-white placeholder-white/50 focus:outline-none focus:ring-2 transition-all duration-300 ${
