@@ -95,7 +95,7 @@ function Formulario() {
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-2xl p-8 border border-white/20">
           <div className="mb-8 text-center relative">
             <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-300 to-blue-300 bg-clip-text text-transparent mb-6">
-              Formulário de Confirmação
+              Formulário de Aplicação para Autoridade
             </h2>
             
             {/* Enhanced progress bar */}
@@ -390,7 +390,7 @@ function Formulario() {
                             'Dificuldade em criar conteúdo estratégico – Não sei o que postar ou como planejar meus conteúdos.',
                             'Pouca geração de leads e vendas – Quero atrair mais clientes e vender meus produtos/serviços no digital.',
                             'Falta de conhecimento sobre marketing digital – Preciso entender melhor estratégias para crescer no online.',
-                            'Medo ou insegurança de se expor no digital – Tenho receio de aparecer e criar conteúdo autêntico.',
+                            'Medo ou insegurança – Tenho receio em aparecer e criar conteudo no digital',
                             'Falta de tempo e produtividade – Preciso de métodos para produzir conteúdo sem perder muito tempo.',
                           ].map((option) => (
                             <label key={option} className="relative">
@@ -448,9 +448,9 @@ function Formulario() {
                         <p className="block text-white font-medium mb-4">Como você descreve seu estágio atual no digital?</p>
                         <div className="space-y-3">
                           {[
-                            { value: 'Basico', label: 'Básico (Tenho rede social, mas não uso)' },
-                            { value: 'Intermediario', label: 'Intermediário (Tenho rede social e posto algumas coisas)' },
-                            { value: 'Avancado', label: 'Avançado (Tenho uma rede social ativa e já executo alguma estratégia)' },
+                            { value: 'Basico', label: 'Iniciante (Estou começando no digital)' },
+                            { value: 'Intermediario', label: 'Em Desenvolvimento (Já tenho presença digital mas preciso melhorar)' },
+                            { value: 'Avancado', label: 'Avançado (Tenho presença digital estabelecida e busco autoridade)' },
                           ].map((option) => (
                             <label key={option.value} className="relative">
                               <input
