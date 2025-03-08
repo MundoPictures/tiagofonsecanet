@@ -328,8 +328,8 @@ function Influencia() {
                     <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==')] opacity-20"></div>
                     <div className="relative z-10">
                         <div className="flex justify-center mb-8">
-                            <div className="bg-[#5A3BAA] rounded-lg p-4 inline-flex items-center justify-center">
-                                <span className="text-[#FF9E00] text-5xl md:text-6xl font-bold">TF</span>
+                            <div className="bg-transparent rounded-lg p-4 inline-flex items-center justify-center">
+                                <img src={logoInfluencia} alt="Logo Influência" className="w-1/2 lg:w-1/4" />
                             </div>
                         </div>
                         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-white">Transforme sua presença digital agora!</h2>
