@@ -36,7 +36,7 @@ const bonuses = [
       "Liberado após a sua primeira ação de venda implementada. Uma surpresa que potencializa seus resultados.",
     icon: "gift",
     value: "R$ 197",
-    color: "yellow",
+    color: "green",
   },
 ];
 
@@ -76,7 +76,7 @@ const BonusSection: React.FC = () => {
             <span className="text-green-400">Bônus Especiais</span> de Fundador
           </h2>
           <div className="flex justify-center items-center">
-            <div className="px-4 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full shadow-lg">
+            <div className="px-4 py-1 bg-green-500 text-black text-sm font-bold rounded-full shadow-lg">
               Valor total: R$ 497 — você leva GRÁTIS
             </div>
           </div>
@@ -151,10 +151,10 @@ const BonusSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <div className="bg-black/30 p-6 rounded-xl border border-yellow-500/20">
+          <div className="bg-black/30 p-6 rounded-xl border border-green-500/20">
             <div className="flex items-center justify-center mb-4">
               <svg
-                className="w-8 h-8 text-yellow-500 mr-3"
+                className="w-8 h-8 text-green-500 mr-3"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -189,8 +189,8 @@ function getColorClass(color: string): string {
       return "bg-blue-500";
     case "purple":
       return "bg-purple-500";
-    case "yellow":
-      return "bg-yellow-500";
+    case "green":
+      return "bg-green-500";
     default:
       return "bg-green-500";
   }
@@ -204,8 +204,8 @@ function getIconBgClass(color: string): string {
       return "bg-gradient-to-br from-blue-600 to-blue-500";
     case "purple":
       return "bg-gradient-to-br from-purple-600 to-purple-500";
-    case "yellow":
-      return "bg-gradient-to-br from-yellow-600 to-yellow-500";
+    case "green":
+      return "bg-gradient-to-br from-green-600 to-green-500";
     default:
       return "bg-gradient-to-br from-green-600 to-green-500";
   }

@@ -59,7 +59,8 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-green-900 to-green-800 text-white py-3 shadow-xl border-b border-green-700"
+      className="fixed top-0 left-0 right-0 z-50 bg-opacity-50 bg-black text-white py-3 shadow-xl"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
     >
       <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-center">
@@ -71,7 +72,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
               transition={{ delay: 0.5 }}
             >
               <motion.span
-                className="inline-block mr-2 text-yellow-300"
+                className="inline-block mr-2 text-green-300"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
@@ -79,7 +80,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
               </motion.span>
               <span className="font-light">A oferta encerra em</span>
               <motion.span
-                className="font-bold mx-1 underline decoration-yellow-300 decoration-2 underline-offset-2"
+                className="font-bold mx-1 underline decoration-green-300 decoration-2 underline-offset-2"
                 whileHover={{ scale: 1.05 }}
               >
                 poucos minutos
@@ -141,7 +142,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
               transition={{ delay: 0.7 }}
             >
               <motion.span
-                className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-yellow-500 text-black shadow-md"
+                className="inline-flex text-white items-center px-3 py-1 text-sm font-medium rounded-full bg-green-500 text-black shadow-md"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 animate={{ y: [0, -3, 0] }}
