@@ -82,7 +82,7 @@ export default function NegocioViral() {
           <TargetAudienceSection onCtaClick={handleCtaClick} />
 
           {/* Testimonials section */}
-          <TestimonialsSection onCtaClick={handleCtaClick} />
+          <TestimonialsSection />
 
           {/* Pricing section */}
           <PricingSection onCtaClick={handleCtaClick} />

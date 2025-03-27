@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
-import CtaButton from "./CtaButton";
 
 interface TestimonialsSectionProps {
-  onCtaClick?: () => void;
+  // Remove onCtaClick if it's not being used
 }
 
 // Sample testimonials data with different heights to create visual interest
@@ -118,9 +117,7 @@ const testimonials = [
   },
 ];
 
-const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
-  onCtaClick,
-}) => {
+const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
   const ref = useRef(null);
   const controls = useAnimation();
   const isInView = useInView(ref, { once: false, amount: 0.2 });
