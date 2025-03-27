@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 interface TestimonialsSectionProps {}
 
@@ -165,16 +164,14 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
           <button className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-full shadow-md shadow-green-600/20">
             Todos os resultados
           </button>
-          {["Produtos digitais", "Serviços", "Lojas físicas"].map(
-            (filter, index) => (
-              <button
-                key={filter}
-                className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-full transition-colors shadow-md"
-              >
-                {filter}
-              </button>
-            )
-          )}
+          {["Produtos digitais", "Serviços", "Lojas físicas"].map((filter) => (
+            <button
+              key={filter}
+              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-full transition-colors shadow-md"
+            >
+              {filter}
+            </button>
+          ))}
         </div>
 
         {/* Simple grid for testimonials that works on all devices */}
