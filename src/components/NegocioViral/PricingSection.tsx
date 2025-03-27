@@ -166,7 +166,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    80% OFF
+                    45% OFF
                   </motion.div>
                 </div>
               </div>
