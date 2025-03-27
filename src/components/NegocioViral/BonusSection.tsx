@@ -76,7 +76,7 @@ const BonusSection: React.FC = () => {
             <span className="text-green-400">Bônus Especiais</span> de Fundador
           </h2>
           <div className="flex justify-center items-center">
-            <div className="px-4 py-1 bg-green-500 text-black text-sm font-bold rounded-full shadow-lg">
+            <div className="px-4 text-white py-1 bg-green-500 text-black text-sm font-bold rounded-full shadow-lg">
               Valor total: R$ 497 — você leva GRÁTIS
             </div>
           </div>

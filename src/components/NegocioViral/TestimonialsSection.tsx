@@ -159,21 +159,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
           ))}
         </div>
 
-        {/* Filter buttons */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
-          <button className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-full shadow-md shadow-green-600/20">
-            Todos os resultados
-          </button>
-          {["Produtos digitais", "Serviços", "Lojas físicas"].map((filter) => (
-            <button
-              key={filter}
-              className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white text-sm font-medium rounded-full transition-colors shadow-md"
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-
         {/* Simple grid for testimonials that works on all devices */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (

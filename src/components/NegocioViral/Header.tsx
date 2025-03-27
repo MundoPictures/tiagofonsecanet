@@ -12,7 +12,7 @@ const Header: React.FC = () => {
     >
       <div className="flex justify-center items-center">
         {/* Logo - centered on all screen sizes */}
-        <div className="max-w-[280px] mt-2 lg:mt-0">
+        <div className="max-w-[280px] mt-70 lg:mt-0">
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}

@@ -31,7 +31,7 @@ export default function NegocioViral() {
     document.documentElement.classList.add("negocio-viral-page");
 
     // Add body background color
-    document.body.style.backgroundColor = "#232323";
+    document.body.style.backgroundColor = "#131313";
 
     // Remove class when component unmounts
     return () => {
@@ -41,7 +41,7 @@ export default function NegocioViral() {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#232323]">
+    <div className="relative w-full overflow-hidden bg-[#131313]">
       {/* Countdown Timer - Fixed at the top */}
       <CountdownTimer initialMinutes={10} />
 

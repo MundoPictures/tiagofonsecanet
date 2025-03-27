@@ -13,10 +13,10 @@ const Background: React.FC<BackgroundProps> = ({
     <div className="absolute inset-0 z-0">
       <div
         className="absolute inset-0 bg-cover bg-center hidden md:block"
-        style={{ backgroundImage: `url(${imageUrl})` }}
+        style={{ backgroundImage: `url(${imageUrl})`, opacity: 0.5 }}
       />
       <div
-        className="absolute inset-0 bg-cover bg-center block md:hidden opacity-20 md:opacity-100"
+        className="absolute inset-0 bg-cover bg-center block md:hidden opacity-90 md:opacity-100"
         style={{ backgroundImage: `url(${mobileImageUrl || imageUrl})` }}
       />
     </div>

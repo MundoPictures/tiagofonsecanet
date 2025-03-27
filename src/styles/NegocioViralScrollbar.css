@@ -41,3 +41,35 @@ html.negocio-viral-page #root {
   min-height: 100vh;
   width: 100%;
 }
+
+/* Custom scrollbar for Negocio Viral page */
+.negocio-viral-page ::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.negocio-viral-page ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.negocio-viral-page ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #22c55e, #16a34a);
+  border-radius: 7px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+}
+
+.negocio-viral-page ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #16a34a, #166534);
+}
+
+/* For gradient text support */
+.text-transparent {
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+}
