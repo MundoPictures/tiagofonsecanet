@@ -15,6 +15,8 @@ import IntroductionSection from "../components/NegocioViral/IntroductionSection"
 import FeaturesSection from "../components/NegocioViral/FeaturesSection";
 import BonusSection from "../components/NegocioViral/BonusSection";
 import "../styles/NegocioViralScrollbar.css";
+import backgroundimage from "../assets/negocioViral/topsite1.png";
+import backgroundimagemobile from "../assets/negocioViral/topsite1mobile.png";
 
 export default function NegocioViral() {
   const handleCtaClick = () => {
@@ -29,7 +31,7 @@ export default function NegocioViral() {
     document.documentElement.classList.add("negocio-viral-page");
 
     // Add body background color
-    document.body.style.backgroundColor = "#131313";
+    document.body.style.backgroundColor = "#232323";
 
     // Remove class when component unmounts
     return () => {
@@ -39,14 +41,17 @@ export default function NegocioViral() {
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#131313]">
+    <div className="relative w-full overflow-hidden bg-[#232323]">
       {/* Countdown Timer - Fixed at the top */}
       <CountdownTimer initialMinutes={10} />
 
       {/* Hero section with background */}
       <div className="relative">
         {/* Background with image */}
-        <Background imageUrl="https://placehold.co/1080x1920/1a1a1a/1a1a1a" />
+        <Background
+          imageUrl={backgroundimage}
+          mobileImageUrl={backgroundimagemobile}
+        />
 
         {/* Main content */}
         <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 lg:p-8 mt-16">

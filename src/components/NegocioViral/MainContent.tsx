@@ -25,10 +25,10 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row flex-1 items-center justify-between md:items-start gap-8 md:gap-12 py-6 md:py-12">
-      {/* Main text content - centered on mobile, left-aligned on desktop */}
+    <div className="relative flex flex-col items-center justify-center flex-1 gap-8 py-6 md:py-12">
+      {/* Main text content - centered */}
       <motion.div
-        className="flex flex-col items-center md:items-start justify-center w-full md:w-3/5 text-center md:text-left"
+        className="flex flex-col items-center justify-center w-full text-center"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -57,7 +57,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         </motion.div>
 
         <motion.h2
-          className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 leading-tight"
+          className="text-white text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 leading-tight max-w-4xl"
           variants={itemVariants}
         >
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
@@ -68,7 +68,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         </motion.h2>
 
         <motion.p
-          className="text-gray-300 text-sm md:text-base mb-8 leading-relaxed max-w-xl"
+          className="text-gray-300 text-sm md:text-base mb-8 leading-relaxed max-w-2xl"
           variants={itemVariants}
         >
           <span className="italic">
@@ -92,7 +92,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         </motion.div>
 
         <motion.div
-          className="mt-5 flex items-center justify-center md:justify-start space-x-5"
+          className="mt-5 flex items-center justify-center space-x-5"
           variants={itemVariants}
         >
           <div className="flex items-center">
@@ -122,71 +122,6 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
               ></path>
             </svg>
             <span className="text-xs text-white">Garantia de 7 dias</span>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      {/* Video/Image Section */}
-      <motion.div
-        className="w-full md:w-2/5 relative"
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <motion.div
-          className="relative h-full rounded-xl overflow-hidden shadow-2xl bg-black/30 border border-green-500/10"
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
-        >
-          {/* Video placeholder - replace with actual video component */}
-          <div className="aspect-video w-full relative">
-            {/* Play button overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                className="w-16 h-16 md:w-20 md:h-20 bg-green-500 rounded-full flex items-center justify-center cursor-pointer shadow-lg"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <svg
-                  className="w-8 h-8 md:w-10 md:h-10 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </motion.div>
-            </div>
-
-            {/* Video thumbnail with text overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end">
-              <div className="p-4 text-white">
-                <p className="font-bold text-sm md:text-base">
-                  Ações reais que explodem o caixa — sem gastar 1 real com
-                  tráfego
-                </p>
-              </div>
-            </div>
-
-            <img
-              src="https://placehold.co/1280x720/111111/333333"
-              alt="Vídeo de apresentação do Negócio Viral"
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Video attributes */}
-          <div className="bg-black/50 p-3 text-xs flex justify-between text-gray-300">
-            <span>11:32</span>
-            <span className="flex items-center">
-              <svg
-                className="w-4 h-4 mr-1"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M8 5v14l11-7z" />
-              </svg>
-              Assista agora
-            </span>
           </div>
         </motion.div>
       </motion.div>
