@@ -1,0 +1,43 @@
+/* Custom scrollbar styles for NegocioViral page - desktop only */
+@media (min-width: 768px) {
+  html.negocio-viral-page::-webkit-scrollbar {
+    width: 12px;
+    background-color: #111111;
+  }
+
+  html.negocio-viral-page::-webkit-scrollbar-thumb {
+    background-color: #22c55e;
+    border-radius: 6px;
+    border: 2px solid #111111;
+  }
+
+  html.negocio-viral-page::-webkit-scrollbar-thumb:hover {
+    background-color: #16a34a;
+  }
+
+  html.negocio-viral-page::-webkit-scrollbar-track {
+    background-color: #111111;
+  }
+
+  /* Firefox */
+  html.negocio-viral-page {
+    scrollbar-width: thin;
+    scrollbar-color: #22c55e #111111;
+  }
+}
+
+/* Full page background styling */
+html.negocio-viral-page,
+html.negocio-viral-page body {
+  background-color: #131313;
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html.negocio-viral-page #root {
+  background-color: #131313;
+  min-height: 100vh;
+  width: 100%;
+}
