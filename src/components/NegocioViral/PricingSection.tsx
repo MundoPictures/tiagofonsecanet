@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
 interface PricingSectionProps {
@@ -7,8 +7,6 @@ interface PricingSectionProps {
 }
 
 const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   // Payment methods with icons
   const paymentMethods = [
     { id: 1, name: "Cartão de Crédito", icon: "💳" },
