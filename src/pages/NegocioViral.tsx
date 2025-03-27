@@ -46,7 +46,7 @@ export default function NegocioViral() {
       <CountdownTimer initialMinutes={10} />
 
       {/* Hero section with background */}
-      <div className="relative">
+      <div className="relative min-h-screen">
         {/* Background with image */}
         <Background
           imageUrl={backgroundimage}
@@ -54,16 +54,13 @@ export default function NegocioViral() {
         />
 
         {/* Main content */}
-        <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 lg:p-8 mt-16">
+        <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 lg:p-8">
           <div className="container mx-auto max-w-7xl">
             {/* Header with logo */}
             <Header />
 
             {/* Main content with text and CTA */}
             <MainContent onCtaClick={handleCtaClick} />
-
-            {/* Bottom spacer - smaller on desktop */}
-            <div className="h-1/4 md:h-1/6"></div>
           </div>
         </div>
       </div>

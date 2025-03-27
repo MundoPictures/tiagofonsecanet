@@ -25,7 +25,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center flex-1 gap-8 py-6 md:py-12">
+    <div className="relative flex flex-col items-center justify-center flex-1 gap-8 py-6 md:py-12 z-10">
       {/* Main text content - centered */}
       <motion.div
         className="flex flex-col items-center justify-center w-full text-center"
@@ -49,11 +49,6 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
               repeatType: "mirror",
             }}
           />
-          <div className="relative px-4 py-1.5 bg-green-600/20 rounded-lg border border-green-500/30">
-            <span className="text-green-400 text-sm md:text-base font-bold tracking-wide">
-              NEGÓCIO VIRAL
-            </span>
-          </div>
         </motion.div>
 
         <motion.h2
