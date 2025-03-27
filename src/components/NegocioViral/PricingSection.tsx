@@ -253,7 +253,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                     {/* Price comparison */}
                     <div className="mb-5 text-center">
                       <p className="text-gray-400 text-lg mb-1">
-                        De <span className="line-through">R$497</span>
+                        De <span className="line-through">R$997</span>
                       </p>
 
                       <div className="flex justify-center items-center">
@@ -266,7 +266,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                             animate={{ scale: [1, 1.04, 1] }}
                             transition={{ duration: 3, repeat: Infinity }}
                           >
-                            97
+                            497
                           </motion.span>
                         </div>
                       </div>
@@ -274,7 +274,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                       <p className="text-white text-lg mt-1">à vista ou</p>
 
                       <div className="text-xl font-bold text-white mt-1">
-                        12x de <span className="text-green-400">R$9,82</span>
+                        12x de <span className="text-green-400">R$41,42</span>
                       </div>
 
                       {/* Timer badge */}
