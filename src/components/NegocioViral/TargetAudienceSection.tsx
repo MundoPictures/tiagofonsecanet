@@ -169,7 +169,7 @@ const TargetAudienceSection: React.FC<TargetAudienceSectionProps> = ({
           <CtaButton
             text="QUERO ENTRAR NO NEGÓCIO VIRAL AGORA"
             onClick={onCtaClick}
-            size="large"
+            size="medium"
             className="mx-auto"
           />
         </motion.div>

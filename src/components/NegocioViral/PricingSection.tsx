@@ -541,7 +541,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
             <CtaButton
               text="QUERO COMEÇAR A VENDER 3X MAIS AGORA"
               onClick={onCtaClick}
-              size="large"
+              size="medium"
               withShine={true}
               withArrow={true}
               className="px-8 py-5 text-lg shadow-2xl shadow-green-900/20"

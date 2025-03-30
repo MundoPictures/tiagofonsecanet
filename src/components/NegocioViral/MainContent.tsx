@@ -76,7 +76,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
           <CtaButton
             text="QUERO VIRALIZAR AGORA"
             onClick={onCtaClick}
-            size="large"
+            size="medium"
             withShine={true}
             withArrow={true}
             className="shadow-lg shadow-green-500/20 hover:shadow-green-500/30 text-sm md:text-base w-full md:w-auto"

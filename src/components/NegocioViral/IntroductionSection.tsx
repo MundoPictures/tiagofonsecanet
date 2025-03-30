@@ -144,7 +144,7 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({
           <CtaButton
             text="QUERO ENTRAR NO NEGÓCIO VIRAL E VENDER TODOS OS DIAS"
             onClick={onCtaClick}
-            size="large"
+            size="medium"
             className="max-w-lg mx-auto"
           />
         </motion.div>

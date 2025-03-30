@@ -270,7 +270,7 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ onCtaClick }) => {
                 <CtaButton
                   text="QUERO APLICAR AS 10 AÇÕES AGORA E AUMENTAR MINHAS VENDAS"
                   onClick={onCtaClick}
-                  size="large"
+                  size="medium"
                   className="w-full md:w-auto shadow-lg shadow-green-600/20"
                 />
 
