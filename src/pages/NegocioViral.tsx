@@ -15,8 +15,8 @@ import IntroductionSection from "../components/NegocioViral/IntroductionSection"
 import FeaturesSection from "../components/NegocioViral/FeaturesSection";
 import BonusSection from "../components/NegocioViral/BonusSection";
 import "../styles/NegocioViralScrollbar.css";
-import backgroundimage from "../assets/negocioViral/topsite1.png";
-import backgroundimagemobile from "../assets/negocioViral/topsite1mobile.png";
+import backgroundimage from "../assets/negocioViral/bg3.png";
+import backgroundimagemobile from "../assets/negocioViral/bg3.png";
 
 export default function NegocioViral() {
   const handleCtaClick = () => {
@@ -54,13 +54,15 @@ export default function NegocioViral() {
         />
 
         {/* Main content */}
-        <div className="relative z-10 flex flex-col min-h-screen p-4 md:p-6 lg:p-8">
+        <div className="relative z-10 flex flex-col min-h-screen pt-10 sm:pt-16 md:pt-28 lg:pt-32 px-2 sm:px-4 md:px-6 lg:px-8">
           <div className="container mx-auto max-w-7xl">
             {/* Header with logo */}
             <Header />
 
-            {/* Main content with text and CTA */}
-            <MainContent onCtaClick={handleCtaClick} />
+            {/* Main content with text and CTA - optimized for mobile and desktop */}
+            <div className="mt-2 md:mt-12 lg:mt-16">
+              <MainContent onCtaClick={handleCtaClick} />
+            </div>
           </div>
         </div>
       </div>
