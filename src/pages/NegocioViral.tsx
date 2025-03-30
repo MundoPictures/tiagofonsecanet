@@ -46,7 +46,7 @@ export default function NegocioViral() {
       <CountdownTimer initialMinutes={10} />
 
       {/* Hero section with background */}
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen md:min-h-screen">
         {/* Background with image */}
         <Background
           imageUrl={backgroundimage}

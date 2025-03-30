@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
+import tiago2 from "../../assets/negocioViral/tiago2.png";
 
 interface MainContentProps {
   onCtaClick?: () => void;
 }
 
 const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -39,7 +46,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         variants={containerVariants}
       >
         <motion.h2
-          className="text-white text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-3 md:mb-6 leading-tight px-2 md:px-0"
+          className="text-white text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 md:mb-6 leading-tight px-2 md:px-0"
           variants={itemVariants}
         >
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
@@ -50,13 +57,13 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         </motion.h2>
 
         <motion.p
-          className="text-gray-300 text-sm md:text-base mb-4 md:mb-8 leading-relaxed px-4 md:px-0"
+          className="text-gray-300 text-sm md:text-base mb-3 md:mb-8 leading-relaxed px-4 md:px-0"
           variants={itemVariants}
         >
           <span className="italic">
             Mesmo que você esteja começando do zero ou vendendo pouco hoje.
           </span>
-          <span className="block mt-3 md:mt-4 font-medium text-green-300">
+          <span className="block mt-2 md:mt-4 font-medium text-green-300">
             Estratégias aplicáveis em qualquer negócio – com potencial de gerar
             vendas nas próximas 24h, mesmo sem experiência.
           </span>
@@ -77,7 +84,7 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         </motion.div>
 
         <motion.div
-          className="mt-3 md:mt-5 flex items-center justify-center md:justify-start space-x-3 md:space-x-5 px-4 md:px-0"
+          className="mt-2 md:mt-5 flex items-center justify-center md:justify-start space-x-3 md:space-x-5 px-4 md:px-0"
           variants={itemVariants}
         >
           <div className="flex items-center">
@@ -107,6 +114,33 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
               ></path>
             </svg>
             <span className="text-xs text-white">Garantia de 7 dias</span>
+          </div>
+        </motion.div>
+
+        {/* Mobile image - only visible on mobile, placed below the button */}
+        <motion.div
+          className="mt-3 block md:hidden w-full"
+          variants={itemVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          {/* Mobile-specific image with glow effect */}
+          <div className="relative w-[80%] mx-auto">
+            {/* Subtle glow behind Tiago */}
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-green-500/20 via-green-400/10 to-transparent rounded-full filter blur-xl opacity-50 scale-110" />
+
+            <img
+              src={tiago2}
+              alt="Tiago"
+              className="w-full h-auto object-contain drop-shadow-2xl"
+              onLoad={() => setIsLoaded(true)}
+              style={{
+                filter: "drop-shadow(0 0 12px rgba(74, 222, 128, 0.4))",
+                transform: "scale(0.9)",
+                maxHeight: "min(70vh, 500px)",
+              }}
+            />
           </div>
         </motion.div>
       </motion.div>
