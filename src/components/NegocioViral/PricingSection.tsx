@@ -7,12 +7,12 @@ interface PricingSectionProps {
 }
 
 const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
-  // Payment methods with icons
-  const paymentMethods = [
-    { id: 1, name: "Cartão de Crédito", icon: "💳" },
-    { id: 2, name: "Boleto", icon: "🧾" },
-    { id: 3, name: "Pix", icon: "📱" },
-  ];
+  // Payment methods with icons - Removed as we're now using SVG icons directly
+  // const paymentMethods = [
+  //   { id: 1, name: "Cartão de Crédito", icon: "💳" },
+  //   { id: 2, name: "Boleto", icon: "🧾" },
+  //   { id: 3, name: "Pix", icon: "📱" },
+  // ];
 
   // Features included in the package
   const features = [
@@ -157,7 +157,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="bg-black/30 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 backdrop-blur-sm">
+                  <div className="bg-gradient-to-br from-green-900/20 to-green-800/10 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 backdrop-blur-sm">
                     <span className="h-2 w-2 bg-red-500 rounded-full animate-pulse"></span>
                     OFERTA EXPIRA HOJE
                   </div>
@@ -249,127 +249,178 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
 
                 {/* Right side - Pricing (3 columns on large screens) */}
                 <div className="lg:col-span-3">
-                  <div className="bg-gradient-to-b from-black/80 to-black/60 backdrop-blur-md rounded-xl border border-green-500/20 p-6 shadow-xl">
-                    {/* Price comparison */}
-                    <div className="mb-5 text-center">
-                      <p className="text-gray-400 text-lg mb-1">
-                        De <span className="line-through">R$997</span>
-                      </p>
+                  <div className="bg-black rounded-3xl border border-[#00ff66]/30 p-0 shadow-xl overflow-hidden relative">
+                    {/* Main pricing card with grid background across whole component */}
+                    <div className="relative">
+                      {/* Grid background that covers the entire component */}
+                      <div className="absolute inset-0 z-0 bg-black">
+                        {/* Evenly spaced grid with same number of vertical and horizontal lines */}
+                        <div className="grid grid-cols-8 h-full w-full">
+                          {[...Array(8)].map((_, i) => (
+                            <div
+                              key={`col-${i}`}
+                              className="border-r border-gray-700/30 h-full"
+                            ></div>
+                          ))}
+                        </div>
+                        <div className="grid grid-rows-8 h-full w-full">
+                          {[...Array(8)].map((_, i) => (
+                            <div
+                              key={`row-${i}`}
+                              className="border-b border-gray-700/30 w-full"
+                            ></div>
+                          ))}
+                        </div>
 
-                      <div className="flex justify-center items-center">
-                        <div className="relative">
-                          <span className="text-white text-lg font-medium absolute -top-2 -left-4 md:-left-6">
-                            R$
-                          </span>
-                          <motion.span
-                            className="text-green-400 text-6xl md:text-7xl font-extrabold leading-none"
-                            animate={{ scale: [1, 1.04, 1] }}
-                            transition={{ duration: 3, repeat: Infinity }}
-                          >
-                            497
-                          </motion.span>
+                        {/* Concentrated corner glow effects */}
+                        <div className="absolute -top-20 -right-20 w-[200px] h-[200px] bg-[#00ff66]/8 rounded-full blur-2xl"></div>
+                        <div className="absolute -bottom-20 -left-20 w-[200px] h-[200px] bg-[#00ff66]/8 rounded-full blur-2xl"></div>
+                      </div>
+
+                      {/* Price section */}
+                      <div className="relative py-6 px-8 text-center border-b border-green-500/10 z-10">
+                        {/* Original price with strikethrough */}
+                        <p className="text-red-500 text-sm">
+                          De <span className="line-through">R$ 997,00</span>
+                        </p>
+
+                        {/* Main price display */}
+                        <div className="flex items-center justify-center mt-2">
+                          <div className="flex items-start">
+                            <span className="text-white text-2xl font-medium mt-2 mr-1">
+                              R$
+                            </span>
+                            <div className="flex items-baseline">
+                              <span className="text-[#00ff66] text-7xl font-bold leading-none">
+                                497
+                              </span>
+                              <span className="text-[#00ff66] text-3xl font-bold">
+                                ,00
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p className="text-white text-sm -mt-1">à vista</p>
+
+                        {/* Installment option */}
+                        <div className="text-xl font-medium text-white mt-5">
+                          ou 12x de{" "}
+                          <span className="text-[#00ff66]">R$ 41,42</span>
                         </div>
                       </div>
 
-                      <p className="text-white text-lg mt-1">à vista ou</p>
-
-                      <div className="text-xl font-bold text-white mt-1">
-                        12x de <span className="text-green-400">R$41,42</span>
+                      {/* Timer badge - styled like the reference image */}
+                      <div className="flex justify-center -mt-3 relative z-10">
+                        <div className="bg-[#1a1a1a] border border-[#ffa500]/60 text-[#ffa500] rounded-full px-6 py-2 inline-flex items-center gap-2 shadow-lg shadow-black/40 z-10">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                          <span className="font-medium">
+                            Oferta expira em breve
+                          </span>
+                        </div>
                       </div>
 
-                      {/* Timer badge */}
-                      <motion.div
-                        className="mt-6 mb-6 bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 border border-yellow-500/30 rounded-full px-4 py-2 inline-flex items-center gap-2"
-                        animate={{ y: [0, -3, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
-                        <svg
-                          className="w-5 h-5 text-yellow-400"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
+                      {/* CTA Button - styled exactly like the reference image */}
+                      <div className="px-6 py-6 relative z-10">
+                        <button
+                          onClick={onCtaClick}
+                          className="w-full bg-[#00e04a] hover:bg-[#00ff4a] text-white font-bold py-4 px-6 rounded-md text-lg uppercase tracking-wide transition-all duration-300 shadow-xl flex items-center justify-center relative z-10"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span className="text-yellow-400 text-sm font-medium">
-                          Oferta expira em breve
-                        </span>
-                      </motion.div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <motion.div
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="mb-5"
-                    >
-                      <CtaButton
-                        text="GARANTIR MINHA VAGA AGORA"
-                        onClick={onCtaClick}
-                        size="large"
-                        withShine={true}
-                        withArrow={true}
-                        withPulse={true}
-                        className="w-full py-5 text-lg shadow-lg shadow-green-900/20"
-                      />
-                      <p className="text-center text-gray-400 text-xs mt-2">
-                        Acesso imediato após a confirmação do pagamento
-                      </p>
-                    </motion.div>
-
-                    {/* Guarantee */}
-                    <motion.div
-                      className="bg-gradient-to-br from-green-900/10 to-green-900/5 backdrop-blur-sm rounded-lg p-4 border border-green-800/20 flex items-center gap-3 mb-5"
-                      whileHover={{ y: -2 }}
-                    >
-                      <div className="h-10 w-10 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex-shrink-0 flex items-center justify-center text-white">
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h5 className="text-white font-bold">
-                          Garantia de 7 Dias
-                        </h5>
-                        <p className="text-gray-400 text-sm">
-                          Devolução total do investimento se não ficar
-                          satisfeito
+                          GARANTIR MINHA VAGA AGORA
+                          <span className="ml-2">→</span>
+                        </button>
+                        <p className="text-center text-gray-400 text-xs mt-2">
+                          Acesso imediato após a confirmação do pagamento
                         </p>
                       </div>
-                    </motion.div>
 
-                    {/* Payment methods */}
-                    <div className="border-t border-green-900/20 pt-4 mt-5">
-                      <p className="text-gray-400 text-xs mb-3 text-center">
-                        Formas de pagamento:
-                      </p>
-                      <div className="flex justify-center gap-4">
-                        {paymentMethods.map((method) => (
-                          <div
-                            key={method.id}
-                            className="flex flex-col items-center"
+                      {/* Guarantee section */}
+                      <div className="mx-6 mb-6 bg-gradient-to-br from-green-900/20 to-green-800/10 backdrop-blur-sm rounded-lg p-4 border border-green-800/10 flex items-center gap-3 relative z-10">
+                        <div className="h-12 w-12 bg-[#00df4a] rounded-full flex-shrink-0 flex items-center justify-center text-white">
+                          <svg
+                            className="w-6 h-6"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
                           >
-                            <span className="text-2xl mb-1">{method.icon}</span>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                            />
+                          </svg>
+                        </div>
+                        <div>
+                          <h5 className="text-white font-bold">
+                            Garantia de 7 Dias
+                          </h5>
+                          <p className="text-gray-400 text-sm">
+                            Devolução total do investimento se não ficar
+                            satisfeito
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Payment methods */}
+                      <div className="pb-6 px-6 relative z-10">
+                        <p className="text-gray-400 text-xs mb-3 text-center">
+                          Formas de pagamento:
+                        </p>
+                        <div className="flex justify-center gap-10">
+                          <div className="flex flex-col items-center">
+                            <div className="w-8 h-8 flex items-center justify-center mb-1">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="w-full h-full text-blue-400"
+                                fill="currentColor"
+                              >
+                                <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z" />
+                              </svg>
+                            </div>
                             <span className="text-xs text-gray-400">
-                              {method.name}
+                              Cartão
                             </span>
                           </div>
-                        ))}
+                          <div className="flex flex-col items-center">
+                            <div className="w-8 h-8 flex items-center justify-center mb-1">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="w-full h-full text-gray-400"
+                                fill="currentColor"
+                              >
+                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                              </svg>
+                            </div>
+                            <span className="text-xs text-gray-400">
+                              Boleto
+                            </span>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <div className="w-8 h-8 flex items-center justify-center mb-1">
+                              <svg
+                                viewBox="0 0 24 24"
+                                className="w-full h-full text-green-400"
+                                fill="currentColor"
+                              >
+                                <path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H7V4h10v16zm-1-5H8v2h8v-2zm-4-6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0-2c0 .55.45 1 1 1s1-.45 1-1-.45-1-1-1-1 .45-1 1z" />
+                              </svg>
+                            </div>
+                            <span className="text-xs text-gray-400">Pix</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
