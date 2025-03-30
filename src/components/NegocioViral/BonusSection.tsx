@@ -76,7 +76,7 @@ const BonusSection: React.FC = () => {
             <span className="text-green-400">Bônus Especiais</span> de Fundador
           </h2>
           <div className="flex justify-center items-center">
-            <div className="px-4 text-white py-1 bg-green-500 text-black text-sm font-bold rounded-full shadow-lg">
+            <div className="px-4 text-white py-1 bg-green-500 text-sm font-bold rounded-full shadow-lg">
               Valor total: R$ 497 — você leva GRÁTIS
             </div>
           </div>
@@ -119,8 +119,8 @@ const BonusSection: React.FC = () => {
                     <h3 className="text-xl md:text-2xl font-bold text-white">
                       {bonus.title}
                     </h3>
-                    <span className="text-sm font-medium px-3 py-1 bg-green-900/50 text-green-400 rounded-full">
-                      Valor: {bonus.value}
+                    <span className="text-sm font-medium text-center w-[100px] px-3 py-1 bg-green-900/50 text-green-400 rounded-full">
+                      {bonus.value}
                     </span>
                   </div>
                   <p className="text-gray-300 mb-2">{bonus.description}</p>
@@ -189,8 +189,6 @@ function getColorClass(color: string): string {
       return "bg-blue-500";
     case "purple":
       return "bg-purple-500";
-    case "green":
-      return "bg-green-500";
     default:
       return "bg-green-500";
   }
@@ -204,8 +202,6 @@ function getIconBgClass(color: string): string {
       return "bg-gradient-to-br from-blue-600 to-blue-500";
     case "purple":
       return "bg-gradient-to-br from-purple-600 to-purple-500";
-    case "green":
-      return "bg-gradient-to-br from-green-600 to-green-500";
     default:
       return "bg-gradient-to-br from-green-600 to-green-500";
   }
