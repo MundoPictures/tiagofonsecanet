@@ -1,10 +1,82 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 import tiago2 from "../../assets/negocioViral/tiago2.png";
 
+// Add type declaration for Vimeo
+declare global {
+  interface Window {
+    Vimeo?: {
+      Player: any;
+    };
+  }
+}
+
 const MainContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<any>(null);
+
+  // Handler for Vimeo API messages
+  const handleVimeoMessage = (event: MessageEvent) => {
+    if (!event.data || typeof event.data !== "string") return;
+
+    try {
+      const data = JSON.parse(event.data);
+
+      // Check if this is a Vimeo player event
+      if (data.event === "ready" && videoRef.current) {
+        setPlayerReady(true);
+
+        // Get the Vimeo player instance
+        if (window.Vimeo) {
+          playerRef.current = new window.Vimeo.Player(videoRef.current);
+
+          // Set initial volume to 0 for autoplay
+          playerRef.current.setVolume(0);
+
+          // Start playing automatically
+          playerRef.current.play().catch((error: any) => {
+            console.log("Autoplay was prevented by browser:", error);
+          });
+        }
+      }
+    } catch (e) {
+      // Not a JSON message or not from Vimeo
+    }
+  };
+
+  useEffect(() => {
+    // Load Vimeo player script
+    const script = document.createElement("script");
+    script.src = "https://player.vimeo.com/api/player.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Add event listener for Vimeo API messages
+    window.addEventListener("message", handleVimeoMessage);
+
+    return () => {
+      window.removeEventListener("message", handleVimeoMessage);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
+  // Handle click on video
+  const handleVideoClick = () => {
+    if (playerRef.current) {
+      if (!isPlaying) {
+        // Turn on sound and ensure playing
+        playerRef.current.setVolume(1);
+        playerRef.current.play();
+      }
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     setIsLoaded(true);
@@ -68,7 +140,7 @@ const MainContent: React.FC = () => {
         <motion.div variants={itemVariants} className="w-full md:w-auto">
           <CtaButton
             text="QUERO VIRALIZAR MEU NEGÓCIO"
-            mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
+            mobileText="QUERO VIRALIZAR"
             size="medium"
             withShine={true}
             withArrow={true}
@@ -124,8 +196,8 @@ const MainContent: React.FC = () => {
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          {/* Mobile-specific image with glow effect */}
-          <div className="relative w-[85%] mx-auto">
+          {/* Mobile-specific image with glow effect and video overlay */}
+          <div className="relative w-[95%] mx-auto">
             {/* Enhanced glow behind Tiago */}
             <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-green-500/30 via-green-400/15 to-transparent rounded-full filter blur-xl opacity-70 scale-110" />
 
@@ -140,6 +212,68 @@ const MainContent: React.FC = () => {
                 maxHeight: "min(70vh, 500px)",
               }}
             />
+
+            {/* Video overlay container positioned on top of the image */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div
+                className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl shadow-green-500/20"
+                style={{ aspectRatio: "16/9" }}
+                onClick={handleVideoClick}
+              >
+                <div
+                  style={{
+                    padding: "56.25% 0 0 0",
+                    position: "relative",
+                    background: "#000",
+                  }}
+                  className="relative"
+                >
+                  <iframe
+                    ref={videoRef}
+                    src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1"
+                    frameBorder="0"
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                    }}
+                    title="Copy Negocio Viral"
+                  ></iframe>
+
+                  {/* Play button overlay that disappears when video is playing */}
+                  {!isPlaying && (
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center z-10 bg-black/30 cursor-pointer"
+                      initial={{ opacity: 1 }}
+                      animate={{ opacity: isPlaying ? 0 : 1 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <motion.div
+                        className="bg-green-500 h-14 w-14 rounded-full flex items-center justify-center cursor-pointer"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <svg
+                          className="w-8 h-8 text-white"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                      </motion.div>
+                      <div className="absolute bottom-3 left-0 right-0 text-center text-white text-sm font-semibold">
+                        <span className="bg-black/50 px-3 py-1 rounded-full">
+                          Clique para assistir com áudio
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </motion.div>

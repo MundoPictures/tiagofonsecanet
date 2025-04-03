@@ -1,8 +1,90 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
+// Add type declaration for Vimeo if not already declared
+declare global {
+  interface Window {
+    Vimeo?: {
+      Player: any;
+    };
+  }
+}
+
 const IntroductionSection: React.FC = () => {
+  const [playerReady, setPlayerReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLIFrameElement>(null);
+  const playerRef = useRef<any>(null);
+
+  // Handler for Vimeo API messages
+  const handleVimeoMessage = (event: MessageEvent) => {
+    if (!event.data || typeof event.data !== "string") return;
+
+    try {
+      const data = JSON.parse(event.data);
+
+      // Check if this is a Vimeo player event
+      if (data.event === "ready" && videoRef.current) {
+        setPlayerReady(true);
+
+        // Get the Vimeo player instance
+        if (window.Vimeo) {
+          playerRef.current = new window.Vimeo.Player(videoRef.current);
+
+          // Set initial volume to 0 for autoplay
+          playerRef.current.setVolume(0);
+
+          // Start playing automatically
+          playerRef.current.play().catch((error: any) => {
+            console.log("Autoplay was prevented by browser:", error);
+          });
+        }
+      }
+    } catch (e) {
+      // Not a JSON message or not from Vimeo
+    }
+  };
+
+  useEffect(() => {
+    // Load Vimeo player script if it hasn't been loaded yet
+    if (
+      !document.querySelector(
+        'script[src="https://player.vimeo.com/api/player.js"]'
+      )
+    ) {
+      const script = document.createElement("script");
+      script.src = "https://player.vimeo.com/api/player.js";
+      script.async = true;
+      document.body.appendChild(script);
+
+      // Add event listener for Vimeo API messages
+      window.addEventListener("message", handleVimeoMessage);
+
+      return () => {
+        window.removeEventListener("message", handleVimeoMessage);
+        const scriptElement = document.querySelector(
+          'script[src="https://player.vimeo.com/api/player.js"]'
+        );
+        if (scriptElement && scriptElement.parentNode) {
+          scriptElement.parentNode.removeChild(scriptElement);
+        }
+      };
+    }
+  }, []);
+
+  // Handle click on video
+  const handleVideoClick = () => {
+    if (playerRef.current) {
+      if (!isPlaying) {
+        // Turn on sound and ensure playing
+        playerRef.current.setVolume(1);
+        playerRef.current.play();
+      }
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <section className="py-20 relative overflow-hidden">
       {/* Background elements */}
@@ -17,6 +99,85 @@ const IntroductionSection: React.FC = () => {
 
       <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-12">
+          {/* Video container for desktop only */}
+          <motion.div
+            className="hidden md:block w-full max-w-2xl mx-auto mb-10 relative"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div
+              className="w-full rounded-xl overflow-hidden shadow-2xl shadow-green-500/20 cursor-pointer group"
+              style={{ aspectRatio: "16/9" }}
+              onClick={handleVideoClick}
+            >
+              <div
+                style={{
+                  padding: "56.25% 0 0 0",
+                  position: "relative",
+                  background: "#000",
+                }}
+                className="relative"
+              >
+                <iframe
+                  ref={videoRef}
+                  src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  title="Copy Negocio Viral"
+                ></iframe>
+
+                {/* Play button overlay that disappears when video is playing */}
+                {!isPlaying && (
+                  <motion.div
+                    className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 cursor-pointer group-hover:bg-black/30 transition-all duration-300"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: isPlaying ? 0 : 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <motion.div
+                      className="bg-green-500 h-20 w-20 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-green-500/40"
+                      whileHover={{
+                        scale: 1.1,
+                        boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.6)",
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <svg
+                        className="w-10 h-10 text-white"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                    </motion.div>
+                    <motion.div
+                      className="absolute bottom-6 left-0 right-0 text-center"
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1 }}
+                    >
+                      <span className="bg-black/60 text-white text-sm font-semibold px-4 py-2 rounded-full">
+                        Assista o vídeo com áudio
+                      </span>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </div>
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -bottom-3 -left-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
+            <div className="absolute -top-3 -right-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
