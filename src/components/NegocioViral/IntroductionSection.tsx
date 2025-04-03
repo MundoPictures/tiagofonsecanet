@@ -2,15 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
-interface IntroductionSectionProps {
-  onCtaClick?: () => void;
-}
-
-const IntroductionSection: React.FC<IntroductionSectionProps> = ({
-  onCtaClick,
-}) => {
+const IntroductionSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-24 bg-[#131313] relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute -top-20 right-10 text-[200px] font-bold text-green-500 transform rotate-12 opacity-5">
@@ -143,9 +137,10 @@ const IntroductionSection: React.FC<IntroductionSectionProps> = ({
 
           <CtaButton
             text="QUERO VENDER TODO DIA"
-            onClick={onCtaClick}
+            mobileText="QUERO VENDER"
             size="medium"
             className="max-w-lg mx-auto"
+            isPricingButton={false}
           />
         </motion.div>
       </div>

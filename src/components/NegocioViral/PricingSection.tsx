@@ -2,11 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
-interface PricingSectionProps {
-  onCtaClick?: () => void;
-}
-
-const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
+const PricingSection: React.FC = () => {
   // Payment methods with icons - Removed as we're now using SVG icons directly
   // const paymentMethods = [
   //   { id: 1, name: "Cartão de Crédito", icon: "💳" },
@@ -44,7 +40,22 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
   ];
 
   return (
-    <section id="preco" className="py-20 relative overflow-hidden">
+    <section
+      id="pricing-section"
+      className="py-20 md:py-24 relative overflow-hidden"
+    >
+      <motion.div
+        className="absolute -inset-2 bg-gradient-to-br from-green-500/5 to-transparent rounded-3xl blur-xl z-0"
+        animate={{
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "mirror",
+        }}
+      />
+
       {/* Dynamic background elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -285,7 +296,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                         </p>
 
                         {/* Main price display */}
-                        <div className="flex items-center justify-center mt-2">
+                        <div
+                          id="main-pricing-display"
+                          className="flex items-center justify-center mt-2"
+                        >
                           <div className="flex items-start">
                             <span className="text-white text-2xl font-medium mt-2 mr-1">
                               R$
@@ -334,14 +348,18 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
 
                       {/* CTA Button - styled exactly like the reference image */}
                       <div className="px-6 py-6 relative z-10">
-                        <button
-                          onClick={onCtaClick}
-                          className="w-full bg-[#00e04a] hover:bg-[#00ff4a] text-white font-bold py-4 px-6 rounded-md text-lg uppercase tracking-wide transition-all duration-300 shadow-xl flex items-center justify-center relative z-10"
-                        >
-                          GARANTIR MINHA VAGA AGORA
-                          <span className="ml-2">→</span>
-                        </button>
-                        <p className="text-center text-gray-400 text-xs mt-2">
+                        <CtaButton
+                          id="pricing-cta-button"
+                          text="GARANTIR MINHA VAGA AGORA"
+                          mobileText="GARANTIR VAGA"
+                          size="large"
+                          withShine={true}
+                          withArrow={true}
+                          withPulse={true}
+                          isPricingButton={true}
+                          className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl shadow-green-900/30"
+                        />
+                        <p className="text-center mt-3 text-gray-400 text-xs sm:text-sm">
                           Acesso imediato após a confirmação do pagamento
                         </p>
                       </div>
@@ -419,6 +437,37 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
                               </svg>
                             </div>
                             <span className="text-xs text-gray-400">Pix</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Pricing value - bold and prominent */}
+                      <div className="flex flex-col items-center mb-3 relative z-10">
+                        <div className="flex flex-col items-center">
+                          <div className="flex">
+                            <span className="text-gray-400 text-xl font-medium line-through opacity-60">
+                              R$997
+                            </span>
+                            <div className="relative ml-2">
+                              <div className="absolute -right-3 -top-2 flex items-center justify-center bg-green-500 text-[10px] font-bold text-white rounded-full w-12 h-12 animate-pulse">
+                                -50%
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            id="pricing-value"
+                            className="flex items-baseline mb-2"
+                          >
+                            <span className="text-gray-400 mr-1 text-lg">
+                              R$
+                            </span>
+                            <span className="text-white text-5xl font-bold">
+                              497
+                            </span>
+                          </div>
+                          <div className="bg-gradient-to-r from-green-600/20 to-green-400/20 px-4 py-1 rounded-full border border-green-500/30 text-green-400 text-sm font-medium">
+                            <span className="mr-1">🔥</span>
+                            Por tempo limitado!
                           </div>
                         </div>
                       </div>
@@ -534,25 +583,27 @@ const PricingSection: React.FC<PricingSectionProps> = ({ onCtaClick }) => {
           transition={{ duration: 0.6 }}
         >
           <motion.div
-            className="relative inline-block"
+            className="relative inline-block w-full sm:w-auto px-4 sm:px-0"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
             <CtaButton
               text="QUERO COMEÇAR A VENDER 3X MAIS AGORA"
-              onClick={onCtaClick}
-              size="medium"
+              mobileText="VENDER 3X MAIS"
+              size="large"
               withShine={true}
               withArrow={true}
-              className="px-8 py-5 text-lg shadow-2xl shadow-green-900/20"
+              withPulse={true}
+              isPricingButton={true}
+              className="w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-bold shadow-2xl shadow-green-900/30"
             />
 
             {/* Subtle pulsing circle behind button */}
             <motion.div
-              className="absolute -inset-3 bg-gradient-to-r from-green-500/20 to-green-600/20 rounded-full blur-xl -z-10"
+              className="absolute -inset-3 bg-gradient-to-r from-green-500/30 to-green-600/30 rounded-full blur-xl -z-10"
               animate={{
                 scale: [1, 1.05, 1],
-                opacity: [0.4, 0.6, 0.4],
+                opacity: [0.5, 0.7, 0.5],
               }}
               transition={{
                 duration: 2,

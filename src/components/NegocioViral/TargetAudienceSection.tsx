@@ -2,10 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
-interface TargetAudienceSectionProps {
-  onCtaClick?: () => void;
-}
-
 const targetProfiles = [
   {
     title: "Donos de negócios físicos e digitais",
@@ -33,9 +29,7 @@ const targetProfiles = [
   },
 ];
 
-const TargetAudienceSection: React.FC<TargetAudienceSectionProps> = ({
-  onCtaClick,
-}) => {
+const TargetAudienceSection: React.FC = () => {
   return (
     <section className="py-20 bg-gradient-to-b from-[#0a0a0a] to-[#131313] relative overflow-hidden">
       {/* Background decorations */}
@@ -168,9 +162,10 @@ const TargetAudienceSection: React.FC<TargetAudienceSectionProps> = ({
 
           <CtaButton
             text="QUERO ENTRAR NO NEGÓCIO VIRAL AGORA"
-            onClick={onCtaClick}
+            mobileText="QUERO ENTRAR AGORA"
             size="medium"
             className="mx-auto"
+            isPricingButton={false}
           />
         </motion.div>
       </div>

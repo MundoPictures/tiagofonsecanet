@@ -19,12 +19,6 @@ import backgroundimage from "../assets/negocioViral/bg3.png";
 import backgroundimagemobile from "../assets/negocioViral/bg3.png";
 
 export default function NegocioViral() {
-  const handleCtaClick = () => {
-    // Handle CTA button click
-    console.log("CTA clicked");
-    // You can add navigation, form display, etc. here
-  };
-
   // Add/remove the class to html element on mount/unmount
   useEffect(() => {
     // Add class when component mounts
@@ -61,7 +55,7 @@ export default function NegocioViral() {
 
             {/* Main content with text and CTA - optimized for mobile and desktop */}
             <div className="mt-2 md:mt-12 lg:mt-16">
-              <MainContent onCtaClick={handleCtaClick} />
+              <MainContent />
             </div>
           </div>
         </div>
@@ -71,7 +65,7 @@ export default function NegocioViral() {
       <div className="bg-[#131313] w-full">
         <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
           {/* Introduction section */}
-          <IntroductionSection onCtaClick={handleCtaClick} />
+          <IntroductionSection />
 
           {/* Benefits section */}
           <BenefitsSection />
@@ -83,16 +77,16 @@ export default function NegocioViral() {
           <BonusSection />
 
           {/* Target audience section */}
-          <TargetAudienceSection onCtaClick={handleCtaClick} />
+          <TargetAudienceSection />
 
           {/* Testimonials section */}
           <TestimonialsSection />
 
           {/* Pricing section */}
-          <PricingSection onCtaClick={handleCtaClick} />
+          <PricingSection />
 
           {/* Guarantee section */}
-          <GuaranteeSection onCtaClick={handleCtaClick} />
+          <GuaranteeSection />
 
           {/* Coach section */}
           <CoachSection />

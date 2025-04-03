@@ -2,11 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
-interface GuaranteeSectionProps {
-  onCtaClick?: () => void;
-}
-
-const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ onCtaClick }) => {
+const GuaranteeSection: React.FC = () => {
   return (
     <div
       id="garantia"
@@ -268,10 +264,11 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({ onCtaClick }) => {
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
                 <CtaButton
-                  text="QUERO APLICAR AS 10 AÇÕES AGORA E AUMENTAR MINHAS VENDAS"
-                  onClick={onCtaClick}
+                  text="QUERO GARANTIR SEM RISCO"
+                  mobileText="SEM RISCO"
                   size="medium"
-                  className="w-full md:w-auto shadow-lg shadow-green-600/20"
+                  className="mx-auto"
+                  isPricingButton={false}
                 />
 
                 <p className="text-center mt-4 text-gray-400 text-sm">
