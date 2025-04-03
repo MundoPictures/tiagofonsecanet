@@ -83,22 +83,41 @@ const TargetAudienceSection: React.FC = () => {
 
         {/* Not For section */}
         <motion.div
-          className="max-w-4xl mx-auto bg-black/40 rounded-2xl p-8 border border-red-900/20 mb-16"
+          className="max-w-4xl mx-auto bg-black/40 rounded-2xl p-8 border border-red-900/20 mb-16 relative overflow-hidden"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="flex flex-col md:flex-row items-start gap-6">
-            <div className="md:w-16 flex-shrink-0 bg-red-500 w-12 h-12 rounded-full flex items-center justify-center">
+          {/* Animated red glow in the background */}
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-br from-red-900/10 to-red-700/5 rounded-2xl blur-md"
+            animate={{
+              opacity: [0.5, 0.8, 0.5],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatType: "mirror",
+            }}
+          />
+
+          <div className="flex flex-col md:flex-row items-start gap-6 relative z-10">
+            <div className="md:w-16 flex-shrink-0 bg-gradient-to-br from-red-600 to-red-500 w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-red-500/20">
               <motion.svg
                 className="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
                 animate={{
-                  scale: [1, 1.15, 1],
+                  scale: [1, 1.3, 1],
+                  rotate: [0, 15, 0, -15, 0],
                   opacity: [1, 0.8, 1],
+                  filter: [
+                    "drop-shadow(0 0 0 rgba(255, 255, 255, 0))",
+                    "drop-shadow(0 0 3px rgba(255, 255, 255, 0.5))",
+                    "drop-shadow(0 0 0 rgba(255, 255, 255, 0))",
+                  ],
                 }}
                 transition={{
                   duration: 1.5,
@@ -106,51 +125,96 @@ const TargetAudienceSection: React.FC = () => {
                   repeatType: "loop",
                 }}
               >
-                <path
+                <motion.path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
-                ></path>
+                  animate={{
+                    pathLength: [0, 1],
+                    pathOffset: [0.3, 0],
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    repeatDelay: 2,
+                  }}
+                ></motion.path>
               </motion.svg>
             </div>
-            <div>
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
-                Este programa <span className="text-red-400">NÃO</span> é para
-                você se:
-              </h3>
-              <ul className="space-y-3 text-gray-300">
+
+            <div className="flex-1">
+              <motion.h3
+                className="text-2xl md:text-3xl font-bold text-white mb-4"
+                animate={{
+                  textShadow: [
+                    "0 0 0px rgba(248, 113, 113, 0)",
+                    "0 0 5px rgba(248, 113, 113, 0.5)",
+                    "0 0 0px rgba(248, 113, 113, 0)",
+                  ],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              >
+                Não é para você se...
+              </motion.h3>
+              <div className="space-y-4">
                 {[
                   "Está em busca de mais teoria sobre marketing ou vendas",
                   "Não está disposto a executar ações práticas no seu negócio",
                   "Prefere investir em anúncios e terceirizar tudo",
                   "Busca um resultado mágico sem nenhum esforço da sua parte",
                 ].map((item, index) => (
-                  <motion.li
+                  <motion.div
                     key={index}
-                    className="flex items-start"
-                    initial={{ opacity: 0, x: 20 }}
+                    className="flex items-start gap-3"
+                    initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.5 + index * 0.1 }}
+                    transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
                   >
-                    <svg
-                      className="w-5 h-5 text-red-500 mt-1 mr-3 flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                        clipRule="evenodd"
-                      ></path>
-                    </svg>
-                    <span>{item}</span>
-                  </motion.li>
+                    <div className="h-6 w-6 rounded-full bg-red-500/20 flex-shrink-0 flex items-center justify-center mt-1">
+                      <svg
+                        className="w-4 h-4 text-red-500"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-gray-300">{item}</p>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
+
+          {/* Animated warning border */}
+          <motion.div
+            className="absolute inset-0 rounded-2xl"
+            style={{
+              border: "1px solid rgba(220, 38, 38, 0.3)",
+              boxShadow: "0 0 0 0 rgba(220, 38, 38, 0.4)",
+            }}
+            animate={{
+              boxShadow: [
+                "0 0 0 0 rgba(220, 38, 38, 0.4)",
+                "0 0 0 3px rgba(220, 38, 38, 0.2)",
+                "0 0 0 0 rgba(220, 38, 38, 0.4)",
+              ],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
         </motion.div>
 
         {/* CTA Container */}

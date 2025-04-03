@@ -43,6 +43,28 @@ const bonuses = [
 const BonusSection: React.FC = () => {
   return (
     <section className="py-20 bg-[#131313] relative overflow-hidden">
+      {/* Floating particles background effect */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={`particle-${i}`}
+          className="absolute w-2 h-2 rounded-full bg-green-500/30"
+          style={{
+            top: `${Math.random() * 100}%`,
+            left: `${Math.random() * 100}%`,
+          }}
+          animate={{
+            y: [0, -15, 0],
+            opacity: [0.1, 0.3, 0.1],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 3 + Math.random() * 5,
+            repeat: Infinity,
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+
       {/* Background decorations */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <svg
@@ -61,6 +83,20 @@ const BonusSection: React.FC = () => {
         </svg>
       </div>
 
+      {/* Large glowing orb */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-green-500/5 to-green-300/5 blur-[120px] z-0"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+      />
+
       <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
@@ -69,11 +105,55 @@ const BonusSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-block bg-green-500/10 px-4 py-2 rounded-full border border-green-500/20 text-green-400 text-sm font-semibold uppercase tracking-wider mb-4">
+          <motion.div
+            className="inline-block bg-green-500/10 px-4 py-2 rounded-full border border-green-500/20 text-green-400 text-sm font-semibold uppercase tracking-wider mb-4"
+            animate={{
+              boxShadow: [
+                "0 0 5px rgba(74, 222, 128, 0.2)",
+                "0 0 20px rgba(74, 222, 128, 0.4)",
+                "0 0 5px rgba(74, 222, 128, 0.2)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          >
             Exclusivo nesta oferta
-          </div>
+          </motion.div>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            <span className="text-green-400">Bônus Especiais</span> de Fundador
+            <motion.span
+              className="text-green-400 relative inline-block"
+              animate={{
+                textShadow: [
+                  "0 0 5px rgba(74, 222, 128, 0.2)",
+                  "0 0 15px rgba(74, 222, 128, 0.5)",
+                  "0 0 5px rgba(74, 222, 128, 0.2)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            >
+              Bônus Especiais
+              {/* Underline effect */}
+              <motion.span
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-green-500/0 via-green-500 to-green-500/0"
+                animate={{
+                  scaleX: [0, 1, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  repeatDelay: 1,
+                }}
+              />
+            </motion.span>{" "}
+            de Fundador
           </h2>
 
           {/* Updated value display with yellow background and animation for mobile */}
@@ -83,14 +163,53 @@ const BonusSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="px-6 py-3 bg-yellow-500 rounded-lg shadow-lg mb-2">
-              <div className="text-center">
+            <motion.div
+              className="px-6 py-3 bg-yellow-500 rounded-lg mb-2 relative overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              animate={{
+                boxShadow: [
+                  "0 10px 15px -3px rgba(234, 179, 8, 0.3)",
+                  "0 15px 25px -5px rgba(234, 179, 8, 0.5)",
+                  "0 10px 15px -3px rgba(234, 179, 8, 0.3)",
+                ],
+              }}
+              transition={{
+                boxShadow: {
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                },
+              }}
+            >
+              {/* Shine effect */}
+              <motion.div
+                className="absolute inset-0 w-full h-full"
+                style={{
+                  maskImage:
+                    "linear-gradient(to right, transparent, white, transparent)",
+                  WebkitMaskImage:
+                    "linear-gradient(to right, transparent, white, transparent)",
+                }}
+              >
+                <motion.div
+                  className="w-1/3 h-full bg-white/30 blur-md"
+                  animate={{ x: ["-100%", "400%"] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    ease: "easeInOut",
+                    repeatDelay: 2,
+                  }}
+                />
+              </motion.div>
+
+              <div className="text-center relative z-10">
                 <p className="text-black font-bold text-lg">
                   Valor Total: R$ 497,00
                 </p>
                 <p className="text-black font-bold text-xl">Você leva GRÁTIS</p>
               </div>
-            </div>
+            </motion.div>
 
             <motion.div
               animate={{ y: [0, 6, 0] }}
@@ -102,7 +221,7 @@ const BonusSection: React.FC = () => {
               className="mt-2"
             >
               <svg
-                className="w-8 h-8 text-yellow-500"
+                className="w-8 h-8 text-yellow-500 filter drop-shadow-lg"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -120,16 +239,35 @@ const BonusSection: React.FC = () => {
           {bonuses.map((bonus, index) => (
             <motion.div
               key={bonus.id}
-              className="bg-gradient-to-br from-black to-gray-900 rounded-xl overflow-hidden shadow-lg border border-green-500/10 relative"
+              className="bg-gradient-to-br from-black to-gray-900 rounded-xl overflow-hidden border border-green-500/20 relative"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{
                 y: -5,
-                boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.5)",
+                boxShadow: "0 15px 30px -10px rgba(22, 163, 74, 0.3)",
+                borderColor: "rgba(74, 222, 128, 0.4)",
               }}
             >
+              {/* Animated border glow */}
+              <motion.div
+                className="absolute inset-0 rounded-xl z-0"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.3), transparent)",
+                }}
+                animate={{
+                  x: ["-100%", "100%"],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2.5,
+                  ease: "linear",
+                  repeatDelay: 0.5,
+                }}
+              />
+
               {/* Color accent corner */}
               <div
                 className={`absolute top-0 right-0 w-24 h-24 ${getColorClass(
@@ -137,39 +275,73 @@ const BonusSection: React.FC = () => {
                 )} transform translate-x-8 -translate-y-8 rotate-45 opacity-20`}
               />
 
-              <div className="p-6 md:p-8 flex gap-5">
+              <div className="p-6 md:p-8 flex gap-5 relative z-10">
                 {/* Icon */}
-                <div
+                <motion.div
                   className={`flex-shrink-0 w-16 h-16 ${getIconBgClass(
                     bonus.color
                   )} rounded-xl flex items-center justify-center shadow-lg`}
+                  whileHover={{
+                    scale: 1.1,
+                    boxShadow: `0 0 20px rgba(22, 163, 74, 0.5)`,
+                  }}
                 >
                   {renderIcon(bonus.icon)}
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl md:text-2xl font-bold text-white">
+                    <motion.h3
+                      className="text-xl md:text-2xl font-bold text-white"
+                      animate={
+                        index === 0 || index === 3
+                          ? {
+                              scale: [1, 1.03, 1],
+                            }
+                          : {}
+                      }
+                      transition={
+                        index === 0 || index === 3
+                          ? {
+                              duration: 2,
+                              repeat: Infinity,
+                            }
+                          : {}
+                      }
+                    >
                       {bonus.title}
-                    </h3>
-                    <span className="text-sm font-medium text-center w-[100px] px-3 py-1 bg-green-900/50 text-green-400 rounded-full">
+                    </motion.h3>
+                    <motion.span
+                      className="text-sm font-medium text-center w-[100px] px-3 py-1 bg-green-900/50 text-green-400 rounded-full"
+                      whileHover={{
+                        backgroundColor: "rgba(22, 163, 74, 0.4)",
+                        scale: 1.05,
+                      }}
+                    >
                       {bonus.value}
-                    </span>
+                    </motion.span>
                   </div>
                   <p className="text-gray-300 mb-2">{bonus.description}</p>
                   <div className="flex items-center text-green-400 text-sm font-medium">
-                    <svg
+                    <motion.svg
                       className="w-4 h-4 mr-1"
                       fill="currentColor"
                       viewBox="0 0 20 20"
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        delay: index * 0.2,
+                      }}
                     >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                         clipRule="evenodd"
                       ></path>
-                    </svg>
+                    </motion.svg>
                     <span>Incluído no pacote</span>
                   </div>
                 </div>
@@ -185,29 +357,87 @@ const BonusSection: React.FC = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <div className="bg-black/30 p-6 rounded-xl border border-green-500/20">
-            <div className="flex items-center justify-center mb-4">
-              <svg
+          <motion.div
+            className="bg-black/30 p-6 rounded-xl border border-green-500/20 shadow-lg relative overflow-hidden"
+            whileHover={{
+              boxShadow: "0 20px 30px -10px rgba(22, 163, 74, 0.2)",
+              y: -3,
+            }}
+          >
+            {/* Moving light effect */}
+            <motion.div
+              className="absolute inset-0 opacity-30"
+              style={{
+                background:
+                  "radial-gradient(circle at 0% 50%, rgba(74, 222, 128, 0.5) 0%, transparent 50%)",
+              }}
+              animate={{
+                x: ["-50%", "150%"],
+              }}
+              transition={{
+                repeat: Infinity,
+                duration: 8,
+                ease: "linear",
+              }}
+            />
+
+            <div className="flex items-center justify-center mb-4 relative z-10">
+              <motion.svg
                 className="w-8 h-8 text-green-500 mr-3"
                 fill="currentColor"
                 viewBox="0 0 20 20"
+                animate={{
+                  rotate: [0, 10, 0, -10, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
               >
                 <path
                   fillRule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                   clipRule="evenodd"
                 ></path>
-              </svg>
+              </motion.svg>
               <h3 className="text-xl font-bold text-white">
                 Atenção! Oferta por tempo limitado
               </h3>
             </div>
-            <p className="text-gray-300">
+            <motion.p
+              className="text-gray-300 relative z-10"
+              animate={{
+                color: [
+                  "rgb(209, 213, 219)",
+                  "rgb(156, 163, 175)",
+                  "rgb(209, 213, 219)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+              }}
+            >
               Estes bônus são exclusivos para a turma de fundadores e serão
               removidos em breve. Após o lançamento, o acesso a estes materiais
               será vendido separadamente.
-            </p>
-          </div>
+            </motion.p>
+
+            {/* Urgent countdown-style animation */}
+            <motion.div
+              className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
+              style={{ width: "100%" }}
+              animate={{
+                width: ["100%", "0%"],
+              }}
+              transition={{
+                duration: 30,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>

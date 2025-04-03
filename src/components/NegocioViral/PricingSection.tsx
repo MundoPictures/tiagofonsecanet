@@ -95,12 +95,49 @@ const PricingSection: React.FC = () => {
           transition={{ duration: 0.7 }}
         >
           <motion.div
-            className="inline-block bg-gradient-to-r from-green-600/20 to-green-400/20 px-6 py-2 rounded-full border border-green-500/30 text-green-400 text-sm font-semibold uppercase tracking-wider mb-4 backdrop-blur-sm"
+            className="inline-block bg-gradient-to-r from-green-600/20 to-green-400/20 px-6 py-2 rounded-full border border-green-500/30 text-green-400 text-sm font-semibold uppercase tracking-wider mb-4 backdrop-blur-sm shadow-lg shadow-green-500/20"
             whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            animate={{
+              boxShadow: [
+                "0 10px 15px -3px rgba(22, 163, 74, 0.1)",
+                "0 15px 25px -5px rgba(22, 163, 74, 0.2)",
+              ],
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
           >
-            <span className="mr-2">⚡</span>
-            Oferta Por Tempo Limitado
+            <motion.span
+              className="mr-2"
+              animate={{ rotate: [0, -10, 0, 10, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                type: "tween", // Using tween instead of spring for multi-keyframe animation
+              }}
+            >
+              ⚡
+            </motion.span>
+            <motion.span
+              animate={{
+                textShadow: [
+                  "0 0 0px rgba(74, 222, 128, 0)",
+                  "0 0 8px rgba(74, 222, 128, 0.5)",
+                  "0 0 0px rgba(74, 222, 128, 0)",
+                ],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatType: "mirror",
+              }}
+            >
+              Oferta Por Tempo Limitado
+            </motion.span>
           </motion.div>
 
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -290,24 +327,81 @@ const PricingSection: React.FC = () => {
 
                       {/* Price section */}
                       <div className="relative py-6 px-8 text-center border-b border-green-500/10 z-10">
-                        {/* Original price with strikethrough */}
-                        <p className="text-red-500 text-sm">
-                          De <span className="line-through">R$ 997,00</span>
-                        </p>
+                        {/* Original price with strikethrough - made more prominent */}
+                        <motion.p
+                          className="text-red-500 text-base md:text-lg font-bold"
+                          animate={{
+                            scale: [1, 1.05, 1],
+                          }}
+                          transition={{
+                            duration: 2.5,
+                            repeat: Infinity,
+                            repeatType: "reverse",
+                          }}
+                        >
+                          De{" "}
+                          <span className="line-through text-lg md:text-xl">
+                            R$ 997,00
+                          </span>
+                          {/* Discount tag */}
+                          <motion.span
+                            className="inline-block ml-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-md"
+                            initial={{ rotate: 0 }}
+                            animate={{
+                              rotate: [-5, 5, -5],
+                              scale: [1, 1.1, 1],
+                            }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              repeatType: "mirror",
+                            }}
+                          >
+                            -50%
+                          </motion.span>
+                        </motion.p>
 
                         {/* Main price display */}
                         <div
                           id="main-pricing-display"
-                          className="flex items-center justify-center mt-2"
+                          className="flex items-center justify-center mt-2 relative"
                         >
-                          <div className="flex items-start">
+                          {/* Starburst background effect */}
+                          <motion.div
+                            className="absolute -inset-4 rounded-full bg-gradient-to-r from-green-500/5 to-green-300/5 blur-lg z-0"
+                            animate={{
+                              scale: [0.9, 1.1, 0.9],
+                              opacity: [0.3, 0.6, 0.3],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              repeatType: "reverse",
+                            }}
+                          />
+
+                          <div className="flex items-start relative z-10">
                             <span className="text-white text-2xl font-medium mt-2 mr-1">
                               R$
                             </span>
                             <div className="flex items-baseline">
-                              <span className="text-[#00ff66] text-7xl font-bold leading-none">
+                              <motion.span
+                                className="text-[#00ff66] text-7xl font-bold leading-none"
+                                animate={{
+                                  textShadow: [
+                                    "0 0 10px rgba(0, 255, 102, 0.2)",
+                                    "0 0 20px rgba(0, 255, 102, 0.6)",
+                                    "0 0 10px rgba(0, 255, 102, 0.2)",
+                                  ],
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  repeatType: "reverse",
+                                }}
+                              >
                                 497
-                              </span>
+                              </motion.span>
                               <span className="text-[#00ff66] text-3xl font-bold">
                                 ,00
                               </span>
@@ -320,18 +414,64 @@ const PricingSection: React.FC = () => {
                         {/* Installment option */}
                         <div className="text-xl font-medium text-white mt-5">
                           ou 12x de{" "}
-                          <span className="text-[#00ff66]">R$ 41,42</span>
+                          <motion.span
+                            className="text-[#00ff66]"
+                            animate={{
+                              opacity: [0.8, 1, 0.8],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                            }}
+                          >
+                            R$ 41,42
+                          </motion.span>
                         </div>
                       </div>
 
                       {/* Timer badge - styled like the reference image */}
                       <div className="flex justify-center -mt-3 relative z-10">
-                        <div className="bg-[#1a1a1a] border border-[#ffa500]/60 text-[#ffa500] rounded-full px-6 py-2 inline-flex items-center gap-2 shadow-lg shadow-black/40 z-10">
-                          <svg
-                            className="w-5 h-5"
+                        <motion.div
+                          className="bg-[#1a1a1a] border border-[#ffa500]/60 text-[#ffa500] rounded-full px-6 py-2 inline-flex items-center gap-2 shadow-lg shadow-black/40 z-10 relative overflow-hidden"
+                          animate={{
+                            boxShadow: [
+                              "0 5px 15px rgba(255, 165, 0, 0)",
+                              "0 5px 15px rgba(255, 165, 0, 0.3)",
+                              "0 5px 15px rgba(255, 165, 0, 0)",
+                            ],
+                          }}
+                          transition={{
+                            duration: 2,
+                            repeat: Infinity,
+                          }}
+                        >
+                          {/* Background pulse effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-[#ffa500]/10 rounded-full"
+                            animate={{
+                              scale: [0.85, 1.15, 0.85],
+                              opacity: [0.3, 0.1, 0.3],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              repeatType: "reverse",
+                            }}
+                          />
+
+                          <motion.svg
+                            className="w-5 h-5 relative z-10"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            animate={{
+                              rotate: 360,
+                            }}
+                            transition={{
+                              duration: 8,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
                           >
                             <path
                               strokeLinecap="round"
@@ -339,11 +479,39 @@ const PricingSection: React.FC = () => {
                               strokeWidth="2"
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
-                          </svg>
-                          <span className="font-medium">
+                          </motion.svg>
+
+                          <motion.span
+                            className="font-medium relative z-10"
+                            animate={{
+                              textShadow: [
+                                "0 0 0px rgba(255, 165, 0, 0)",
+                                "0 0 10px rgba(255, 165, 0, 0.7)",
+                                "0 0 0px rgba(255, 165, 0, 0)",
+                              ],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                            }}
+                          >
                             Oferta expira em breve
-                          </span>
-                        </div>
+                          </motion.span>
+
+                          {/* Countdown line animation */}
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-500 via-yellow-500 to-green-500"
+                            style={{ width: "100%" }}
+                            animate={{
+                              width: ["100%", "0%"],
+                            }}
+                            transition={{
+                              duration: 60,
+                              ease: "linear",
+                              repeat: Infinity,
+                            }}
+                          />
+                        </motion.div>
                       </div>
 
                       {/* CTA Button - styled exactly like the reference image */}
@@ -392,7 +560,7 @@ const PricingSection: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Payment methods */}
+                      {/* Payment methods - removed Boleto */}
                       <div className="pb-6 px-6 relative z-10">
                         <p className="text-gray-400 text-xs mb-3 text-center">
                           Formas de pagamento:
@@ -416,20 +584,6 @@ const PricingSection: React.FC = () => {
                             <div className="w-8 h-8 flex items-center justify-center mb-1">
                               <svg
                                 viewBox="0 0 24 24"
-                                className="w-full h-full text-gray-400"
-                                fill="currentColor"
-                              >
-                                <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
-                              </svg>
-                            </div>
-                            <span className="text-xs text-gray-400">
-                              Boleto
-                            </span>
-                          </div>
-                          <div className="flex flex-col items-center">
-                            <div className="w-8 h-8 flex items-center justify-center mb-1">
-                              <svg
-                                viewBox="0 0 24 24"
                                 className="w-full h-full text-green-400"
                                 fill="currentColor"
                               >
@@ -443,33 +597,7 @@ const PricingSection: React.FC = () => {
 
                       {/* Pricing value - bold and prominent */}
                       <div className="flex flex-col items-center mb-3 relative z-10">
-                        <div className="flex flex-col items-center">
-                          <div className="flex">
-                            <span className="text-gray-400 text-xl font-medium line-through opacity-60">
-                              R$997
-                            </span>
-                            <div className="relative ml-2">
-                              <div className="absolute -right-3 -top-2 flex items-center justify-center bg-green-500 text-[10px] font-bold text-white rounded-full w-12 h-12 animate-pulse">
-                                -50%
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            id="pricing-value"
-                            className="flex items-baseline mb-2"
-                          >
-                            <span className="text-gray-400 mr-1 text-lg">
-                              R$
-                            </span>
-                            <span className="text-white text-5xl font-bold">
-                              497
-                            </span>
-                          </div>
-                          <div className="bg-gradient-to-r from-green-600/20 to-green-400/20 px-4 py-1 rounded-full border border-green-500/30 text-green-400 text-sm font-medium">
-                            <span className="mr-1">🔥</span>
-                            Por tempo limitado!
-                          </div>
-                        </div>
+                        <div className="flex flex-col items-center"></div>
                       </div>
                     </div>
                   </div>
