@@ -46,7 +46,7 @@ const MainContent: React.FC = () => {
           variants={itemVariants}
         >
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
-          Aplicando 10 Ações de Marketing Que Geram Caixa Imediato
+          Aplicando as Ações de Marketing Que Geram Caixa Imediato
           <span className="text-gray-200 block mt-3 md:mt-3 text-xl sm:text-xl md:text-2xl font-semibold">
             Sem anúncios, sem audiência e sem enrolação.
           </span>

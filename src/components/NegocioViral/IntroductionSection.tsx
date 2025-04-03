@@ -79,8 +79,8 @@ const IntroductionSection: React.FC = () => {
                 <span className="text-green-400 font-semibold">
                   Negócio Viral
                 </span>
-                : um método com 10 ações de marketing direto que funcionam em
-                qualquer cenário — físico ou digital, serviço ou produto.
+                : um método com diversas ações de marketing direto que funcionam
+                em qualquer cenário — físico ou digital, serviço ou produto.
               </p>
               <p>São estratégias validadas, que já:</p>
               <ul className="space-y-3">

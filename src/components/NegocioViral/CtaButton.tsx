@@ -16,7 +16,7 @@ interface CtaButtonProps {
 }
 
 const CtaButton: React.FC<CtaButtonProps> = ({
-  text = "QUERO APLICAR AS 10 AÇÕES AGORA",
+  text = "QUERO APLICAR AS AÇÕES AGORA",
   mobileText,
   onClick,
   className = "",

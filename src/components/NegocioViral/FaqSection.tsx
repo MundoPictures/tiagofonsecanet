@@ -27,7 +27,7 @@ const FaqSection: React.FC = () => {
     {
       question: "Isso é um curso ou uma mentoria?",
       answer:
-        "É um método direto com 10 ações de marketing práticas, explicadas passo a passo. Você assiste, aplica e vê resultado. Sem enrolação teórica.",
+        "É um método direto com diversas ações de marketing práticas, explicadas passo a passo. Você assiste, aplica e vê resultado. Sem enrolação teórica.",
     },
     {
       question: "Em quanto tempo posso ver resultado?",

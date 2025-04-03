@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const features = [
   {
     icon: "fire",
-    title: "10 Ações de Marketing Direto",
+    title: "Ações de Marketing Direto",
     description:
       "As estratégias mais poderosas do mercado para resultados imediatos",
   },

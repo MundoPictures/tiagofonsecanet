@@ -12,7 +12,7 @@ const PricingSection: React.FC = () => {
 
   // Features included in the package
   const features = [
-    "10 Ações de Marketing Que Geram Caixa Imediato",
+    "Ações de Marketing Que Geram Caixa Imediato",
     "4 Bônus Exclusivos de Alto Valor",
     "Acesso Vitalício ao Método Completo",
     "Atualizações Gratuitas Para Sempre",
@@ -117,7 +117,7 @@ const PricingSection: React.FC = () => {
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                type: "tween", // Using tween instead of spring for multi-keyframe animation
+                type: "tween",
               }}
             >
               ⚡
@@ -136,7 +136,7 @@ const PricingSection: React.FC = () => {
                 repeatType: "mirror",
               }}
             >
-              Oferta Por Tempo Limitado
+              Lote 1 - Preço Promocional
             </motion.span>
           </motion.div>
 
@@ -157,6 +157,33 @@ const PricingSection: React.FC = () => {
             Estratégias que funcionam mesmo sem tráfego pago, sem audiência e
             sem experiência anterior em marketing.
           </p>
+
+          <motion.div
+            className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 text-yellow-400 rounded-lg border border-yellow-500/20"
+            animate={{
+              scale: [1, 1.03, 1],
+              boxShadow: [
+                "0 0 0px rgba(234, 179, 8, 0)",
+                "0 0 15px rgba(234, 179, 8, 0.3)",
+                "0 0 0px rgba(234, 179, 8, 0)",
+              ],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+            }}
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span className="font-medium">
+              Últimas <span className="font-bold">7 vagas</span> para o Lote 1
+            </span>
+          </motion.div>
         </motion.div>
 
         {/* Main pricing container with new layout */}
@@ -199,7 +226,7 @@ const PricingSection: React.FC = () => {
                   <h3 className="text-white text-xl md:text-2xl font-bold tracking-wide leading-tight">
                     Método Completo Negócio Viral
                     <span className="block text-white/80 text-sm font-medium mt-1">
-                      10 Ações + 4 Bônus + Acesso Vitalício
+                      Diversas Ações + 4 Bônus + Acesso Vitalício
                     </span>
                   </h3>
                 </div>
@@ -214,7 +241,7 @@ const PricingSection: React.FC = () => {
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
                   >
-                    45% OFF
+                    50% OFF
                   </motion.div>
                 </div>
               </div>
@@ -495,7 +522,7 @@ const PricingSection: React.FC = () => {
                               repeat: Infinity,
                             }}
                           >
-                            Oferta expira em breve
+                            LOTE 1 - Últimas vagas
                           </motion.span>
 
                           {/* Countdown line animation */}
@@ -518,7 +545,7 @@ const PricingSection: React.FC = () => {
                       <div className="px-6 py-6 relative z-10">
                         <CtaButton
                           id="pricing-cta-button"
-                          text="GARANTIR MINHA VAGA AGORA"
+                          text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
                           mobileText="GARANTIR VAGA"
                           size="large"
                           withShine={true}
@@ -532,31 +559,117 @@ const PricingSection: React.FC = () => {
                         </p>
                       </div>
 
-                      {/* Guarantee section */}
-                      <div className="mx-6 mb-6 bg-gradient-to-br from-green-900/20 to-green-800/10 backdrop-blur-sm rounded-lg p-4 border border-green-800/10 flex items-center gap-3 relative z-10">
-                        <div className="h-12 w-12 bg-[#00df4a] rounded-full flex-shrink-0 flex items-center justify-center text-white">
-                          <svg
-                            className="w-6 h-6"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                            />
-                          </svg>
+                      {/* Batch pricing urgency section - replacing the guarantee section */}
+                      <div className="mx-6 mb-6 bg-gradient-to-br from-yellow-900/30 to-yellow-800/10 backdrop-blur-sm rounded-lg p-4 border border-yellow-600/20 relative z-10 overflow-hidden">
+                        {/* Animated gradient background */}
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-yellow-600/10 to-yellow-500/5"
+                          animate={{
+                            opacity: [0.5, 0.8, 0.5],
+                          }}
+                          transition={{
+                            duration: 3,
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                          }}
+                        />
+
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
+                          <div className="flex-shrink-0">
+                            <div className="h-12 w-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-yellow-600/20">
+                              <svg
+                                className="w-6 h-6"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+
+                          <div className="flex-1">
+                            <div className="flex items-center mb-1">
+                              <h5 className="text-white font-bold text-lg">
+                                Preço de Lançamento
+                              </h5>
+                              <motion.span
+                                className="ml-2 px-2 py-0.5 bg-yellow-500 text-black text-xs font-bold rounded"
+                                animate={{
+                                  scale: [1, 1.1, 1],
+                                }}
+                                transition={{
+                                  duration: 1.5,
+                                  repeat: Infinity,
+                                }}
+                              >
+                                LOTE 1
+                              </motion.span>
+                            </div>
+
+                            <div className="flex flex-col md:flex-row md:items-center md:gap-6">
+                              <p className="text-gray-300 text-sm mb-2 md:mb-0">
+                                <span className="text-yellow-400 font-medium">
+                                  Apenas no Lote 1:
+                                </span>{" "}
+                                R$ 497,00
+                              </p>
+
+                              <motion.div
+                                className="flex items-center gap-2 text-sm border-l border-yellow-600/30 pl-3 text-red-300"
+                                initial={{ opacity: 0.8 }}
+                                animate={{
+                                  opacity: [0.8, 1, 0.8],
+                                }}
+                                transition={{
+                                  duration: 3,
+                                  repeat: Infinity,
+                                }}
+                              >
+                                <span className="font-medium">Lote 2:</span>
+                                <span className="font-bold">R$ 997,00</span>
+                              </motion.div>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <h5 className="text-white font-bold">
-                            Garantia de 7 Dias
-                          </h5>
-                          <p className="text-gray-400 text-sm">
-                            Devolução total do investimento se não ficar
-                            satisfeito
-                          </p>
+
+                        {/* Countdown line */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-500 via-yellow-500 to-yellow-300"
+                          style={{ width: "100%" }}
+                          animate={{
+                            width: ["100%", "0%"],
+                          }}
+                          transition={{
+                            duration: 40,
+                            ease: "linear",
+                            repeat: Infinity,
+                          }}
+                        />
+                      </div>
+
+                      {/* Progress indicator for batch filling */}
+                      <div className="mx-6 mb-8 relative z-10">
+                        <div className="flex justify-between text-xs text-gray-400 mb-2">
+                          <span>Lote 1</span>
+                          <span>98% preenchido</span>
+                        </div>
+                        <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                          <motion.div
+                            className="h-full bg-gradient-to-r from-green-500 to-green-400 w-[98%]"
+                            animate={{
+                              opacity: [0.7, 1, 0.7],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                            }}
+                          />
                         </div>
                       </div>
 
@@ -716,8 +829,8 @@ const PricingSection: React.FC = () => {
             whileTap={{ scale: 0.98 }}
           >
             <CtaButton
-              text="QUERO COMEÇAR A VENDER 3X MAIS AGORA"
-              mobileText="QUERO VENDER 3X MAIS"
+              text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
+              mobileText="GARANTIR VAGA"
               size="large"
               withShine={true}
               withArrow={true}
@@ -741,9 +854,24 @@ const PricingSection: React.FC = () => {
             />
           </motion.div>
 
-          <p className="text-gray-400 text-sm mt-4">
-            Acesso imediato após pagamento • Oferta por tempo limitado
-          </p>
+          <motion.p
+            className="text-gray-400 text-sm mt-4"
+            animate={{
+              color: [
+                "rgb(156, 163, 175)",
+                "rgb(252, 211, 77)",
+                "rgb(156, 163, 175)",
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+            }}
+          >
+            <span className="font-bold">Preço de Lote 1</span> •{" "}
+            <span className="text-red-400">Restam apenas 7 vagas</span> •
+            Próximo lote: R$ 997,00
+          </motion.p>
         </motion.div>
       </div>
     </section>

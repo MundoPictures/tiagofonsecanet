@@ -88,7 +88,7 @@ const CoachSection: React.FC = () => {
                 {" "}
                 identificar os padrões que realmente funcionam
               </span>
-              , ele decidiu organizar as 10 ações mais eficazes em um método
+              , ele decidiu organizar as ações mais eficazes em um método
               simples, replicável e acessível que qualquer empreendedor pode
               aplicar — mesmo sem experiência em marketing e sem grandes
               orçamentos para anúncios.
