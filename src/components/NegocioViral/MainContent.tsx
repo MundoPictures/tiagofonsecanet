@@ -15,8 +15,38 @@ declare global {
 const MainContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [videoInitialized, setVideoInitialized] = useState(false);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
+
+  // Set up intersection observer to detect when video is visible
+  useEffect(() => {
+    if (!videoContainerRef.current) return;
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // 50% of the video must be visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVideoVisible(true);
+          // Once we've detected visibility once, we can disconnect the observer
+          observer.disconnect();
+        }
+      });
+    }, options);
+
+    observer.observe(videoContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Handler for Vimeo API messages
   const handleVimeoMessage = (event: MessageEvent) => {
@@ -30,20 +60,32 @@ const MainContent: React.FC = () => {
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
+          setVideoInitialized(true);
 
           // Set initial volume to 0 for autoplay
           playerRef.current.setVolume(0);
 
-          // Start playing automatically
-          playerRef.current.play().catch((error: any) => {
-            console.log("Autoplay was prevented by browser:", error);
-          });
+          // Only start playing if the video is visible
+          if (isVideoVisible) {
+            playerRef.current.play().catch((error: any) => {
+              console.log("Autoplay was prevented by browser:", error);
+            });
+          }
         }
       }
     } catch (e) {
       // Not a JSON message or not from Vimeo
     }
   };
+
+  // Start playing when video becomes visible
+  useEffect(() => {
+    if (isVideoVisible && videoInitialized && playerRef.current) {
+      playerRef.current.play().catch((error: any) => {
+        console.log("Autoplay was prevented by browser:", error);
+      });
+    }
+  }, [isVideoVisible, videoInitialized]);
 
   useEffect(() => {
     // Load Vimeo player script
@@ -187,7 +229,7 @@ const MainContent: React.FC = () => {
 
         {/* Mobile image - only visible on mobile, placed below the button */}
         <motion.div
-          className="mt-6 block md:hidden w-full"
+          className="mt-8 block md:hidden w-full"
           variants={itemVariants}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
@@ -210,9 +252,10 @@ const MainContent: React.FC = () => {
               }}
             />
 
-            {/* Video overlay container positioned on top of the image */}
-            <div className="absolute inset-0 flex items-center justify-center">
+            {/* Video overlay container positioned on top of the image, shifted down 20px */}
+            <div className="absolute inset-0 flex items-center justify-center translate-y-5">
               <div
+                ref={videoContainerRef}
                 className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl shadow-green-500/20"
                 style={{ aspectRatio: "16/9" }}
                 onClick={handleVideoClick}
@@ -227,7 +270,7 @@ const MainContent: React.FC = () => {
                 >
                   <iframe
                     ref={videoRef}
-                    src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1"
+                    src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&quality=1080p&preload=metadata"
                     frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                     style={{

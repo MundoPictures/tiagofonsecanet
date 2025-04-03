@@ -13,8 +13,38 @@ declare global {
 
 const IntroductionSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [videoInitialized, setVideoInitialized] = useState(false);
+  const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
+
+  // Set up intersection observer to detect when video is visible
+  useEffect(() => {
+    if (!videoContainerRef.current) return;
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.5, // 50% of the video must be visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsVideoVisible(true);
+          // Once we've detected visibility once, we can disconnect the observer
+          observer.disconnect();
+        }
+      });
+    }, options);
+
+    observer.observe(videoContainerRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   // Handler for Vimeo API messages
   const handleVimeoMessage = (event: MessageEvent) => {
@@ -28,20 +58,32 @@ const IntroductionSection: React.FC = () => {
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
+          setVideoInitialized(true);
 
           // Set initial volume to 0 for autoplay
           playerRef.current.setVolume(0);
 
-          // Start playing automatically
-          playerRef.current.play().catch((error: any) => {
-            console.log("Autoplay was prevented by browser:", error);
-          });
+          // Only start playing if the video is visible
+          if (isVideoVisible) {
+            playerRef.current.play().catch((error: any) => {
+              console.log("Autoplay was prevented by browser:", error);
+            });
+          }
         }
       }
     } catch (e) {
       // Not a JSON message or not from Vimeo
     }
   };
+
+  // Start playing when video becomes visible
+  useEffect(() => {
+    if (isVideoVisible && videoInitialized && playerRef.current) {
+      playerRef.current.play().catch((error: any) => {
+        console.log("Autoplay was prevented by browser:", error);
+      });
+    }
+  }, [isVideoVisible, videoInitialized]);
 
   useEffect(() => {
     // Load Vimeo player script if it hasn't been loaded yet
@@ -98,13 +140,14 @@ const IntroductionSection: React.FC = () => {
         <div className="max-w-3xl mx-auto text-center mb-12">
           {/* Video container for desktop only */}
           <motion.div
-            className="hidden md:block w-full max-w-2xl mx-auto mb-10 relative"
+            className="hidden md:block w-full max-w-2xl mx-auto mb-10 relative pt-5"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
             <div
+              ref={videoContainerRef}
               className="w-full rounded-xl overflow-hidden shadow-2xl shadow-green-500/20 cursor-pointer group"
               style={{ aspectRatio: "16/9" }}
               onClick={handleVideoClick}
@@ -119,7 +162,7 @@ const IntroductionSection: React.FC = () => {
               >
                 <iframe
                   ref={videoRef}
-                  src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&background=1"
+                  src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&quality=1080p&preload=metadata"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                   style={{
@@ -295,7 +338,7 @@ const IntroductionSection: React.FC = () => {
 
           <CtaButton
             text="QUERO VENDER TODO DIA"
-            mobileText="QUERO VENDER"
+            mobileText="QUERO VENDER 3X MAIS"
             size="medium"
             className="max-w-lg mx-auto"
             isPricingButton={false}
