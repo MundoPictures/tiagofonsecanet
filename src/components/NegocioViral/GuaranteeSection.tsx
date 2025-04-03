@@ -265,7 +265,7 @@ const GuaranteeSection: React.FC = () => {
               >
                 <CtaButton
                   text="QUERO GARANTIR SEM RISCO"
-                  mobileText="SEM RISCO"
+                  mobileText="QUERO GARANTIR HOJE"
                   size="medium"
                   className="mx-auto"
                   isPricingButton={false}

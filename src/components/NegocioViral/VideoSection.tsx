@@ -113,7 +113,7 @@ const VideoSection: React.FC = () => {
           <div className="w-full px-4 sm:px-0">
             <CtaButton
               text="QUERO VIRALIZAR MEU NEGÓCIO"
-              mobileText="VIRALIZAR AGORA"
+              mobileText="VIRALIZAR AGORA MEU"
               size="large"
               className="w-full shadow-lg shadow-green-900/20"
               isPricingButton={false}

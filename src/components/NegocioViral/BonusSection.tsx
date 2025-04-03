@@ -75,11 +75,45 @@ const BonusSection: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             <span className="text-green-400">Bônus Especiais</span> de Fundador
           </h2>
-          <div className="flex justify-center items-center">
-            <div className="px-4 text-white py-1 bg-green-500 text-sm font-bold rounded-full shadow-lg">
-              Valor total: R$ 497 — você leva GRÁTIS
+
+          {/* Updated value display with yellow background and animation for mobile */}
+          <motion.div
+            className="flex flex-col items-center justify-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="px-6 py-3 bg-yellow-500 rounded-lg shadow-lg mb-2">
+              <div className="text-center">
+                <p className="text-black font-bold text-lg">
+                  Valor Total: R$ 497,00
+                </p>
+                <p className="text-black font-bold text-xl">Você leva GRÁTIS</p>
+              </div>
             </div>
-          </div>
+
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="mt-2"
+            >
+              <svg
+                className="w-8 h-8 text-yellow-500"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </motion.div>
+          </motion.div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">

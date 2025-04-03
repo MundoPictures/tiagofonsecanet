@@ -13,7 +13,6 @@ type FormData = {
   name: string;
   email: string;
   whatsapp: string;
-  instagram: string;
 };
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
@@ -198,27 +197,6 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                           WhatsApp é obrigatório
                         </p>
                       )}
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="instagram"
-                        className="block text-sm font-medium text-gray-200 mb-1"
-                      >
-                        Instagram (opcional)
-                      </label>
-                      <div className="flex rounded-md bg-black/50 border border-green-500/30 focus-within:ring-2 focus-within:ring-green-500/50">
-                        <span className="flex items-center px-3 text-gray-400 text-sm border-r border-green-500/30">
-                          @
-                        </span>
-                        <input
-                          id="instagram"
-                          type="text"
-                          className="w-full rounded-r-md bg-transparent px-3 py-2 text-white placeholder-gray-500 focus:outline-none"
-                          placeholder="seu.perfil"
-                          {...register("instagram")}
-                        />
-                      </div>
                     </div>
 
                     <div className="mt-6">

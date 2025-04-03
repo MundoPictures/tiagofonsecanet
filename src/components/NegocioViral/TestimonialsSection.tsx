@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface TestimonialsSectionProps {}
 
@@ -35,22 +36,6 @@ const testimonials = [
     rating: 5,
     text: "Minha loja física estava às moscas. Com o método de reativação de clientes, fiz R$3.400 em 3 dias sem gastar com anúncios.",
     author: "Carlos M., lojista",
-  },
-  {
-    id: 5,
-    imageSrc: "https://placehold.co/600x900/222222/444444",
-    alt: "Depoimento 5",
-    rating: 5,
-    text: "Sem seguidores nem tráfego, consegui 8 novos clientes em uma semana usando apenas a técnica da Oferta Irresistível!",
-    author: "Patricia L., fisioterapeuta",
-  },
-  {
-    id: 6,
-    imageSrc: "https://placehold.co/600x700/222222/444444",
-    alt: "Depoimento 6",
-    rating: 5,
-    text: "O script de fechamento foi um divisor de águas. Minha taxa de conversão de chamadas para vendas dobrou!",
-    author: "Roberto S., coach financeiro",
   },
 ];
 
@@ -91,28 +76,88 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
           </p>
         </div>
 
-        {/* Counter stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
-          {[
-            { label: "Empreendedores Atendidos", value: "12.000+" },
-            { label: "Média de Aumento", value: "185%" },
-            { label: "Satisfação", value: "98%" },
-            { label: "Implementação", value: "87%" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="bg-black/30 p-4 rounded-lg border border-green-900/20"
-            >
-              <p className="text-2xl md:text-3xl font-bold text-green-400">
-                {stat.value}
-              </p>
-              <p className="text-sm md:text-base text-gray-300">{stat.label}</p>
-            </div>
-          ))}
-        </div>
+        {/* Stats - updated to single impressive stat */}
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="bg-gradient-to-r from-black/80 to-black/60 p-6 rounded-xl border border-green-500/20 shadow-lg max-w-2xl mx-auto overflow-hidden relative"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            {/* Background animation */}
+            <motion.div
+              className="absolute -inset-2 bg-gradient-to-r from-green-500/10 via-green-400/5 to-green-500/10 rounded-3xl blur-xl z-0"
+              animate={{
+                x: ["-100%", "100%"],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "linear",
+              }}
+            />
 
-        {/* Simple grid for testimonials that works on all devices */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="relative z-10 text-center">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <div className="text-center mb-2">
+                  <span className="inline-block px-4 py-1 bg-green-500/20 text-green-400 text-sm font-medium rounded-full">
+                    Impacto Comprovado
+                  </span>
+                </div>
+
+                <motion.p
+                  className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-green-500"
+                  animate={{
+                    scale: [1, 1.03, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                >
+                  + 1 Bilhão
+                </motion.p>
+
+                <p className="text-xl text-white font-bold mt-2">
+                  Em vendas geradas para nossos clientes
+                </p>
+
+                <div className="flex justify-center mt-4">
+                  <div className="flex items-center space-x-1">
+                    {[1, 2, 3, 4, 5].map((_, i) => (
+                      <motion.svg
+                        key={i}
+                        className="w-5 h-5 text-yellow-400"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: i * 0.1, duration: 0.3 }}
+                      >
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                      </motion.svg>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
@@ -159,13 +204,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Mobile-only "See more" button */}
-        <div className="mt-8 text-center md:hidden">
-          <button className="inline-block px-6 py-3 bg-green-600 text-white font-medium rounded-lg shadow-lg">
-            Ver mais depoimentos
-          </button>
         </div>
       </div>
     </div>

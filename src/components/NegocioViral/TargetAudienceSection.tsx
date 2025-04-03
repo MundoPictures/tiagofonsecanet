@@ -91,11 +91,20 @@ const TargetAudienceSection: React.FC = () => {
         >
           <div className="flex flex-col md:flex-row items-start gap-6">
             <div className="md:w-16 flex-shrink-0 bg-red-500 w-12 h-12 rounded-full flex items-center justify-center">
-              <svg
+              <motion.svg
                 className="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [1, 0.8, 1],
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                }}
               >
                 <path
                   strokeLinecap="round"
@@ -103,7 +112,7 @@ const TargetAudienceSection: React.FC = () => {
                   strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 ></path>
-              </svg>
+              </motion.svg>
             </div>
             <div>
               <h3 className="text-xl md:text-2xl font-bold text-white mb-4">
@@ -162,7 +171,7 @@ const TargetAudienceSection: React.FC = () => {
 
           <CtaButton
             text="QUERO ENTRAR NO NEGÓCIO VIRAL AGORA"
-            mobileText="QUERO ENTRAR AGORA"
+            mobileText="QUERO VENDER 3X MAIS"
             size="medium"
             className="mx-auto"
             isPricingButton={false}

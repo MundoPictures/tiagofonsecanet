@@ -589,7 +589,7 @@ const PricingSection: React.FC = () => {
           >
             <CtaButton
               text="QUERO COMEÇAR A VENDER 3X MAIS AGORA"
-              mobileText="VENDER 3X MAIS"
+              mobileText="QUERO VENDER 3X MAIS"
               size="large"
               withShine={true}
               withArrow={true}

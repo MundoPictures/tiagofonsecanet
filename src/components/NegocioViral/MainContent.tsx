@@ -68,8 +68,8 @@ const MainContent: React.FC = () => {
         <motion.div variants={itemVariants} className="w-full md:w-auto">
           <CtaButton
             text="QUERO VIRALIZAR MEU NEGÓCIO"
-            mobileText="QUERO VIRALIZAR"
-            size="large"
+            mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
+            size="medium"
             withShine={true}
             withArrow={true}
             withPulse={true}
