@@ -204,9 +204,7 @@ const BonusSection: React.FC = () => {
               </motion.div>
 
               <div className="text-center relative z-10">
-                <p className="text-black font-bold text-lg">
-                  Valor Total: R$ 497,00
-                </p>
+                <p className="text-black font-bold text-lg">Adquirindo Hoje</p>
                 <p className="text-black font-bold text-xl">Você leva GRÁTIS</p>
               </div>
             </motion.div>

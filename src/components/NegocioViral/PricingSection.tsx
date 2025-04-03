@@ -157,33 +157,6 @@ const PricingSection: React.FC = () => {
             Estratégias que funcionam mesmo sem tráfego pago, sem audiência e
             sem experiência anterior em marketing.
           </p>
-
-          <motion.div
-            className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 text-yellow-400 rounded-lg border border-yellow-500/20"
-            animate={{
-              scale: [1, 1.03, 1],
-              boxShadow: [
-                "0 0 0px rgba(234, 179, 8, 0)",
-                "0 0 15px rgba(234, 179, 8, 0.3)",
-                "0 0 0px rgba(234, 179, 8, 0)",
-              ],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-            }}
-          >
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <span className="font-medium">
-              Últimas <span className="font-bold">7 vagas</span> para o Lote 1
-            </span>
-          </motion.div>
         </motion.div>
 
         {/* Main pricing container with new layout */}
@@ -546,7 +519,7 @@ const PricingSection: React.FC = () => {
                         <CtaButton
                           id="pricing-cta-button"
                           text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
-                          mobileText="GARANTIR VAGA"
+                          mobileText="GARANTIR VAGA!"
                           size="large"
                           withShine={true}
                           withArrow={true}
@@ -595,31 +568,12 @@ const PricingSection: React.FC = () => {
 
                           <div className="flex-1">
                             <div className="flex items-center mb-1">
-                              <h5 className="text-white font-bold text-lg">
-                                Preço de Lançamento
+                              <h5 className="text-white font-bold text-xl">
+                                Próximo lote
                               </h5>
-                              <motion.span
-                                className="ml-2 px-2 py-0.5 bg-yellow-500 text-black text-xs font-bold rounded"
-                                animate={{
-                                  scale: [1, 1.1, 1],
-                                }}
-                                transition={{
-                                  duration: 1.5,
-                                  repeat: Infinity,
-                                }}
-                              >
-                                LOTE 1
-                              </motion.span>
                             </div>
 
                             <div className="flex flex-col md:flex-row md:items-center md:gap-6">
-                              <p className="text-gray-300 text-sm mb-2 md:mb-0">
-                                <span className="text-yellow-400 font-medium">
-                                  Apenas no Lote 1:
-                                </span>{" "}
-                                R$ 497,00
-                              </p>
-
                               <motion.div
                                 className="flex items-center gap-2 text-sm border-l border-yellow-600/30 pl-3 text-red-300"
                                 initial={{ opacity: 0.8 }}
@@ -631,37 +585,27 @@ const PricingSection: React.FC = () => {
                                   repeat: Infinity,
                                 }}
                               >
-                                <span className="font-medium">Lote 2:</span>
-                                <span className="font-bold">R$ 997,00</span>
+                                <span className="font-medium text-2xl">
+                                  Lote 2:
+                                </span>
+                                <span className="font-bold text-2xl">
+                                  R$ 997,00
+                                </span>
                               </motion.div>
                             </div>
                           </div>
                         </div>
-
-                        {/* Countdown line */}
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-red-500 via-yellow-500 to-yellow-300"
-                          style={{ width: "100%" }}
-                          animate={{
-                            width: ["100%", "0%"],
-                          }}
-                          transition={{
-                            duration: 40,
-                            ease: "linear",
-                            repeat: Infinity,
-                          }}
-                        />
                       </div>
 
                       {/* Progress indicator for batch filling */}
                       <div className="mx-6 mb-8 relative z-10">
                         <div className="flex justify-between text-xs text-gray-400 mb-2">
                           <span>Lote 1</span>
-                          <span>98% preenchido</span>
+                          <span>88% preenchido</span>
                         </div>
                         <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-green-500 to-green-400 w-[98%]"
+                            className="h-full bg-gradient-to-r from-green-500 to-green-400 w-[88%]"
                             animate={{
                               opacity: [0.7, 1, 0.7],
                             }}
@@ -774,20 +718,22 @@ const PricingSection: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-xl font-medium text-gray-300 mb-5">
-            Mais de{" "}
-            <span className="text-green-400 font-bold">
-              1.500+ empreendedores
+            <span className="text-green-400 font-bold text-2xl">
+              +200 mil donos de negócios
             </span>{" "}
             já transformaram seus negócios
           </h3>
 
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-2">
             {[
               "Lojistas",
               "Consultores",
-              "Coaches",
-              "Infoprodutores",
+              "Esteticistas",
+              "Advogados",
+              "Médicos",
+              "Tecnologia",
               "Prestadores de Serviço",
+              "Franqueador",
             ].map((profile, i) => (
               <motion.div
                 key={i}
@@ -830,8 +776,8 @@ const PricingSection: React.FC = () => {
           >
             <CtaButton
               text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
-              mobileText="GARANTIR VAGA"
-              size="large"
+              mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
+              size="small"
               withShine={true}
               withArrow={true}
               withPulse={true}
@@ -868,9 +814,8 @@ const PricingSection: React.FC = () => {
               repeat: Infinity,
             }}
           >
-            <span className="font-bold">Preço de Lote 1</span> •{" "}
-            <span className="text-red-400">Restam apenas 7 vagas</span> •
-            Próximo lote: R$ 997,00
+            <span className="font-bold text-lg">Preço de Lote 1</span> • Próximo
+            lote: R$ 997,00
           </motion.p>
         </motion.div>
       </div>

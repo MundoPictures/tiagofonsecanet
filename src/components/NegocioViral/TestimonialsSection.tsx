@@ -110,12 +110,6 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="text-center mb-2">
-                  <span className="inline-block px-4 py-1 bg-green-500/20 text-green-400 text-sm font-medium rounded-full">
-                    Impacto Comprovado
-                  </span>
-                </div>
-
                 <motion.p
                   className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-green-500"
                   animate={{
