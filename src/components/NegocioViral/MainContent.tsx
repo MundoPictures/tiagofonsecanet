@@ -14,7 +14,6 @@ declare global {
 
 const MainContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [playerReady, setPlayerReady] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
@@ -28,8 +27,6 @@ const MainContent: React.FC = () => {
 
       // Check if this is a Vimeo player event
       if (data.event === "ready" && videoRef.current) {
-        setPlayerReady(true);
-
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
