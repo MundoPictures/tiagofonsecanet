@@ -153,7 +153,6 @@ const BonusSection: React.FC = () => {
                 }}
               />
             </motion.span>{" "}
-            de Fundador
           </h2>
 
           {/* Updated value display with yellow background and animation for mobile */}
@@ -163,52 +162,6 @@ const BonusSection: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <motion.div
-              className="px-6 py-3 bg-yellow-500 rounded-lg mb-2 relative overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-              animate={{
-                boxShadow: [
-                  "0 10px 15px -3px rgba(234, 179, 8, 0.3)",
-                  "0 15px 25px -5px rgba(234, 179, 8, 0.5)",
-                  "0 10px 15px -3px rgba(234, 179, 8, 0.3)",
-                ],
-              }}
-              transition={{
-                boxShadow: {
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                },
-              }}
-            >
-              {/* Shine effect */}
-              <motion.div
-                className="absolute inset-0 w-full h-full"
-                style={{
-                  maskImage:
-                    "linear-gradient(to right, transparent, white, transparent)",
-                  WebkitMaskImage:
-                    "linear-gradient(to right, transparent, white, transparent)",
-                }}
-              >
-                <motion.div
-                  className="w-1/3 h-full bg-white/30 blur-md"
-                  animate={{ x: ["-100%", "400%"] }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 2,
-                    ease: "easeInOut",
-                    repeatDelay: 2,
-                  }}
-                />
-              </motion.div>
-
-              <div className="text-center relative z-10">
-                <p className="text-black font-bold text-lg">Adquirindo Hoje</p>
-                <p className="text-black font-bold text-xl">Você leva GRÁTIS</p>
-              </div>
-            </motion.div>
-
             <motion.div
               animate={{ y: [0, 6, 0] }}
               transition={{
@@ -417,9 +370,9 @@ const BonusSection: React.FC = () => {
                 repeat: Infinity,
               }}
             >
-              Estes bônus são exclusivos para a turma de fundadores e serão
-              removidos em breve. Após o lançamento, o acesso a estes materiais
-              será vendido separadamente.
+              Estes bônus são exclusivos para a turma inicial e serão removidos
+              em breve. Após o lançamento, o acesso a estes materiais será
+              vendido separadamente.
             </motion.p>
 
             {/* Urgent countdown-style animation */}

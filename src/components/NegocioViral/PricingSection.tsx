@@ -548,31 +548,31 @@ const PricingSection: React.FC = () => {
                         />
 
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 relative z-10">
-                          <div className="flex-shrink-0">
-                            <div className="h-12 w-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-yellow-600/20">
-                              <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth="2"
-                                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                                />
-                              </svg>
+                          <div className="flex items-center gap-3">
+                            <div className="flex-shrink-0">
+                              <div className="h-12 w-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center text-white shadow-lg shadow-yellow-600/20">
+                                <svg
+                                  className="w-6 h-6"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                                  />
+                                </svg>
+                              </div>
                             </div>
+
+                            <h5 className="text-white font-bold text-xl">
+                              Próximo lote
+                            </h5>
                           </div>
 
-                          <div className="flex-1">
-                            <div className="flex items-center mb-1">
-                              <h5 className="text-white font-bold text-xl">
-                                Próximo lote
-                              </h5>
-                            </div>
-
+                          <div className="flex-1 mt-3 sm:mt-0">
                             <div className="flex flex-col md:flex-row md:items-center md:gap-6">
                               <motion.div
                                 className="flex items-center gap-2 text-sm border-l border-yellow-600/30 pl-3 text-red-300"
@@ -585,10 +585,10 @@ const PricingSection: React.FC = () => {
                                   repeat: Infinity,
                                 }}
                               >
-                                <span className="font-medium text-2xl">
+                                <span className="font-medium text-xl">
                                   Lote 2:
                                 </span>
-                                <span className="font-bold text-2xl">
+                                <span className="font-bold text-xl">
                                   R$ 997,00
                                 </span>
                               </motion.div>
