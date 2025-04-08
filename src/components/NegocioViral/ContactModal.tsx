@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
+import axios from "axios";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -11,6 +12,12 @@ interface ContactModalProps {
 
 type FormData = {
   name: string;
+  email: string;
+  whatsapp: string;
+};
+
+type SendData = {
+  fullName: string;
   email: string;
   whatsapp: string;
 };
@@ -33,7 +40,16 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       // For now, we'll just simulate a delay and redirect
       console.log("Form data:", data);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const sendData: SendData = {
+        fullName: data.name,
+        email: data.email,
+        whatsapp: data.whatsapp,
+      };
+
+      const makeWebhookURL =
+        "https://hook.us2.make.com/ilj352ga4rp3e4l5gdvnsh3bphhmye4h";
+
+      await axios.post(makeWebhookURL, sendData);
 
       // Redirect to payment page
       window.location.href =
