@@ -15,8 +15,8 @@ declare global {
 const MainContent: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
-  const [videoInitialized, setVideoInitialized] = useState(false);
+  const [, setIsVideoVisible] = useState(false);
+  const [, setVideoInitialized] = useState(false);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
@@ -61,31 +61,12 @@ const MainContent: React.FC = () => {
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
           setVideoInitialized(true);
-
-          // Set initial volume to 0 for autoplay
-          playerRef.current.setVolume(0);
-
-          // Only start playing if the video is visible
-          if (isVideoVisible) {
-            playerRef.current.play().catch((error: any) => {
-              console.log("Autoplay was prevented by browser:", error);
-            });
-          }
         }
       }
-    } catch (e) {
+    } catch {
       // Not a JSON message or not from Vimeo
     }
   };
-
-  // Start playing when video becomes visible
-  useEffect(() => {
-    if (isVideoVisible && videoInitialized && playerRef.current) {
-      playerRef.current.play().catch((error: any) => {
-        console.log("Autoplay was prevented by browser:", error);
-      });
-    }
-  }, [isVideoVisible, videoInitialized]);
 
   useEffect(() => {
     // Load Vimeo player script
@@ -108,11 +89,9 @@ const MainContent: React.FC = () => {
   // Handle click on video
   const handleVideoClick = () => {
     if (playerRef.current) {
-      if (!isPlaying) {
-        // Turn on sound and ensure playing
-        playerRef.current.setVolume(1);
-        playerRef.current.play();
-      }
+      // Turn on sound and ensure playing
+      playerRef.current.setVolume(1);
+      playerRef.current.play();
       setIsPlaying(true);
     }
   };
@@ -270,7 +249,7 @@ const MainContent: React.FC = () => {
                 >
                   <iframe
                     ref={videoRef}
-                    src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&quality=1080p&preload=metadata"
+                    src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                     style={{
                       position: "absolute",

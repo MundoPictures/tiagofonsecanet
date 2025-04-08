@@ -777,7 +777,7 @@ const PricingSection: React.FC = () => {
             <CtaButton
               text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
               mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
-              size="small"
+              size="medium"
               withShine={true}
               withArrow={true}
               withPulse={true}
