@@ -22,7 +22,7 @@ const bonuses = [
   },
   {
     id: 3,
-    title: "Grupo no WhatsApp",
+    title: "Comunidade na Área de Membros",
     description:
       "Tire dúvidas, compartilhe resultados e receba suporte direto ao aplicar as estratégias.",
     icon: "chat",
@@ -33,7 +33,7 @@ const bonuses = [
     id: 4,
     title: "Bônus Oculto",
     description:
-      "Liberado após a sua primeira ação de venda implementada. Uma surpresa que potencializa seus resultados.",
+      "Liberado após o seu 10º dia de aplicação das estratégias. Uma surpresa que vai potencializar seus resultados.",
     icon: "gift",
     value: "R$ 197",
     color: "green",

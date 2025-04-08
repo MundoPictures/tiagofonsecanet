@@ -73,10 +73,10 @@ const CoachSection: React.FC = () => {
           <div className="md:w-2/3 text-white space-y-6">
             <p className="text-lg leading-relaxed">
               <span className="text-green-400 font-bold">
-                O criador do Negócio Viral
+                Tiago Fonseca, O criador do Negócio Viral
               </span>{" "}
               é especialista em estratégias de marketing direto e criação de
-              campanhas que vendem sem depender de tráfego pago. Com mais de 10
+              campanhas que vendem sem depender de tráfego pago. Com mais de 13
               anos de experiência ajudando empresas de todos os tamanhos a
               aumentarem suas vendas usando técnicas práticas e diretas que
               geram resultados imediatos.

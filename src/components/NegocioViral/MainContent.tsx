@@ -158,13 +158,13 @@ const MainContent: React.FC = () => {
         >
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
           Aplicando as Ações de Marketing Que Geram Caixa Imediato
-          <span className="text-gray-200 block mt-3 md:mt-3 text-xl sm:text-xl md:text-2xl font-semibold">
+          <span className="text-gray-200 block mt-3 md:mt-3 text-sm sm:text-sm md:text-2xl font-semibold">
             Sem anúncios, sem audiência e sem enrolação.
           </span>
         </motion.h2>
 
         <motion.p
-          className="text-gray-200 text-base md:text-base mb-6 md:mb-8 leading-relaxed w-full"
+          className="text-gray-200 text-base md:text-base mb-4 md:mb-8 leading-relaxed w-full"
           variants={itemVariants}
         >
           <span className="italic">
@@ -253,7 +253,7 @@ const MainContent: React.FC = () => {
             />
 
             {/* Video overlay container positioned on top of the image, shifted down 20px */}
-            <div className="absolute inset-0 flex items-center justify-center translate-y-5">
+            <div className="absolute inset-0 flex items-center justify-center translate-y-24">
               <div
                 ref={videoContainerRef}
                 className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl shadow-green-500/20"
@@ -271,7 +271,6 @@ const MainContent: React.FC = () => {
                   <iframe
                     ref={videoRef}
                     src="https://player.vimeo.com/video/1071430415?h=25011df217&badge=0&autopause=0&player_id=0&app_id=58479&muted=1&quality=1080p&preload=metadata"
-                    frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                     style={{
                       position: "absolute",

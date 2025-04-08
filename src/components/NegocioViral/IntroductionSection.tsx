@@ -214,7 +214,7 @@ const IntroductionSection: React.FC = () => {
               </div>
             </div>
             {/* Decorative elements */}
-            <div className="absolute -bottom-3 -left-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
+            <div className="absolute cursir -bottom-3 -left-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
             <div className="absolute -top-3 -right-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
           </motion.div>
 

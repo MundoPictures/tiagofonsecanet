@@ -520,7 +520,7 @@ const PricingSection: React.FC = () => {
                           id="pricing-cta-button"
                           text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
                           mobileText="GARANTIR VAGA!"
-                          size="large"
+                          size="medium"
                           withShine={true}
                           withArrow={true}
                           withPulse={true}
@@ -719,7 +719,7 @@ const PricingSection: React.FC = () => {
         >
           <h3 className="text-xl font-medium text-gray-300 mb-5">
             <span className="text-green-400 font-bold text-2xl">
-              +200 mil donos de negócios
+              +200 mil empresários
             </span>{" "}
             já transformaram seus negócios
           </h3>
