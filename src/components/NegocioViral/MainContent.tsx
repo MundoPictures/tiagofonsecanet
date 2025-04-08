@@ -235,7 +235,7 @@ const MainContent: React.FC = () => {
             <div className="absolute inset-0 flex items-center justify-center translate-y-24">
               <div
                 ref={videoContainerRef}
-                className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl shadow-green-500/20"
+                className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl mt-8"
                 style={{ aspectRatio: "16/9" }}
                 onClick={handleVideoClick}
               >
