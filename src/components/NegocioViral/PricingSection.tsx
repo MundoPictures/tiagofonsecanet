@@ -263,36 +263,6 @@ const PricingSection: React.FC = () => {
                       ))}
                     </div>
                   </div>
-
-                  {/* Testimonial */}
-                  <motion.div
-                    className="bg-gradient-to-br from-green-900/20 to-green-800/10 backdrop-blur-sm rounded-xl p-5 border border-green-500/10 relative mt-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                    whileHover={{ y: -2 }}
-                  >
-                    <div className="absolute -top-3 -left-3 text-4xl text-green-500 opacity-60">
-                      ❝
-                    </div>
-                    <p className="text-gray-300 italic mb-4 relative z-10">
-                      "Apliquei a estratégia #3 e consegui fechar 5 novos
-                      clientes em menos de 48 horas, sem gastar um centavo com
-                      anúncios. O investimento se pagou no mesmo dia!"
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm">
-                        MC
-                      </div>
-                      <div>
-                        <p className="text-white font-medium">Marcelo Costa</p>
-                        <p className="text-xs text-gray-400">
-                          Coach de Carreira, Rio de Janeiro
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
                 </div>
 
                 {/* Right side - Pricing (3 columns on large screens) */}
@@ -585,10 +555,10 @@ const PricingSection: React.FC = () => {
                                   repeat: Infinity,
                                 }}
                               >
-                                <span className="font-medium text-xl">
+                                <span className="font-medium l text-xl">
                                   Lote 2:
                                 </span>
-                                <span className="font-bold text-xl">
+                                <span className="font-bold l text-xl">
                                   R$ 997,00
                                 </span>
                               </motion.div>

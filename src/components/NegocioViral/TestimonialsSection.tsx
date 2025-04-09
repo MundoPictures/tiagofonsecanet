@@ -1,53 +1,47 @@
-import React from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
-interface TestimonialsSectionProps {}
-
-// Sample testimonials data with different heights to create visual interest
-const testimonials = [
+// Video testimonials data
+const videoTestimonials = [
   {
     id: 1,
-    imageSrc: "https://placehold.co/600x900/222222/444444",
-    alt: "Depoimento 1",
-    rating: 5,
-    text: "Fiz a Ação 3 do Negócio Viral e vendi R$4.280 em 2 dias — sem anúncio e só com a base que eu já tinha.",
-    author: "Amanda R., loja de semijoias",
+    videoId: "1073343922",
+    hash: "8217ef7108",
   },
   {
     id: 2,
-    imageSrc: "https://placehold.co/600x700/222222/444444",
-    alt: "Depoimento 2",
-    rating: 5,
-    text: "Pensei que fosse mais um curso, mas é execução pura. É como se alguém entrasse no meu negócio e mostrasse onde tá o dinheiro.",
-    author: "João P., designer freelancer",
+    videoId: "1073343787",
+    hash: "0cb71e042f",
   },
   {
     id: 3,
-    imageSrc: "https://placehold.co/600x800/222222/444444",
-    alt: "Depoimento 3",
-    rating: 5,
-    text: "Apliquei a estratégia de urgência e vendi em 1 dia o que normalmente vendo em uma semana. Método simples e eficaz!",
-    author: "Ana C., infoprodutora",
+    videoId: "1073344227",
+    hash: "1009cf7a15",
   },
   {
     id: 4,
-    imageSrc: "https://placehold.co/600x800/222222/444444",
-    alt: "Depoimento 4",
-    rating: 5,
-    text: "Minha loja física estava às moscas. Com o método de reativação de clientes, fiz R$3.400 em 3 dias sem gastar com anúncios.",
-    author: "Carlos M., lojista",
+    videoId: "1073987748",
+    hash: "6eceafa2bb",
   },
 ];
 
-const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
+const TestimonialsSection = () => {
+  const [playingVideo, setPlayingVideo] = useState<number | null>(null);
+  const videoRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  const handleVideoClick = (videoId: number) => {
+    setPlayingVideo(videoId === playingVideo ? null : videoId);
+  };
+
   return (
     <div
       id="depoimentos"
       className="bg-[#131313] w-full py-20 border-t border-gray-800 relative overflow-hidden"
     >
-      {/* Background patterns */}
+      {/* Background patterns with subtle blur effect */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-green-500 blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-green-500/20 blur-[120px]" />
         <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-green-500 blur-[100px]" />
       </div>
 
@@ -63,140 +57,89 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = () => {
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
             </svg>
             <span className="text-green-400 text-sm font-semibold">
-              PROVAS REAIS
+              DEPOIMENTOS REAIS
             </span>
           </div>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Resultados <span className="text-green-400">Comprovados</span>
           </h2>
-          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto">
-            Veja o que nossos alunos estão dizendo sobre o método e as vendas
-            que conseguiram aplicando as ações do Negócio Viral
-          </p>
         </div>
 
-        {/* Stats - updated to single impressive stat */}
-        <motion.div
-          className="mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.div
-            className="bg-gradient-to-r from-black/80 to-black/60 p-6 rounded-xl border border-green-500/20 shadow-lg max-w-2xl mx-auto overflow-hidden relative"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          >
-            {/* Background animation */}
+        {/* Video testimonials grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+          {videoTestimonials.map((video, index) => (
             <motion.div
-              className="absolute -inset-2 bg-gradient-to-r from-green-500/10 via-green-400/5 to-green-500/10 rounded-3xl blur-xl z-0"
-              animate={{
-                x: ["-100%", "100%"],
+              key={video.id}
+              className="relative group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: video.id * 0.1 }}
+              whileHover={{ scale: 1.01 }}
+              ref={(el) => {
+                videoRefs.current[index] = el;
               }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              }}
-            />
-
-            <div className="relative z-10 text-center">
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <motion.p
-                  className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-green-300 to-green-500"
-                  animate={{
-                    scale: [1, 1.03, 1],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
+            >
+              {/* Card with video */}
+              <div className="rounded-2xl overflow-hidden bg-black/40 border border-green-500/10 shadow-xl">
+                {/* Video container */}
+                <div
+                  className="relative cursor-pointer overflow-hidden"
+                  onClick={() => handleVideoClick(video.id)}
                 >
-                  + 1 Bilhão
-                </motion.p>
+                  <div
+                    style={{
+                      padding: "56.25% 0 0 0",
+                      position: "relative",
+                      background: "#000",
+                    }}
+                  >
+                    <iframe
+                      src={`https://player.vimeo.com/video/${video.videoId}?h=${video.hash}&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata&controls=0&transparent=1`}
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      title={`Testimonial video ${video.id}`}
+                    ></iframe>
 
-                <p className="text-xl text-white font-bold mt-2">
-                  Em vendas geradas para nossos clientes
-                </p>
-
-                <div className="flex justify-center mt-4">
-                  <div className="flex items-center space-x-1">
-                    {[1, 2, 3, 4, 5].map((_, i) => (
-                      <motion.svg
-                        key={i}
-                        className="w-5 h-5 text-yellow-400"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.1, duration: 0.3 }}
+                    {/* Clean play button overlay */}
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-t from-black/50 to-black/20 backdrop-blur-[1px]"
+                      initial={{ opacity: 1 }}
+                      animate={{
+                        opacity: playingVideo === video.id ? 0 : 1,
+                        background:
+                          playingVideo === video.id
+                            ? "rgba(0,0,0,0)"
+                            : "rgba(0,0,0,0.3)",
+                      }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      {/* Clean centered play button */}
+                      <motion.div
+                        className="bg-green-500 h-16 w-16 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-green-500/30"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </motion.svg>
-                    ))}
+                        <svg
+                          className="w-8 h-8 text-white"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <path d="M8 5v14l11-7z"></path>
+                        </svg>
+                      </motion.div>
+                    </motion.div>
                   </div>
                 </div>
-              </motion.div>
-            </div>
-          </motion.div>
-        </motion.div>
-
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {testimonials.map((testimonial) => (
-            <div
-              key={testimonial.id}
-              className="bg-black/40 rounded-xl overflow-hidden border border-green-500/10 shadow-lg"
-            >
-              {/* Top portion with image and success badge */}
-              <div className="relative h-40">
-                <img
-                  src={testimonial.imageSrc}
-                  alt={testimonial.alt}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-                <div className="absolute top-3 right-3 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
-                  Sucesso
-                </div>
               </div>
-
-              {/* Content portion */}
-              <div className="p-4">
-                {/* Stars */}
-                <div className="flex mb-3">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <svg
-                      key={star}
-                      className="w-4 h-4 text-yellow-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
-                  ))}
-                </div>
-
-                {/* Testimonial text */}
-                <p className="text-white text-sm font-medium mb-3">
-                  "{testimonial.text}"
-                </p>
-
-                {/* Author */}
-                <p className="text-gray-400 text-xs">
-                  {testimonial.author} • Aluno(a) do Negócio Viral
-                </p>
-              </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
