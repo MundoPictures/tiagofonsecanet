@@ -45,12 +45,9 @@ type MetaPixelContextType = {
     event: StandardEvent,
     data?: Record<string, unknown>
   ) => void;
-  testPixel: () => void;
 };
 
 const PIXEL_ID = "234115115494557";
-// Meta Pixel test event code
-const TEST_EVENT_CODE = "TEST85766";
 
 // Need to store the last tracked events to prevent duplicates
 interface EventCache {
@@ -71,9 +68,6 @@ const MetaPixelContext = createContext<MetaPixelContextType>({
     // Default empty implementation
   },
   trackStandardEvent: () => {
-    // Default empty implementation
-  },
-  testPixel: () => {
     // Default empty implementation
   },
 });
@@ -97,7 +91,7 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', '${PIXEL_ID}');
-      fbq('track', 'PageView', {}, {eventID: 'page-view-${Date.now()}', test_event_code: '${TEST_EVENT_CODE}'});
+      fbq('track', 'PageView', {}, {eventID: 'page-view-${Date.now()}'});
     `;
     document.head.appendChild(script);
 
@@ -107,7 +101,7 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
     img.height = 1;
     img.width = 1;
     img.style.display = "none";
-    img.src = `https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1&test_event_code=${TEST_EVENT_CODE}`;
+    img.src = `https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`;
     noscript.appendChild(img);
     document.head.appendChild(noscript);
 
@@ -161,41 +155,13 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
         const eventID = `${eventName}-${Date.now()}`;
 
         console.log(`[Meta Pixel] Tracking custom event: ${eventName}`, data);
-        // Add test event code to options parameter (4th parameter)
         window.fbq("trackCustom", eventName, data || {}, {
           eventID,
-          test_event_code: TEST_EVENT_CODE,
         });
       }
     },
     [isRecentDuplicate]
   );
-
-  // Special test function to verify if Pixel is working
-  const testPixel = useCallback(() => {
-    if (window.fbq) {
-      const testEventId = `test-pixel-${Date.now()}`;
-      console.log(`[Meta Pixel] Running TEST85766 verification`);
-
-      // Send a specific test event
-      window.fbq(
-        "trackCustom",
-        "TestEvent",
-        {
-          test_id: "TEST85766",
-          timestamp: new Date().toISOString(),
-        },
-        {
-          eventID: testEventId,
-          test_event_code: TEST_EVENT_CODE,
-        }
-      );
-
-      console.log(`[Meta Pixel] Test event sent with ID: ${testEventId}`);
-    } else {
-      console.error("[Meta Pixel] Facebook Pixel is not initialized");
-    }
-  }, []);
 
   // Function to track standard events with duplicate prevention
   const trackStandardEvent = useCallback(
@@ -210,10 +176,8 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
         const eventID = `${event}-${Date.now()}`;
 
         console.log(`[Meta Pixel] Tracking standard event: ${event}`, data);
-        // Add test event code to options parameter (4th parameter)
         window.fbq("track", event, data || {}, {
           eventID,
-          test_event_code: TEST_EVENT_CODE,
         });
       }
     },
@@ -254,15 +218,14 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
           "ViewContent",
         ].includes(event);
 
+        // Call the appropriate tracking method
         if (isStandardEvent) {
           window.fbq("track", event, data || {}, {
             eventID,
-            test_event_code: TEST_EVENT_CODE,
           });
         } else {
           window.fbq("trackCustom", event, data || {}, {
             eventID,
-            test_event_code: TEST_EVENT_CODE,
           });
         }
       }
@@ -272,7 +235,7 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <MetaPixelContext.Provider
-      value={{ trackEvent, trackCustomEvent, trackStandardEvent, testPixel }}
+      value={{ trackEvent, trackCustomEvent, trackStandardEvent }}
     >
       {children}
     </MetaPixelContext.Provider>

@@ -25,7 +25,7 @@ import ScrollDepthTracker from "../components/tracking/ScrollDepthTracker";
 export default function NegocioViral() {
   // Get tracking functions
   const tracking = useNegocioViralTracking();
-  const { trackStandardEvent, testPixel } = useMetaPixel();
+  const { trackStandardEvent } = useMetaPixel();
   const initialPageViewTracked = useRef(false);
 
   // Track page view ONCE on initial page load only
@@ -85,26 +85,6 @@ export default function NegocioViral() {
 
   return (
     <div className="relative w-full overflow-hidden bg-[#131313]">
-      {/* Developer Test Button */}
-      <button
-        onClick={testPixel}
-        style={{
-          position: "fixed",
-          bottom: "20px",
-          right: "20px",
-          zIndex: 9999,
-          padding: "10px 15px",
-          background: "#ff5500",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-          fontWeight: "bold",
-        }}
-      >
-        Test Pixel (TEST85766)
-      </button>
-
       {/* Add ScrollDepthTracker component */}
       <ScrollDepthTracker
         thresholds={[25, 50, 75, 100]}
