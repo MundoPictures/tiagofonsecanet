@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import React from "react";
 
 // Add type declaration for Vimeo
 declare global {
@@ -34,7 +35,13 @@ const videoTestimonials = [
   },
 ];
 
-const TestimonialsSection = () => {
+interface TestimonialsSectionProps {
+  onTestimonialInteraction?: (testimonialId: string) => void;
+}
+
+const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
+  onTestimonialInteraction,
+}) => {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
   const videoRefs = useRef<Array<HTMLIFrameElement | null>>([]);
   const playerRefs = useRef<any[]>([]);
@@ -114,6 +121,14 @@ const TestimonialsSection = () => {
     videoRefs.current[index] = el;
   };
 
+  // Add tracking to testimonial click/interaction
+  const handleTestimonialInteraction = (testimonialId: string) => {
+    if (onTestimonialInteraction) {
+      onTestimonialInteraction(testimonialId);
+    }
+    // Your existing testimonial interaction logic
+  };
+
   return (
     <div
       id="depoimentos"
@@ -164,7 +179,10 @@ const TestimonialsSection = () => {
                 {/* Video container */}
                 <div
                   className="relative cursor-pointer overflow-hidden"
-                  onClick={() => handleVideoClick(video.id)}
+                  onClick={() => {
+                    handleVideoClick(video.id);
+                    handleTestimonialInteraction(`testimonial_${video.id}`);
+                  }}
                 >
                   <div
                     style={{

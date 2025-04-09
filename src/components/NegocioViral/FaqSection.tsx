@@ -6,7 +6,11 @@ interface FaqItem {
   answer: string;
 }
 
-const FaqSection: React.FC = () => {
+interface FaqSectionProps {
+  onFaqExpand?: (faqId: string) => void;
+}
+
+const FaqSection: React.FC<FaqSectionProps> = ({ onFaqExpand }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
@@ -51,6 +55,14 @@ const FaqSection: React.FC = () => {
     },
   ];
 
+  // Track FAQ expansion
+  const handleFaqExpand = (faqId: string) => {
+    if (onFaqExpand) {
+      onFaqExpand(faqId);
+    }
+    // Any existing FAQ expansion logic
+  };
+
   return (
     <section className="py-20 bg-[#131313] relative overflow-hidden">
       {/* Background effect */}
@@ -87,7 +99,10 @@ const FaqSection: React.FC = () => {
             >
               <button
                 className="flex justify-between items-center w-full p-5 text-left"
-                onClick={() => toggleFaq(index)}
+                onClick={() => {
+                  handleFaqExpand(`faq_${index}`);
+                  toggleFaq(index);
+                }}
               >
                 <h3 className="text-lg md:text-xl font-semibold text-white pr-8">
                   {faq.question}

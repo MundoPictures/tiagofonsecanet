@@ -1,8 +1,45 @@
 import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
+import { useModal } from "../../contexts/ModalContext";
 
-const PricingSection: React.FC = () => {
+interface PricingSectionProps {
+  onModalOpen?: (modalName: string) => void;
+  onModalClose?: (modalName: string) => void;
+  onCheckoutClick?: (planId: string, price: number) => void;
+}
+
+const PricingSection: React.FC<PricingSectionProps> = ({
+  onModalOpen,
+  // onModalClose,
+  // onCheckoutClick,
+}) => {
+  const { openModal } = useModal();
+
+  // The correct handler for opening the modal
+  const handleModalOpen = () => {
+    if (onModalOpen) {
+      onModalOpen("pricing_modal");
+    }
+    openModal();
+  };
+
+  // // Handle closing modal with tracking
+  // const handleCloseModal = () => {
+  //   if (onModalClose) {
+  //     onModalClose("pricing_modal");
+  //   }
+  //   closeModal();
+  // };
+
+  // // Handle checkout button click with tracking
+  // const handleCheckoutClick = (planId: string, price: number) => {
+  //   if (onCheckoutClick) {
+  //     onCheckoutClick(planId, price);
+  //   }
+  //   // Your existing checkout logic
+  // };
+
   // Payment methods with icons - Removed as we're now using SVG icons directly
   // const paymentMethods = [
   //   { id: 1, name: "Cartão de Crédito", icon: "💳" },
@@ -488,14 +525,14 @@ const PricingSection: React.FC = () => {
                       <div className="px-6 py-6 relative z-10">
                         <CtaButton
                           id="pricing-cta-button"
-                          text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
-                          mobileText="GARANTIR VAGA!"
-                          size="medium"
+                          text="QUERO GARANTIR MINHA VAGA"
+                          size="large"
                           withShine={true}
                           withArrow={true}
                           withPulse={true}
                           isPricingButton={true}
                           className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl shadow-green-900/30"
+                          onClick={() => handleModalOpen()}
                         />
                         <p className="text-center mt-3 text-gray-400 text-xs sm:text-sm">
                           Acesso imediato após a confirmação do pagamento
@@ -745,14 +782,14 @@ const PricingSection: React.FC = () => {
             whileTap={{ scale: 0.98 }}
           >
             <CtaButton
-              text="GARANTIR PREÇO ESPECIAL DO LOTE 1"
-              mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
-              size="medium"
+              text="QUERO GARANTIR MINHA VAGA"
+              size="large"
               withShine={true}
               withArrow={true}
               withPulse={true}
               isPricingButton={true}
               className="w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg font-bold shadow-2xl shadow-green-900/30"
+              onClick={() => handleModalOpen()}
             />
 
             {/* Subtle pulsing circle behind button */}

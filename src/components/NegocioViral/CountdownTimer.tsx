@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 
 interface CountdownTimerProps {
   initialMinutes: number;
+  onExpire?: () => void;
 }
 
 const CountdownTimer: React.FC<CountdownTimerProps> = ({
   initialMinutes = 10,
+  onExpire,
 }) => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 0,
@@ -29,6 +31,12 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
       if (difference <= 0) {
         clearInterval(interval);
         setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+
+        // Call onExpire callback when timer reaches zero
+        if (onExpire) {
+          onExpire();
+        }
+
         return;
       }
 
@@ -47,7 +55,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({
 
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
-  }, [initialMinutes]);
+  }, [initialMinutes, onExpire]);
 
   // Format time with leading zeros
   const formatTime = (time: number): string => {

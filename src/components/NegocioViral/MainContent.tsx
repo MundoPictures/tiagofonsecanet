@@ -12,7 +12,11 @@ declare global {
   }
 }
 
-const MainContent: React.FC = () => {
+interface MainContentProps {
+  onCtaClick?: (buttonName: string) => void;
+}
+
+const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [, setIsVideoVisible] = useState(false);
@@ -165,6 +169,9 @@ const MainContent: React.FC = () => {
             withPulse={true}
             isPricingButton={false}
             className="shadow-xl shadow-green-500/20 hover:shadow-green-500/30 text-base md:text-base w-full md:w-auto"
+            onClick={() =>
+              onCtaClick && onCtaClick("QUERO VIRALIZAR MEU NEGÓCIO")
+            }
           />
         </motion.div>
 

@@ -2,11 +2,26 @@ import React from "react";
 import { motion } from "framer-motion";
 import CtaButton from "./CtaButton";
 
-const GuaranteeSection: React.FC = () => {
+interface GuaranteeSectionProps {
+  onGuaranteeClick?: () => void;
+}
+
+const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
+  onGuaranteeClick,
+}) => {
+  // Handler for guarantee interactions
+  const handleGuaranteeClick = () => {
+    if (onGuaranteeClick) {
+      onGuaranteeClick();
+    }
+    // Any existing guarantee click logic
+  };
+
   return (
     <div
-      id="garantia"
-      className="bg-[#131313] w-full py-20 border-t border-gray-800 relative overflow-hidden"
+      className="py-20 md:py-24 relative"
+      id="guarantee-section"
+      onClick={handleGuaranteeClick}
     >
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
