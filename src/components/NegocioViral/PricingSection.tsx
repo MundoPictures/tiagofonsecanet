@@ -522,7 +522,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                       </div>
 
                       {/* CTA Button - styled exactly like the reference image */}
-                      <div className="px-6 py-6 relative z-10">
+                      <div className="px-6 py-6 relative z-10 flex flex-col items-center">
                         <CtaButton
                           id="pricing-cta-button"
                           text="QUERO GARANTIR MINHA VAGA"
