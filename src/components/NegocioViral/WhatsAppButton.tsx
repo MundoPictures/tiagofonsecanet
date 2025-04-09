@@ -15,7 +15,15 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   const [visible, setVisible] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [pulseNotification, setPulseNotification] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
   const { trackCustomEvent } = useMetaPixel();
+
+  // Detect iOS device
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isIOSDevice = /iphone|ipad|ipod/.test(userAgent);
+    setIsIOS(isIOSDevice);
+  }, []);
 
   // Show button after scrolling down
   useEffect(() => {
@@ -95,6 +103,26 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
     window.open(whatsappUrl, "_blank");
   };
 
+  // Custom style for iOS devices
+  const getButtonStyles = () => {
+    // Use enhanced styles for non-iOS, simpler styles for iOS
+    if (isIOS) {
+      return {
+        buttonClass:
+          "relative flex items-center justify-center bg-green-500 text-white p-4 rounded-full shadow-xl",
+        iconClass: "text-3xl z-10 text-white",
+      };
+    }
+
+    return {
+      buttonClass:
+        "relative flex items-center justify-center bg-gradient-to-br from-green-400 to-green-600 text-white p-4 rounded-full shadow-xl",
+      iconClass: "text-3xl z-10",
+    };
+  };
+
+  const { buttonClass, iconClass } = getButtonStyles();
+
   return (
     <AnimatePresence>
       {visible && (
@@ -108,63 +136,71 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
           {/* Ripple effect container */}
           <div className="relative">
             {/* Multiple pulse rings */}
-            <motion.div
-              className="absolute -inset-1 rounded-full bg-green-500 opacity-20"
-              animate={{
-                scale: [1, 1.5, 1],
-                opacity: [0.2, 0, 0.2],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-                times: [0, 0.5, 1],
-              }}
-            />
+            {!isIOS && (
+              <>
+                <motion.div
+                  className="absolute -inset-1 rounded-full bg-green-500 opacity-20"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.2, 0, 0.2],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                    times: [0, 0.5, 1],
+                  }}
+                />
 
-            <motion.div
-              className="absolute -inset-2 rounded-full bg-green-500 opacity-10"
-              animate={{
-                scale: [1, 1.8, 1],
-                opacity: [0.1, 0, 0.1],
-              }}
-              transition={{
-                duration: 2.5,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "easeInOut",
-                delay: 0.2,
-              }}
-            />
+                <motion.div
+                  className="absolute -inset-2 rounded-full bg-green-500 opacity-10"
+                  animate={{
+                    scale: [1, 1.8, 1],
+                    opacity: [0.1, 0, 0.1],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                    delay: 0.2,
+                  }}
+                />
+              </>
+            )}
 
             <motion.button
               onClick={handleWhatsAppClick}
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
-              className="relative flex items-center justify-center bg-gradient-to-br from-green-400 to-green-600 text-white p-4 rounded-full shadow-xl"
+              className={buttonClass}
               whileHover={{
                 scale: 1.1,
-                boxShadow: "0 0 25px rgba(37, 211, 102, 0.6)",
+                boxShadow: isIOS
+                  ? "0 0 15px rgba(37, 211, 102, 0.4)"
+                  : "0 0 25px rgba(37, 211, 102, 0.6)",
               }}
               whileTap={{ scale: 0.95 }}
             >
-              {/* Inner glow effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full bg-white opacity-30 blur-sm"
-                animate={{
-                  scale: [0.85, 1, 0.85],
-                  opacity: [0.3, 0.4, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+              {/* Inner glow effect - only for non-iOS */}
+              {!isIOS && (
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-white opacity-30 blur-sm"
+                  animate={{
+                    scale: [0.85, 1, 0.85],
+                    opacity: [0.3, 0.4, 0.3],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+              )}
 
-              {/* Icon */}
-              <FaWhatsapp className="text-3xl z-10" />
+              {/* Icon - with explicit white color for iOS */}
+              <FaWhatsapp className={iconClass} />
 
               {/* Notification badge */}
               <AnimatePresence>
@@ -173,7 +209,7 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
                     className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-20 min-w-6 h-6 flex items-center justify-center"
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{
-                      scale: [0, 1.2, 1],
+                      scale: 1,
                       opacity: 1,
                     }}
                     exit={{
@@ -181,7 +217,6 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
                       opacity: 0,
                     }}
                     transition={{
-                      duration: 0.3,
                       type: "spring",
                       stiffness: 500,
                     }}
@@ -193,11 +228,13 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
             </motion.button>
           </div>
 
-          {/* Tooltip */}
+          {/* Tooltip - simplified for iOS */}
           <AnimatePresence>
             {showTooltip && (
               <motion.div
-                className="absolute right-full mr-4 bottom-1 bg-white text-gray-800 px-4 py-2 rounded-lg shadow-lg whitespace-nowrap font-medium text-sm"
+                className={`absolute right-full mr-4 bottom-1 ${
+                  isIOS ? "bg-white" : "bg-white"
+                } text-gray-800 px-4 py-2 rounded-lg shadow-lg whitespace-nowrap font-medium text-sm`}
                 initial={{ opacity: 0, x: 20, scale: 0.8 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: 10, scale: 0.9 }}

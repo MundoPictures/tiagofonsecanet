@@ -526,12 +526,12 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                         <CtaButton
                           id="pricing-cta-button"
                           text="QUERO GARANTIR MINHA VAGA"
-                          size="large"
+                          size="small"
                           withShine={true}
                           withArrow={true}
                           withPulse={true}
                           isPricingButton={true}
-                          className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl shadow-green-900/30"
+                          className="w-full py-4 sm:py-5 text-base sm:text-lg font-bold shadow-xl shadow-green-900/30 mx-auto"
                           onClick={() => handleModalOpen()}
                         />
                         <p className="text-center mt-3 text-gray-400 text-xs sm:text-sm">
