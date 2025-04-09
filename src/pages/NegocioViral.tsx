@@ -14,6 +14,7 @@ import FaqSection from "../components/NegocioViral/FaqSection";
 import IntroductionSection from "../components/NegocioViral/IntroductionSection";
 import FeaturesSection from "../components/NegocioViral/FeaturesSection";
 import BonusSection from "../components/NegocioViral/BonusSection";
+import WhatsAppButton from "../components/NegocioViral/WhatsAppButton";
 import "../styles/NegocioViralScrollbar.css";
 import backgroundimage from "../assets/negocioViral/bg3.png";
 import backgroundimagemobile from "../assets/negocioViral/bg3.png";
@@ -85,6 +86,12 @@ export default function NegocioViral() {
 
   return (
     <div className="relative w-full overflow-hidden bg-[#131313]">
+      {/* WhatsApp Floating Button */}
+      <WhatsAppButton
+        phoneNumber="+551131350879"
+        message="Olá! Estou interessado no curso Negócio Viral e gostaria de saber mais informações!"
+      />
+
       {/* Add ScrollDepthTracker component */}
       <ScrollDepthTracker
         thresholds={[25, 50, 75, 100]}

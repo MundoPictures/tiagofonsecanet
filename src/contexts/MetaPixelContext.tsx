@@ -154,7 +154,7 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
         // Generate a unique event ID
         const eventID = `${eventName}-${Date.now()}`;
 
-        console.log(`[Meta Pixel] Tracking custom event: ${eventName}`, data);
+        // console.log(`[Meta Pixel] Tracking custom event: ${eventName}`, data);
         window.fbq("trackCustom", eventName, data || {}, {
           eventID,
         });
@@ -175,7 +175,7 @@ export const MetaPixelProvider: React.FC<{ children: React.ReactNode }> = ({
         // Generate a unique event ID
         const eventID = `${event}-${Date.now()}`;
 
-        console.log(`[Meta Pixel] Tracking standard event: ${event}`, data);
+        // console.log(`[Meta Pixel] Tracking standard event: ${event}`, data);
         window.fbq("track", event, data || {}, {
           eventID,
         });
