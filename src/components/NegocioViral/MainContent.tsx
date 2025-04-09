@@ -141,8 +141,16 @@ const MainContent: React.FC<MainContentProps> = ({ onCtaClick }) => {
         >
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
           Aplicando as Ações de Marketing Que Geram Caixa Imediato
-          <span className="text-gray-200 block mt-3 md:mt-3 text-sm sm:text-sm md:text-2xl font-semibold">
-            Sem anúncios, sem audiência e sem enrolação.
+          <span className="text-gray-200 mt-3 md:mt-3 text-sm sm:text-sm md:text-2xl flex justify-center gap-2 font-bold">
+            <span className="bg-yellow-400 p-1 text-green-800">
+              SEM ANUNCIOS
+            </span>
+            <span className="bg-yellow-400 p-1 text-green-800">
+              SEM AUDIÊNCIA
+            </span>
+            <span className="bg-yellow-400 p-1 text-green-800">
+              SEM ENROLAÇÃO
+            </span>
           </span>
         </motion.h2>
 
