@@ -1,5 +1,14 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
+
+// Add type declaration for Vimeo
+declare global {
+  interface Window {
+    Vimeo?: {
+      Player: any;
+    };
+  }
+}
 
 // Video testimonials data
 const videoTestimonials = [
@@ -27,10 +36,82 @@ const videoTestimonials = [
 
 const TestimonialsSection = () => {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
-  const videoRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const videoRefs = useRef<Array<HTMLIFrameElement | null>>([]);
+  const playerRefs = useRef<any[]>([]);
+  const [vimeoLoaded, setVimeoLoaded] = useState(false);
+
+  // Load Vimeo player script on mount
+  useEffect(() => {
+    // Load Vimeo player script
+    const script = document.createElement("script");
+    script.src = "https://player.vimeo.com/api/player.js";
+    script.async = true;
+    script.onload = () => setVimeoLoaded(true);
+    document.body.appendChild(script);
+
+    // Clean up
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+    };
+  }, []);
+
+  // Initialize players after script loads
+  useEffect(() => {
+    if (!vimeoLoaded) return;
+
+    const Vimeo = window.Vimeo;
+    if (!Vimeo) return;
+
+    // Initialize players when the Vimeo script has loaded
+    videoRefs.current.forEach((iframe, index) => {
+      if (iframe) {
+        playerRefs.current[index] = new Vimeo.Player(iframe);
+      }
+    });
+
+    // Clean up
+    return () => {
+      playerRefs.current.forEach((player) => {
+        if (player && typeof player.destroy === "function") {
+          player.destroy();
+        }
+      });
+    };
+  }, [vimeoLoaded]);
 
   const handleVideoClick = (videoId: number) => {
-    setPlayingVideo(videoId === playingVideo ? null : videoId);
+    if (playingVideo === videoId) {
+      // If clicking the same video that's playing, pause it
+      const index = videoTestimonials.findIndex((v) => v.id === videoId);
+      if (playerRefs.current[index]) {
+        playerRefs.current[index].pause();
+      }
+      setPlayingVideo(null);
+    } else {
+      // Pause any currently playing video
+      if (playingVideo !== null) {
+        const prevIndex = videoTestimonials.findIndex(
+          (v) => v.id === playingVideo
+        );
+        if (playerRefs.current[prevIndex]) {
+          playerRefs.current[prevIndex].pause();
+        }
+      }
+
+      // Play the new video
+      const index = videoTestimonials.findIndex((v) => v.id === videoId);
+      if (playerRefs.current[index]) {
+        playerRefs.current[index].play();
+      }
+      setPlayingVideo(videoId);
+    }
+  };
+
+  // Ref callback function that properly sets the iframe ref
+  const setVideoRef = (index: number) => (el: HTMLIFrameElement | null) => {
+    videoRefs.current[index] = el;
   };
 
   return (
@@ -77,9 +158,6 @@ const TestimonialsSection = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: video.id * 0.1 }}
               whileHover={{ scale: 1.01 }}
-              ref={(el) => {
-                videoRefs.current[index] = el;
-              }}
             >
               {/* Card with video */}
               <div className="rounded-2xl overflow-hidden bg-black/40 border border-green-500/10 shadow-xl">
@@ -96,6 +174,7 @@ const TestimonialsSection = () => {
                     }}
                   >
                     <iframe
+                      ref={setVideoRef(index)}
                       src={`https://player.vimeo.com/video/${video.videoId}?h=${video.hash}&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata&controls=0&transparent=1`}
                       allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                       style={{
