@@ -30,8 +30,18 @@ const videoTestimonials = [
   },
   {
     id: 4,
-    videoId: "1073987748",
-    hash: "6eceafa2bb",
+    videoId: "1074079422",
+    hash: "11588a0075",
+  },
+  {
+    id: 5,
+    videoId: "1074079355",
+    hash: "2511d46643",
+  },
+  {
+    id: 6,
+    videoId: "1074079477",
+    hash: "fbd38b1106",
   },
 ];
 
