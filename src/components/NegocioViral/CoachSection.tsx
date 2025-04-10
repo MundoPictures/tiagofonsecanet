@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import tiago2 from "../../assets/negocioViral/tiago2.png";
+import tiago2 from "../../assets/negocioViral/tiago2x.png";
 
 const CoachSection: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
