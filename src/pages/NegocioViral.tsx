@@ -145,7 +145,7 @@ export default function NegocioViral() {
       {/* WhatsApp Floating Button */}
       <WhatsAppButton
         phoneNumber="+551131350879"
-        message="Olá! Estou interessado no curso Negócio Viral e gostaria de saber mais informações!"
+        message="Olá! Tenho interesse em saber mais sobre o treinamento Negócio Viral, poderia me enviar mais informações?"
       />
 
       {/* Countdown Timer - Fixed at the top */}
