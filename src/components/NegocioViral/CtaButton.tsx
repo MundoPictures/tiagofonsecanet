@@ -1,5 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
+// Import non-animated components to improve performance on mobile
+import { motion } from "../../utils/nonAnimatedComponents";
 import { useModal } from "../../contexts/ModalContext";
 
 interface CtaButtonProps {
@@ -28,6 +29,8 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   id, // Add ID parameter
 }) => {
   const { openModal, scrollToPricing } = useModal();
+  // Detect if we're on mobile to reduce animations
+  const isMobile = window.innerWidth < 768;
 
   const handleClick = () => {
     if (isPricingButton) {
@@ -55,6 +58,24 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   ) : (
     text
   );
+
+  // Skip animations on mobile for better performance
+  if (isMobile) {
+    return (
+      <div className="relative inline-block w-full sm:w-auto">
+        <button
+          id={id}
+          className={`relative overflow-hidden w-full md:w-auto bg-green-500 text-white font-bold rounded-md uppercase tracking-wide cursor-pointer ${sizeClasses[size]} ${className} shadow-lg shadow-green-900/30`}
+          onClick={handleClick}
+        >
+          <span className="relative flex items-center justify-center">
+            {displayText}
+            {withArrow && <span className="ml-1 sm:ml-2 text-xl">→</span>}
+          </span>
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative inline-block w-full sm:w-auto">

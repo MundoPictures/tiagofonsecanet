@@ -1,26 +1,50 @@
-import { useEffect, useCallback, useRef } from "react";
+import { useEffect, useCallback, useRef, Suspense, lazy } from "react";
 import Background from "../components/NegocioViral/Background";
 import Header from "../components/NegocioViral/Header";
 import MainContent from "../components/NegocioViral/MainContent";
-import BenefitsSection from "../components/NegocioViral/BenefitsSection";
-import TargetAudienceSection from "../components/NegocioViral/TargetAudienceSection";
-import TestimonialsSection from "../components/NegocioViral/TestimonialsSection";
-import PricingSection from "../components/NegocioViral/PricingSection";
-import GuaranteeSection from "../components/NegocioViral/GuaranteeSection";
-import CoachSection from "../components/NegocioViral/CoachSection";
-import Footer from "../components/NegocioViral/Footer";
+// Import components that are visible above the fold directly
 import CountdownTimer from "../components/NegocioViral/CountdownTimer";
-import FaqSection from "../components/NegocioViral/FaqSection";
-import IntroductionSection from "../components/NegocioViral/IntroductionSection";
-import FeaturesSection from "../components/NegocioViral/FeaturesSection";
-import BonusSection from "../components/NegocioViral/BonusSection";
 import WhatsAppButton from "../components/NegocioViral/WhatsAppButton";
+// Lazy load components that are below the fold
+const BenefitsSection = lazy(
+  () => import("../components/NegocioViral/BenefitsSection")
+);
+const TargetAudienceSection = lazy(
+  () => import("../components/NegocioViral/TargetAudienceSection")
+);
+const TestimonialsSection = lazy(
+  () => import("../components/NegocioViral/TestimonialsSection")
+);
+const PricingSection = lazy(
+  () => import("../components/NegocioViral/PricingSection")
+);
+const GuaranteeSection = lazy(
+  () => import("../components/NegocioViral/GuaranteeSection")
+);
+const CoachSection = lazy(
+  () => import("../components/NegocioViral/CoachSection")
+);
+const Footer = lazy(() => import("../components/NegocioViral/Footer"));
+const FaqSection = lazy(() => import("../components/NegocioViral/FaqSection"));
+const IntroductionSection = lazy(
+  () => import("../components/NegocioViral/IntroductionSection")
+);
+const FeaturesSection = lazy(
+  () => import("../components/NegocioViral/FeaturesSection")
+);
+const BonusSection = lazy(
+  () => import("../components/NegocioViral/BonusSection")
+);
 import "../styles/NegocioViralScrollbar.css";
+// Import background images with explicit width/height
 import backgroundimage from "../assets/negocioViral/bg3.png";
 import backgroundimagemobile from "../assets/negocioViral/bg3.png";
 import useNegocioViralTracking from "../utils/negocioViralTracker";
 import { useMetaPixel } from "../contexts/MetaPixelContext";
 import SectionViewTracker from "../components/tracking/SectionViewTracker";
+// Import image preloading utility
+import preloadCriticalImages from "../utils/preloadImages";
+// Import this conditionally for mobile devices
 import "../utils/nonAnimatedComponents";
 
 export default function NegocioViral() {
@@ -28,6 +52,12 @@ export default function NegocioViral() {
   const tracking = useNegocioViralTracking();
   const { trackStandardEvent } = useMetaPixel();
   const initialPageViewTracked = useRef(false);
+  const isMobile = useRef(window.innerWidth < 768);
+
+  // Preload critical images
+  useEffect(() => {
+    preloadCriticalImages();
+  }, []);
 
   // Track page view ONCE on initial page load only
   useEffect(() => {
@@ -76,6 +106,11 @@ export default function NegocioViral() {
     [tracking]
   );
 
+  // Simple loading fallback for lazy-loaded components
+  const LoadingFallback = () => (
+    <div className="py-8 text-center text-gray-400">Carregando...</div>
+  );
+
   return (
     <div className="relative w-full overflow-hidden bg-[#131313]">
       {/* WhatsApp Floating Button */}
@@ -100,6 +135,7 @@ export default function NegocioViral() {
         <Background
           imageUrl={backgroundimage}
           mobileImageUrl={backgroundimagemobile}
+          isMobile={isMobile.current}
         />
 
         {/* Main content */}
@@ -116,6 +152,7 @@ export default function NegocioViral() {
                     position: "top",
                   })
                 }
+                isMobile={isMobile.current}
               />
             </div>
           </div>
@@ -125,134 +162,139 @@ export default function NegocioViral() {
       {/* Container for all sections with full-width background */}
       <div className="bg-[#131313] w-full">
         <div className="container mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
-          {/* Introduction section */}
-          <SectionViewTracker
-            sectionName="introduction"
-            onVisible={handleSectionVisible}
-          >
-            <IntroductionSection />
-          </SectionViewTracker>
+          {/* Wrap sections in Suspense for lazy loading */}
+          <Suspense fallback={<LoadingFallback />}>
+            {/* Introduction section */}
+            <SectionViewTracker
+              sectionName="introduction"
+              onVisible={handleSectionVisible}
+            >
+              <IntroductionSection />
+            </SectionViewTracker>
 
-          {/* Benefits section */}
-          <SectionViewTracker
-            sectionName="benefits"
-            onVisible={handleSectionVisible}
-          >
-            <BenefitsSection />
-          </SectionViewTracker>
+            {/* Benefits section */}
+            <SectionViewTracker
+              sectionName="benefits"
+              onVisible={handleSectionVisible}
+            >
+              <BenefitsSection />
+            </SectionViewTracker>
 
-          {/* Features section */}
-          <SectionViewTracker
-            sectionName="features"
-            onVisible={handleSectionVisible}
-          >
-            <FeaturesSection />
-          </SectionViewTracker>
+            {/* Features section */}
+            <SectionViewTracker
+              sectionName="features"
+              onVisible={handleSectionVisible}
+            >
+              <FeaturesSection />
+            </SectionViewTracker>
 
-          {/* Bonus section */}
-          <SectionViewTracker
-            sectionName="bonus"
-            onVisible={handleSectionVisible}
-          >
-            <BonusSection />
-          </SectionViewTracker>
+            {/* Bonus section */}
+            <SectionViewTracker
+              sectionName="bonus"
+              onVisible={handleSectionVisible}
+            >
+              <BonusSection />
+            </SectionViewTracker>
 
-          {/* Target audience section */}
-          <SectionViewTracker
-            sectionName="target_audience"
-            onVisible={handleSectionVisible}
-          >
-            <TargetAudienceSection />
-          </SectionViewTracker>
+            {/* Target audience section */}
+            <SectionViewTracker
+              sectionName="target_audience"
+              onVisible={handleSectionVisible}
+            >
+              <TargetAudienceSection />
+            </SectionViewTracker>
 
-          {/* Testimonials section */}
-          <SectionViewTracker
-            sectionName="testimonials"
-            onVisible={handleSectionVisible}
-          >
-            <TestimonialsSection
-              onTestimonialInteraction={(testimonialId) =>
-                tracking.trackCustomEvent("testimonial_interaction", {
-                  testimonial_id: testimonialId,
-                  page: "negocio_viral",
-                })
-              }
-            />
-          </SectionViewTracker>
+            {/* Testimonials section */}
+            <SectionViewTracker
+              sectionName="testimonials"
+              onVisible={handleSectionVisible}
+            >
+              <TestimonialsSection
+                onTestimonialInteraction={(testimonialId) =>
+                  tracking.trackCustomEvent("testimonial_interaction", {
+                    testimonial_id: testimonialId,
+                    page: "negocio_viral",
+                  })
+                }
+              />
+            </SectionViewTracker>
 
-          {/* Pricing section */}
-          <SectionViewTracker
-            sectionName="pricing"
-            onVisible={handleSectionVisible}
-          >
-            <PricingSection
-              onModalOpen={(modalName) =>
-                tracking.trackModalInteraction("open", modalName)
-              }
-              onModalClose={(modalName) =>
-                tracking.trackModalInteraction("close", modalName)
-              }
-              onCheckoutClick={(planId, price) => {
-                // Track standard InitiateCheckout event
-                tracking.trackPurchaseFunnel("InitiateCheckout", {
-                  content_name: "Negocio Viral",
-                  content_category: "sales_page",
-                  content_ids: [planId],
-                  value: price,
-                  currency: "BRL",
-                });
+            {/* Pricing section */}
+            <SectionViewTracker
+              sectionName="pricing"
+              onVisible={handleSectionVisible}
+            >
+              <PricingSection
+                onModalOpen={(modalName) =>
+                  tracking.trackModalInteraction("open", modalName)
+                }
+                onModalClose={(modalName) =>
+                  tracking.trackModalInteraction("close", modalName)
+                }
+                onCheckoutClick={(planId, price) => {
+                  // Track standard InitiateCheckout event
+                  tracking.trackPurchaseFunnel("InitiateCheckout", {
+                    content_name: "Negocio Viral",
+                    content_category: "sales_page",
+                    content_ids: [planId],
+                    value: price,
+                    currency: "BRL",
+                  });
 
-                // Also track custom checkout click event
-                tracking.trackCustomEvent("click_checkout_button", {
-                  plan_id: planId,
-                  price: price,
-                  currency: "BRL",
-                });
-              }}
-            />
-          </SectionViewTracker>
+                  // Also track custom checkout click event
+                  tracking.trackCustomEvent("click_checkout_button", {
+                    plan_id: planId,
+                    price: price,
+                    currency: "BRL",
+                  });
+                }}
+              />
+            </SectionViewTracker>
 
-          {/* Guarantee section */}
-          <SectionViewTracker
-            sectionName="guarantee"
-            onVisible={handleSectionVisible}
-          >
-            <GuaranteeSection
-              onGuaranteeClick={() =>
-                tracking.trackCustomEvent("guarantee_click", {
-                  page: "negocio_viral",
-                })
-              }
-            />
-          </SectionViewTracker>
+            {/* Guarantee section */}
+            <SectionViewTracker
+              sectionName="guarantee"
+              onVisible={handleSectionVisible}
+            >
+              <GuaranteeSection
+                onGuaranteeClick={() =>
+                  tracking.trackCustomEvent("guarantee_click", {
+                    page: "negocio_viral",
+                  })
+                }
+              />
+            </SectionViewTracker>
 
-          {/* Coach section */}
-          <SectionViewTracker
-            sectionName="coach"
-            onVisible={handleSectionVisible}
-          >
-            <CoachSection />
-          </SectionViewTracker>
+            {/* Coach section */}
+            <SectionViewTracker
+              sectionName="coach"
+              onVisible={handleSectionVisible}
+            >
+              <CoachSection />
+            </SectionViewTracker>
 
-          {/* FAQ section */}
-          <SectionViewTracker
-            sectionName="faq"
-            onVisible={handleSectionVisible}
-          >
-            <FaqSection
-              onFaqExpand={(faqId) =>
-                tracking.trackCustomEvent("faq_expanded", {
-                  faq_id: faqId,
-                  page: "negocio_viral",
-                })
-              }
-            />
-          </SectionViewTracker>
+            {/* FAQ section */}
+            <SectionViewTracker
+              sectionName="faq"
+              onVisible={handleSectionVisible}
+            >
+              <FaqSection
+                onFaqExpand={(faqId) =>
+                  tracking.trackCustomEvent("faq_expanded", {
+                    faq_id: faqId,
+                    page: "negocio_viral",
+                  })
+                }
+              />
+            </SectionViewTracker>
+          </Suspense>
         </div>
       </div>
 
       {/* Footer */}
-      <Footer />
+      <Suspense fallback={<LoadingFallback />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
