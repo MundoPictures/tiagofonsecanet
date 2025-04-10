@@ -160,7 +160,7 @@ const MainContent: React.FC<MainContentProps> = ({
           Venda <span className="text-green-400">3x Mais</span> em 7 Dias
           Aplicando as Ações de Marketing Que Geram Caixa Imediato
           <span className="text-gray-200 mt-3 md:mt-3 text-[11px] sm:text-sm md:text-2xl flex justify-center gap-3 md:gap-4 font-semibold">
-            <span className="bg-green-800/40 p-1 text-white">SEM ANUNCIOS</span>
+            <span className="bg-green-800/40 p-1 text-white">SEM ANÚNCIOS</span>
             <span className="bg-green-800/40 p-1 text-white">
               SEM AUDIÊNCIA
             </span>
