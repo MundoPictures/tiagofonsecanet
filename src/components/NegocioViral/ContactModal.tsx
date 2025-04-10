@@ -4,6 +4,7 @@ import { motion } from "../../../src/utils/nonAnimatedComponents";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import axios from "axios";
+import { getCheckoutUrl } from "../../utils/urlParams";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -51,9 +52,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
       await axios.post(makeWebhookURL, sendData);
 
-      // Redirect to payment page
-      window.location.href =
-        "https://go.tiagofonseca.net/pay/lote-01-negocio-viral";
+      // Get dynamic checkout URL based on source parameter
+      const checkoutUrl = getCheckoutUrl();
+
+      // Redirect to appropriate payment page based on source
+      window.location.href = checkoutUrl;
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {

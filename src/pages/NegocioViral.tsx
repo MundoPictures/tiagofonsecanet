@@ -47,11 +47,15 @@ import preloadCriticalImages from "../utils/preloadImages";
 // Import this conditionally for mobile devices
 import "../utils/nonAnimatedComponents";
 
+// Define valid sources for tracking
+const VALID_SOURCES = ["bio", "reel", "ads", "yt", "sts"];
+
 export default function NegocioViral() {
   // Get tracking functions
   const tracking = useNegocioViralTracking();
   const { trackStandardEvent } = useMetaPixel();
   const initialPageViewTracked = useRef(false);
+  const sourceTracked = useRef(false);
   const isMobile = useRef(window.innerWidth < 768);
 
   // Preload critical images
@@ -59,7 +63,7 @@ export default function NegocioViral() {
     preloadCriticalImages();
   }, []);
 
-  // Track page view ONCE on initial page load only
+  // Track source from URL parameter and page view ONCE on initial page load
   useEffect(() => {
     // Only track if we haven't tracked this page view yet
     if (!initialPageViewTracked.current) {
@@ -71,12 +75,37 @@ export default function NegocioViral() {
         content_type: "product",
       });
 
-      // Track custom page load event
+      // Parse URL to get source parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const source = urlParams.get("source");
+
+      // Track custom page load event with source info
       tracking.trackCustomEvent("page_loaded", {
         page: "negocio_viral",
         referrer: document.referrer,
         url: window.location.href,
+        source: source || "direct",
       });
+
+      // If we have a valid source parameter, track a specific event for it
+      if (source && VALID_SOURCES.includes(source) && !sourceTracked.current) {
+        console.log("source", source);
+        // Track specific source access event
+        tracking.trackCustomEvent("source_accessed_page", {
+          source: source,
+          page: "negocio_viral",
+          url: window.location.href,
+        });
+
+        // Send specific event format requested by user
+        const formattedSource =
+          source.charAt(0).toUpperCase() + source.slice(1);
+        tracking.trackCustomEvent(`${formattedSource}AccessedPage`, {
+          page: "negocio_viral",
+        });
+
+        sourceTracked.current = true;
+      }
 
       // Mark as tracked
       initialPageViewTracked.current = true;

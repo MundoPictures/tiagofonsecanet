@@ -48,6 +48,15 @@ export const NegocioViralEvents = {
   ADD_TO_CART: "add_to_cart", // Use StandardEvent instead
   INITIATE_CHECKOUT: "initiate_checkout", // Use StandardEvent instead
   PURCHASE_COMPLETE: "purchase_complete", // Use StandardEvent instead
+
+  // Source tracking events
+  SOURCE_ACCESSED_PAGE: "source_accessed_page",
+  BIO_ACCESSED_PAGE: "BioAccessedPage",
+  REEL_ACCESSED_PAGE: "ReelAccessedPage",
+  STORY_ACCESSED_PAGE: "StoryAccessedPage",
+  ADS_ACCESSED_PAGE: "AdsAccessedPage",
+  YT_ACCESSED_PAGE: "YtAccessedPage",
+  STS_ACCESSED_PAGE: "StsAccessedPage",
 };
 
 /**
