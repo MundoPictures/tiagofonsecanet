@@ -1,5 +1,6 @@
+// import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import React from "react";
-import { motion } from "framer-motion";
 import logo from "../../assets/negocioViral/negociovirallogo.png";
 
 const Header: React.FC = () => {

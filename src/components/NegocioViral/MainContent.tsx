@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
 import tiago2 from "../../assets/negocioViral/tiago2.png";
 

@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import axios from "axios";

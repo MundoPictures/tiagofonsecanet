@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 
 interface FaqItem {
   question: string;
@@ -127,21 +128,11 @@ const FaqSection: React.FC<FaqSectionProps> = ({ onFaqExpand }) => {
                   </svg>
                 </div>
               </button>
-              <AnimatePresence>
-                {activeIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-5 pt-0 text-gray-300 border-t border-gray-800/50">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {activeIndex === index && (
+                <div className="p-5 pt-0 text-gray-300 border-t border-gray-800/50">
+                  {faq.answer}
+                </div>
+              )}
             </motion.div>
           ))}
         </div>

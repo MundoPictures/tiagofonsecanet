@@ -67,12 +67,23 @@ html.negocio-viral-page #root {
 .text-transparent {
   -webkit-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
+  color: black; /* Fallback for devices that don't support background-clip: text */
 }
 
 .text-gradient {
   background-clip: text;
   -webkit-background-clip: text;
   -moz-background-clip: text;
+}
+
+/* Specific fallback for mobile devices - ensures text has a color even if gradients fail */
+.mobile-text-fallback {
+  color: #4ade80; /* Fallback color if all gradient methods fail - green for NegocioViral */
+}
+
+/* Influencia page styles - orange gradient */
+.mobile-text-fallback[class*="text-gradient"] {
+  color: #ff9e00 !important; /* Orange fallback for Influencia page */
 }
 
 /* iOS specific fixes */
@@ -104,11 +115,35 @@ html.negocio-viral-page #root {
   }
 
   /* Fix for gradient text on iOS */
+  .text-gradient {
+    background-clip: text !important;
+    -webkit-background-clip: text !important;
+    color: #4ade80 !important; /* Fallback color if gradient fails */
+  }
+
+  /* Fix for specific gradient directions */
   .text-gradient.bg-gradient-to-r {
     background-image: linear-gradient(
       to right,
       var(--tw-gradient-stops)
     ) !important;
     -webkit-box-decoration-break: clone;
+  }
+
+  /* Fix for from-green-400 to-green-600 gradient which appears in PricingSection */
+  .text-gradient.bg-gradient-to-r.from-green-400.to-green-600 {
+    color: #4ade80 !important; /* Use green-400 as fallback */
+  }
+
+  /* Ensure mobile-text-fallback has a strong color override */
+  .mobile-text-fallback {
+    color: #4ade80 !important;
+    -webkit-text-fill-color: #4ade80 !important;
+  }
+
+  /* Influencia page specific style override for iOS */
+  .mobile-text-fallback[class*="text-gradient"] {
+    color: #ff9e00 !important;
+    -webkit-text-fill-color: #ff9e00 !important;
   }
 }

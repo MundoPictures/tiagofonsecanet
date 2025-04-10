@@ -35,6 +35,13 @@ function Influencia() {
                 -webkit-text-fill-color: transparent;
                 background-clip: text;
                 text-fill-color: transparent;
+                color: #FF9E00; /* Fallback for older devices */
+            }
+            /* iOS specific fixes */
+            @supports (-webkit-touch-callout: none) {
+                .text-gradient {
+                    color: #FF9E00 !important;
+                }
             }
         `;
     document.head.appendChild(style);
@@ -129,7 +136,9 @@ function Influencia() {
         />
 
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 relative z-10">
-          <span className="text-gradient">"O mais conhecido</span>
+          <span className="text-gradient mobile-text-fallback">
+            "O mais conhecido
+          </span>
           <br />
           <span className="text-white">vence o melhor!"</span>
         </h1>

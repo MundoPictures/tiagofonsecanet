@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import tiagoImage from "../../assets/negocioViral/tiago.png";
 
 interface BackgroundProps {
@@ -10,13 +10,6 @@ const Background: React.FC<BackgroundProps> = ({
   imageUrl = "https://placehold.co/1080x1920/1a1a1a/1a1a1a",
   mobileImageUrl,
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Simulate image loading for entrance animation
-    setIsLoaded(true);
-  }, []);
-
   return (
     <div className="absolute inset-0 z-0 h-auto min-h-[100vh] md:h-[100vh] lg:h-[100vh] overflow-hidden">
       {/* Grid overlay pattern - provides the matrix/digital look */}
@@ -26,17 +19,17 @@ const Background: React.FC<BackgroundProps> = ({
 
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center hidden md:block transition-opacity duration-700"
+        className="absolute inset-0 bg-cover bg-center hidden md:block"
         style={{
           backgroundImage: `url(${imageUrl})`,
-          opacity: isLoaded ? 0.7 : 0,
+          opacity: 0.7,
         }}
       />
       <div
-        className="absolute inset-0 bg-cover bg-center block md:hidden transition-opacity duration-700"
+        className="absolute inset-0 bg-cover bg-center block md:hidden"
         style={{
           backgroundImage: `url(${mobileImageUrl || imageUrl})`,
-          opacity: isLoaded ? 0.7 : 0,
+          opacity: 0.7,
         }}
       />
 
@@ -47,15 +40,7 @@ const Background: React.FC<BackgroundProps> = ({
       <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50 md:from-black/80 md:via-black/60 md:to-transparent pointer-events-none" />
 
       {/* Desktop image only - Mobile will be placed in MainContent */}
-      <div
-        className={`absolute bottom-0 w-[75%] md:w-[50%] lg:w-[80%] transition-all duration-1000 ease-in-out z-10 
-                   hidden md:block md:right-0 ${
-                     isLoaded ? "translate-y-0" : "translate-y-[10%]"
-                   }`}
-        style={{
-          opacity: isLoaded ? 1 : 0,
-        }}
-      >
+      <div className="absolute bottom-0 w-[75%] md:w-[50%] lg:w-[80%] z-10 hidden md:block md:right-0">
         {/* Desktop positioning container */}
         <div className="relative">
           {/* Subtle glow behind Tiago */}
@@ -65,7 +50,6 @@ const Background: React.FC<BackgroundProps> = ({
             src={tiagoImage}
             alt="Tiago"
             className="w-full h-auto object-contain drop-shadow-2xl"
-            onLoad={() => setIsLoaded(true)}
             style={{ filter: "drop-shadow(0 0 12px rgba(74, 222, 128, 0.4))" }}
           />
         </div>

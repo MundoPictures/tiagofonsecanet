@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import React from "react";
 
 // Add type declaration for Vimeo

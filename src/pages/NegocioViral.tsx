@@ -21,7 +21,7 @@ import backgroundimagemobile from "../assets/negocioViral/bg3.png";
 import useNegocioViralTracking from "../utils/negocioViralTracker";
 import { useMetaPixel } from "../contexts/MetaPixelContext";
 import SectionViewTracker from "../components/tracking/SectionViewTracker";
-import ScrollDepthTracker from "../components/tracking/ScrollDepthTracker";
+import "../utils/nonAnimatedComponents";
 
 export default function NegocioViral() {
   // Get tracking functions
@@ -76,26 +76,12 @@ export default function NegocioViral() {
     [tracking]
   );
 
-  // Track scroll depth
-  const handleScrollThreshold = useCallback(
-    (threshold: number) => {
-      tracking.trackScrollDepth(threshold as 25 | 50 | 75 | 100);
-    },
-    [tracking]
-  );
-
   return (
     <div className="relative w-full overflow-hidden bg-[#131313]">
       {/* WhatsApp Floating Button */}
       <WhatsAppButton
         phoneNumber="+551131350879"
         message="Olá! Estou interessado no curso Negócio Viral e gostaria de saber mais informações!"
-      />
-
-      {/* Add ScrollDepthTracker component */}
-      <ScrollDepthTracker
-        thresholds={[25, 50, 75, 100]}
-        onThresholdReached={handleScrollThreshold}
       />
 
       {/* Countdown Timer - Fixed at the top */}

@@ -1,5 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
 import { useModal } from "../../contexts/ModalContext";
 
@@ -179,7 +180,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
 
           <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
             Transforme seu{" "}
-            <span className="text-gradient bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+            <span className="text-gradient bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mobile-text-fallback">
               Negócio
             </span>{" "}
             Agora

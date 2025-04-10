@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
+import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
 
 // Add type declaration for Vimeo if not already declared
