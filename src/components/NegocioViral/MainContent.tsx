@@ -23,11 +23,10 @@ const MainContent: React.FC<MainContentProps> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [, setIsVideoVisible] = useState(false);
-  const [, setVideoInitialized] = useState(false);
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
+  const vimeoScriptLoaded = useRef(false);
 
   // Set up intersection observer to detect when video is visible
   useEffect(() => {
@@ -42,7 +41,6 @@ const MainContent: React.FC<MainContentProps> = ({
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setIsVideoVisible(true);
           // Once we've detected visibility once, we can disconnect the observer
           observer.disconnect();
         }
@@ -56,7 +54,7 @@ const MainContent: React.FC<MainContentProps> = ({
     };
   }, []);
 
-  // Handler for Vimeo API messages - only load on interaction for mobile
+  // Handler for Vimeo API messages
   const handleVimeoMessage = (event: MessageEvent) => {
     if (!event.data || typeof event.data !== "string") return;
 
@@ -68,7 +66,6 @@ const MainContent: React.FC<MainContentProps> = ({
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
-          setVideoInitialized(true);
         }
       }
     } catch {
@@ -76,46 +73,60 @@ const MainContent: React.FC<MainContentProps> = ({
     }
   };
 
-  // Only load Vimeo on desktop or when needed on mobile
-  useEffect(() => {
-    if (isMobile) return; // Don't load Vimeo API on mobile initially
+  // Load Vimeo script when needed
+  const loadVimeoScript = () => {
+    if (vimeoScriptLoaded.current) return;
 
-    // Load Vimeo player script
     const script = document.createElement("script");
     script.src = "https://player.vimeo.com/api/player.js";
     script.async = true;
+    script.onload = () => {
+      vimeoScriptLoaded.current = true;
+      // When script is loaded, if video is already loaded, initialize the player
+      if (videoRef.current && window.Vimeo) {
+        playerRef.current = new window.Vimeo.Player(videoRef.current);
+      }
+    };
     document.body.appendChild(script);
 
     // Add event listener for Vimeo API messages
     window.addEventListener("message", handleVimeoMessage);
+  };
+
+  // For desktop, load Vimeo immediately
+  // For mobile, we'll load it on demand when user interacts
+  useEffect(() => {
+    if (!isMobile) {
+      loadVimeoScript();
+    }
 
     return () => {
       window.removeEventListener("message", handleVimeoMessage);
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
     };
   }, [isMobile]);
 
   // Handle click on video
   const handleVideoClick = () => {
-    // If we're on mobile, load the Vimeo API now
-    if (isMobile && !window.Vimeo) {
-      const script = document.createElement("script");
-      script.src = "https://player.vimeo.com/api/player.js";
-      script.async = true;
-      document.body.appendChild(script);
-
-      // Add event listener for Vimeo API messages
-      window.addEventListener("message", handleVimeoMessage);
+    // If Vimeo script isn't loaded yet, load it
+    if (!vimeoScriptLoaded.current) {
+      loadVimeoScript();
     }
 
+    // If player exists, play the video
     if (playerRef.current) {
-      // Turn on sound and ensure playing
       playerRef.current.setVolume(1);
       playerRef.current.play();
       setIsPlaying(true);
     }
+    // If player doesn't exist yet but Vimeo is loaded, create the player
+    else if (window.Vimeo && videoRef.current) {
+      playerRef.current = new window.Vimeo.Player(videoRef.current);
+      playerRef.current.setVolume(1);
+      playerRef.current.play();
+      setIsPlaying(true);
+    }
+    // If neither player nor Vimeo exists, the script is still loading
+    // The onload handler will initialize the player when ready
   };
 
   useEffect(() => {
