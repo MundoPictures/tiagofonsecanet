@@ -201,6 +201,21 @@ export default function NegocioViral() {
               <IntroductionSection />
             </SectionViewTracker>
 
+            {/* Testimonials section */}
+            <SectionViewTracker
+              sectionName="testimonials"
+              onVisible={handleSectionVisible}
+            >
+              <TestimonialsSection
+                onTestimonialInteraction={(testimonialId) =>
+                  tracking.trackCustomEvent("testimonial_interaction", {
+                    testimonial_id: testimonialId,
+                    page: "negocio_viral",
+                  })
+                }
+              />
+            </SectionViewTracker>
+
             {/* Benefits section */}
             <SectionViewTracker
               sectionName="benefits"
@@ -231,21 +246,6 @@ export default function NegocioViral() {
               onVisible={handleSectionVisible}
             >
               <TargetAudienceSection />
-            </SectionViewTracker>
-
-            {/* Testimonials section */}
-            <SectionViewTracker
-              sectionName="testimonials"
-              onVisible={handleSectionVisible}
-            >
-              <TestimonialsSection
-                onTestimonialInteraction={(testimonialId) =>
-                  tracking.trackCustomEvent("testimonial_interaction", {
-                    testimonial_id: testimonialId,
-                    page: "negocio_viral",
-                  })
-                }
-              />
             </SectionViewTracker>
 
             {/* Pricing section */}
