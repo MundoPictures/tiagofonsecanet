@@ -6,6 +6,7 @@ import Influencia from "./pages/Influencia";
 import NegocioViral from "./pages/NegocioViral";
 import NegocioViralB from "./pages/NegocioViralB";
 import RouterTracker from "./components/RouterTracker";
+import Bonus from "./pages/Bonus";
 
 const AppRouter: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="/influencia" element={<Influencia />} />
         <Route path="/negocio-viral" element={<NegocioViral />} />
         <Route path="/negocioviral" element={<NegocioViralB />} />
+        <Route path="/bonus" element={<Bonus />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
