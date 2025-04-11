@@ -6,7 +6,6 @@ import {
   FaArrowRight,
   FaShieldAlt,
   FaLock,
-  FaUsers,
   FaEye,
 } from "react-icons/fa";
 import { FormData, BonusFormProps } from "./types";
