@@ -5,6 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import axios from "axios";
 import { getCheckoutUrl } from "../../utils/urlParams";
+import { useMetaPixel } from "../../contexts/MetaPixelContext";
+import useNegocioViralTracking from "../../utils/negocioViralTracker";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -25,6 +27,8 @@ type SendData = {
 
 const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { trackStandardEvent } = useMetaPixel();
+  const tracking = useNegocioViralTracking();
   const {
     register,
     handleSubmit,
@@ -37,6 +41,39 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
     setIsSubmitting(true);
 
     try {
+      // Track checkout initiation with Meta Pixel
+      trackStandardEvent("InitiateCheckout", {
+        content_name: "Negocio Viral",
+        content_category: "sales_page",
+        content_ids: ["negocioviral_checkout"],
+        value: 997.0, // Replace with actual value if available
+        currency: "BRL",
+      });
+
+      // Also track with custom tracking
+      tracking.trackPurchaseFunnel("InitiateCheckout", {
+        content_name: "Negocio Viral",
+        content_category: "sales_page",
+        content_ids: ["negocioviral_checkout"],
+        value: 997.0, // Replace with actual value if available
+        currency: "BRL",
+      });
+
+      // Track lead generation
+      tracking.trackPurchaseFunnel("Lead", {
+        content_name: "Negocio Viral",
+        content_category: "sales_page",
+        lead_type: "checkout_form",
+        value: 997.0,
+        currency: "BRL",
+      });
+
+      // Track form submit event
+      tracking.trackCustomEvent("form_submit", {
+        form_name: "checkout_form",
+        page: "negocio_viral",
+      });
+
       // Here we would typically send the data to an API
       // For now, we'll just simulate a delay and redirect
       console.log("Form data:", data);
@@ -59,6 +96,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       window.location.href = checkoutUrl;
     } catch (error) {
       console.error("Error submitting form:", error);
+
+      // Track form error
+      tracking.trackCustomEvent("form_error", {
+        form_name: "checkout_form",
+        page: "negocio_viral",
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
     } finally {
       setIsSubmitting(false);
       reset();
@@ -225,6 +269,26 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         disabled={isSubmitting}
+                        onClick={() => {
+                          // Track button click event
+                          tracking.trackButtonClick(
+                            "checkout_button",
+                            "checkout_form",
+                            {
+                              button_text: "CONTINUAR PARA PAGAMENTO",
+                              step: "payment_form",
+                            }
+                          );
+
+                          // Track standard event for click
+                          trackStandardEvent("InitiateCheckout", {
+                            content_name: "Negocio Viral Button Click",
+                            content_category: "sales_page",
+                            content_ids: ["negocioviral_checkout_button"],
+                            value: 447.0,
+                            currency: "BRL",
+                          });
+                        }}
                       >
                         {/* Shine effect */}
                         <motion.div

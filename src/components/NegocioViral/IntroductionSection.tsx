@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
+import { useMetaPixel } from "../../contexts/MetaPixelContext";
+import useNegocioViralTracking, {
+  NegocioViralEvents,
+} from "../../utils/negocioViralTracker";
 
 // Add type declaration for Vimeo if not already declared
 declare global {
@@ -19,6 +23,112 @@ const IntroductionSection: React.FC = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
+  const videoProgressTracked = useRef<{ [key: number]: boolean }>({
+    10: false,
+    25: false,
+    50: false,
+    75: false,
+    100: false,
+  });
+  const videoStartTracked = useRef(false);
+
+  // Setup Meta Pixel tracking
+  const { trackStandardEvent } = useMetaPixel();
+  const tracking = useNegocioViralTracking();
+
+  // Video tracking function
+  const setupVideoTracking = (player: any) => {
+    if (!player) return;
+
+    // Track video start
+    player.on("play", () => {
+      if (!videoStartTracked.current) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_START, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          page: "negocio_viral",
+        });
+        videoStartTracked.current = true;
+      }
+    });
+
+    // Track video progress
+    player.on("timeupdate", (data: any) => {
+      const percent = Math.floor(data.percent * 100);
+
+      // Check for 10% progress
+      if (percent >= 10 && !videoProgressTracked.current[10]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          percent: 10,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[10] = true;
+      }
+
+      // Check for 25% progress
+      if (percent >= 25 && !videoProgressTracked.current[25]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          percent: 25,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[25] = true;
+      }
+
+      // Check for 50% progress
+      if (percent >= 50 && !videoProgressTracked.current[50]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          percent: 50,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[50] = true;
+      }
+
+      // Check for 75% progress
+      if (percent >= 75 && !videoProgressTracked.current[75]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          percent: 75,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[75] = true;
+      }
+    });
+
+    // Track video complete
+    player.on("ended", () => {
+      if (!videoProgressTracked.current[100]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_COMPLETE, {
+          video_id: "intro_video",
+          video_name: "Negocio Viral Introduction",
+          video_position: "introduction",
+          percent: 100,
+          page: "negocio_viral",
+        });
+
+        // Also track standard Meta Pixel event for video complete
+        trackStandardEvent("ViewContent", {
+          content_name: "Negocio Viral Introduction Video Complete",
+          content_category: "video",
+          content_ids: ["intro_video_complete"],
+          page: "negocio_viral",
+        });
+
+        videoProgressTracked.current[100] = true;
+      }
+    });
+  };
 
   // Set up intersection observer to detect when video is visible
   useEffect(() => {
@@ -59,6 +169,7 @@ const IntroductionSection: React.FC = () => {
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
+          setupVideoTracking(playerRef.current);
           setVideoInitialized(true);
         }
       }
@@ -105,6 +216,14 @@ const IntroductionSection: React.FC = () => {
 
   // Handle click on video
   const handleVideoClick = () => {
+    // Track video click event
+    tracking.trackCustomEvent(NegocioViralEvents.VIDEO_CLICK, {
+      video_id: "intro_video",
+      video_name: "Negocio Viral Introduction",
+      video_position: "introduction",
+      page: "negocio_viral",
+    });
+
     if (playerRef.current) {
       // Turn on sound and ensure playing
       playerRef.current.setVolume(1);

@@ -2,6 +2,10 @@ import { useRef, useState, useEffect } from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import React from "react";
+import { useMetaPixel } from "../../contexts/MetaPixelContext";
+import useNegocioViralTracking, {
+  NegocioViralEvents,
+} from "../../utils/negocioViralTracker";
 
 // Add type declaration for Vimeo
 declare global {
@@ -57,6 +61,11 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   const videoRefs = useRef<Array<HTMLIFrameElement | null>>([]);
   const playerRefs = useRef<any[]>([]);
   const [vimeoLoaded, setVimeoLoaded] = useState(false);
+  const videoStartTracked = useRef<{ [key: number]: boolean }>({});
+
+  // Setup tracking
+  const tracking = useNegocioViralTracking();
+  const { trackStandardEvent } = useMetaPixel();
 
   // Load Vimeo player script on mount
   useEffect(() => {
@@ -86,6 +95,21 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     videoRefs.current.forEach((iframe, index) => {
       if (iframe) {
         playerRefs.current[index] = new Vimeo.Player(iframe);
+
+        // Add event listener for play event
+        const player = playerRefs.current[index];
+        const testimonial = videoTestimonials[index];
+
+        if (player) {
+          player.on("play", () => {
+            const videoId = testimonial.id;
+            // Track video start if not already tracked for this video
+            if (!videoStartTracked.current[videoId]) {
+              trackTestimonialStart(videoId);
+              videoStartTracked.current[videoId] = true;
+            }
+          });
+        }
       }
     });
 
@@ -99,7 +123,35 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
     };
   }, [vimeoLoaded]);
 
+  // Track when a testimonial video starts playing
+  const trackTestimonialStart = (videoId: number) => {
+    tracking.trackCustomEvent(NegocioViralEvents.VIDEO_START, {
+      video_id: `testimonial_${videoId}`,
+      video_name: `Testimonial ${videoId}`,
+      video_position: "testimonials_section",
+      video_type: "testimonial",
+      page: "negocio_viral",
+    });
+
+    // Also track standard ViewContent event
+    trackStandardEvent("ViewContent", {
+      content_name: `Testimonial Video ${videoId}`,
+      content_category: "video_testimonial",
+      content_ids: [`testimonial_${videoId}`],
+      page: "negocio_viral",
+    });
+  };
+
   const handleVideoClick = (videoId: number) => {
+    // Track testimonial click event
+    tracking.trackCustomEvent(NegocioViralEvents.VIDEO_CLICK, {
+      video_id: `testimonial_${videoId}`,
+      video_name: `Testimonial ${videoId}`,
+      video_position: "testimonials_section",
+      video_type: "testimonial",
+      page: "negocio_viral",
+    });
+
     if (playingVideo === videoId) {
       // If clicking the same video that's playing, pause it
       const index = videoTestimonials.findIndex((v) => v.id === videoId);

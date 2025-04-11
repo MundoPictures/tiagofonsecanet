@@ -31,11 +31,14 @@ export const NegocioViralEvents = {
   // Countdown timer event
   TIMER_EXPIRED: "timer_expired",
 
-  // Video engagement (if you have videos)
+  // Video engagement events
+  VIDEO_CLICK: "video_click",
   VIDEO_START: "video_start",
-  VIDEO_25_PERCENT: "video_watched_25_percent",
-  VIDEO_50_PERCENT: "video_watched_50_percent",
-  VIDEO_75_PERCENT: "video_watched_75_percent",
+  VIDEO_PROGRESS: "video_progress",
+  VIDEO_PROGRESS_10: "video_progress_10_percent",
+  VIDEO_PROGRESS_25: "video_progress_25_percent",
+  VIDEO_PROGRESS_50: "video_progress_50_percent",
+  VIDEO_PROGRESS_75: "video_progress_75_percent",
   VIDEO_COMPLETE: "video_complete",
 
   // Form interactions

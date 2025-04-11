@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
 import tiago2 from "../../assets/negocioViral/tiago2.png";
+import { useMetaPixel } from "../../contexts/MetaPixelContext";
+import useNegocioViralTracking, {
+  NegocioViralEvents,
+} from "../../utils/negocioViralTracker";
 
 // Add type declaration for Vimeo
 declare global {
@@ -27,6 +31,112 @@ const MainContent: React.FC<MainContentProps> = ({
   const videoRef = useRef<HTMLIFrameElement>(null);
   const playerRef = useRef<any>(null);
   const vimeoScriptLoaded = useRef(false);
+  const videoProgressTracked = useRef<{ [key: number]: boolean }>({
+    10: false,
+    25: false,
+    50: false,
+    75: false,
+    100: false,
+  });
+  const videoStartTracked = useRef(false);
+
+  // Setup Meta Pixel tracking
+  const { trackStandardEvent } = useMetaPixel();
+  const tracking = useNegocioViralTracking();
+
+  // Video tracking function
+  const setupVideoTracking = (player: any) => {
+    if (!player) return;
+
+    // Track video start
+    player.on("play", () => {
+      if (!videoStartTracked.current) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_START, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          page: "negocio_viral",
+        });
+        videoStartTracked.current = true;
+      }
+    });
+
+    // Track video progress
+    player.on("timeupdate", (data: any) => {
+      const percent = Math.floor(data.percent * 100);
+
+      // Check for 10% progress
+      if (percent >= 10 && !videoProgressTracked.current[10]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          percent: 10,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[10] = true;
+      }
+
+      // Check for 25% progress
+      if (percent >= 25 && !videoProgressTracked.current[25]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          percent: 25,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[25] = true;
+      }
+
+      // Check for 50% progress
+      if (percent >= 50 && !videoProgressTracked.current[50]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          percent: 50,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[50] = true;
+      }
+
+      // Check for 75% progress
+      if (percent >= 75 && !videoProgressTracked.current[75]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_PROGRESS, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          percent: 75,
+          page: "negocio_viral",
+        });
+        videoProgressTracked.current[75] = true;
+      }
+    });
+
+    // Track video complete
+    player.on("ended", () => {
+      if (!videoProgressTracked.current[100]) {
+        tracking.trackCustomEvent(NegocioViralEvents.VIDEO_COMPLETE, {
+          video_id: "hero_video",
+          video_name: "Negocio Viral Hero",
+          video_position: "hero",
+          percent: 100,
+          page: "negocio_viral",
+        });
+
+        // Also track standard Meta Pixel event for video complete
+        trackStandardEvent("ViewContent", {
+          content_name: "Negocio Viral Hero Video Complete",
+          content_category: "video",
+          content_ids: ["hero_video_complete"],
+          page: "negocio_viral",
+        });
+
+        videoProgressTracked.current[100] = true;
+      }
+    });
+  };
 
   // Set up intersection observer to detect when video is visible
   useEffect(() => {
@@ -66,6 +176,7 @@ const MainContent: React.FC<MainContentProps> = ({
         // Get the Vimeo player instance
         if (window.Vimeo) {
           playerRef.current = new window.Vimeo.Player(videoRef.current);
+          setupVideoTracking(playerRef.current);
         }
       }
     } catch {
@@ -85,6 +196,7 @@ const MainContent: React.FC<MainContentProps> = ({
       // When script is loaded, if video is already loaded, initialize the player
       if (videoRef.current && window.Vimeo) {
         playerRef.current = new window.Vimeo.Player(videoRef.current);
+        setupVideoTracking(playerRef.current);
       }
     };
     document.body.appendChild(script);
@@ -107,6 +219,14 @@ const MainContent: React.FC<MainContentProps> = ({
 
   // Handle click on video
   const handleVideoClick = () => {
+    // Track video click event
+    tracking.trackCustomEvent(NegocioViralEvents.VIDEO_CLICK, {
+      video_id: "hero_video",
+      video_name: "Negocio Viral Hero",
+      video_position: "hero",
+      page: "negocio_viral",
+    });
+
     // If Vimeo script isn't loaded yet, load it
     if (!vimeoScriptLoaded.current) {
       loadVimeoScript();
@@ -121,6 +241,7 @@ const MainContent: React.FC<MainContentProps> = ({
     // If player doesn't exist yet but Vimeo is loaded, create the player
     else if (window.Vimeo && videoRef.current) {
       playerRef.current = new window.Vimeo.Player(videoRef.current);
+      setupVideoTracking(playerRef.current);
       playerRef.current.setVolume(1);
       playerRef.current.play();
       setIsPlaying(true);
