@@ -52,7 +52,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
   const features = [
     "Ações de Marketing Que Geram Caixa Imediato",
     "4 Bônus Exclusivos de Alto Valor",
-    "Acesso Vitalício ao Método Completo",
+    "Acesso Por 12 Meses ao Método Completo",
     "Atualizações Gratuitas Para Sempre",
     "Comunidade Exclusiva de Suporte",
     "Garantia de 7 Dias Incondicional",
@@ -237,7 +237,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
                   <h3 className="text-white text-xl md:text-2xl font-bold tracking-wide leading-tight">
                     Método Completo Negócio Viral
                     <span className="block text-white/80 text-sm font-medium mt-1">
-                      Diversas Ações + 4 Bônus + Acesso Vitalício
+                      Diversas Ações + 4 Bônus + Acesso Por 12 Meses
                     </span>
                   </h3>
                 </div>

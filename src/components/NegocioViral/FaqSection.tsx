@@ -47,7 +47,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ onFaqExpand }) => {
     {
       question: "Como recebo o acesso?",
       answer:
-        "Assim que o pagamento for confirmado, você recebe tudo por e-mail. O acesso é imediato e vitalício.",
+        "Assim que o pagamento for confirmado, você recebe tudo por e-mail. O acesso é imediato e por 12 meses.",
     },
     {
       question: "E se eu não gostar?",

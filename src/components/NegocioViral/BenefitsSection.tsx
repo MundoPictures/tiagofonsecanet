@@ -59,7 +59,7 @@ const BenefitsSection: React.FC = () => {
           </h3>
           <p className="text-gray-300 text-sm leading-relaxed">
             Ambiente seguro e criptografado. Seus dados estão protegidos e o
-            acesso é vitalício.
+            acesso é por 12 meses.
           </p>
         </div>
       </div>
