@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButton from "./CtaButton";
+import tiago2 from "../../assets/negocioViral/tiago2.png";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
   NegocioViralEvents,
@@ -368,7 +369,7 @@ const MainContent: React.FC<MainContentProps> = ({
           </div>
         </motion.div>
 
-        {/* Mobile video - only visible on mobile, placed below the button */}
+        {/* Mobile image - only visible on mobile, placed below the button */}
         {isMobile && (
           <motion.div
             className="mt-8 block md:hidden w-full"
@@ -377,64 +378,85 @@ const MainContent: React.FC<MainContentProps> = ({
             animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
+            {/* Mobile-specific image with glow effect and video overlay */}
             <div className="relative w-[95%] mx-auto">
-              {/* Video container */}
-              <div
-                ref={videoContainerRef}
-                className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl mt-8"
-                style={{ aspectRatio: "16/9" }}
-                onClick={handleVideoClick}
-              >
-                <div
-                  style={{
-                    padding: "56.25% 0 0 0",
-                    position: "relative",
-                    background: "#000",
-                  }}
-                  className="relative"
-                >
-                  <iframe
-                    ref={videoRef}
-                    src="https://player.vimeo.com/video/1074076463?h=6f1cf79bbc&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata"
-                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                    title="Copy Negocio Viral"
-                  ></iframe>
+              {/* Enhanced glow behind Tiago */}
+              <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-green-500/30 via-green-400/15 to-transparent rounded-full filter blur-xl opacity-70 scale-110" />
 
-                  {/* Play button overlay that disappears when video is playing */}
-                  {!isPlaying && (
-                    <motion.div
-                      className="absolute inset-0 flex items-center justify-center z-10 bg-black/30 cursor-pointer"
-                      initial={{ opacity: 1 }}
-                      animate={{ opacity: isPlaying ? 0 : 1 }}
-                      transition={{ duration: 0.3 }}
-                    >
+              <img
+                src={tiago2}
+                alt="Tiago"
+                className="w-full h-auto object-contain drop-shadow-2xl"
+                onLoad={() => setIsLoaded(true)}
+                style={{
+                  filter: "drop-shadow(0 0 15px rgba(74, 222, 128, 0.5))",
+                  transform: "scale(0.95)",
+                  maxHeight: "min(70vh, 500px)",
+                }}
+                width="400"
+                height="600"
+                loading="eager"
+              />
+
+              {/* Video overlay container positioned on top of the image, shifted down 20px */}
+              <div className="absolute inset-0 flex items-center justify-center translate-y-24">
+                <div
+                  ref={videoContainerRef}
+                  className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl mt-8"
+                  style={{ aspectRatio: "16/9" }}
+                  onClick={handleVideoClick}
+                >
+                  <div
+                    style={{
+                      padding: "56.25% 0 0 0",
+                      position: "relative",
+                      background: "#000",
+                    }}
+                    className="relative"
+                  >
+                    <iframe
+                      ref={videoRef}
+                      src="https://player.vimeo.com/video/1074076463?h=6f1cf79bbc&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata"
+                      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                      style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                      title="Copy Negocio Viral"
+                    ></iframe>
+
+                    {/* Play button overlay that disappears when video is playing */}
+                    {!isPlaying && (
                       <motion.div
-                        className="bg-green-500 h-14 w-14 rounded-full flex items-center justify-center cursor-pointer"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
+                        className="absolute inset-0 flex items-center justify-center z-10 bg-black/30 cursor-pointer"
+                        initial={{ opacity: 1 }}
+                        animate={{ opacity: isPlaying ? 0 : 1 }}
+                        transition={{ duration: 0.3 }}
                       >
-                        <svg
-                          className="w-8 h-8 text-white"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
+                        <motion.div
+                          className="bg-green-500 h-14 w-14 rounded-full flex items-center justify-center cursor-pointer"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
                         >
-                          <path d="M8 5v14l11-7z"></path>
-                        </svg>
+                          <svg
+                            className="w-8 h-8 text-white"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                          >
+                            <path d="M8 5v14l11-7z"></path>
+                          </svg>
+                        </motion.div>
+                        <div className="absolute bottom-3 left-0 right-0 text-center text-white text-sm font-semibold">
+                          <span className="bg-black/50 px-3 py-1 rounded-full">
+                            Clique para assistir com áudio
+                          </span>
+                        </div>
                       </motion.div>
-                      <div className="absolute bottom-3 left-0 right-0 text-center text-white text-sm font-semibold">
-                        <span className="bg-black/50 px-3 py-1 rounded-full">
-                          Clique para assistir com áudio
-                        </span>
-                      </div>
-                    </motion.div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

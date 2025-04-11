@@ -67,6 +67,9 @@ export default function NegocioViral() {
   useEffect(() => {
     // Only track if we haven't tracked this page view yet
     if (!initialPageViewTracked.current) {
+      // Get source from URL
+      const source = tracking.getTrafficSource();
+
       // Track standard Meta Pixel ViewContent event
       trackStandardEvent("ViewContent", {
         content_name: "Negocio Viral",
@@ -75,34 +78,17 @@ export default function NegocioViral() {
         content_type: "product",
       });
 
-      // Parse URL to get source parameter
-      const urlParams = new URLSearchParams(window.location.search);
-      const source = urlParams.get("source");
-
-      // Track custom page load event with source info
-      tracking.trackCustomEvent("page_loaded", {
-        page: "negocio_viral",
-        referrer: document.referrer,
-        url: window.location.href,
-        source: source || "direct",
-      });
-
       // If we have a valid source parameter, track a specific event for it
       if (source && VALID_SOURCES.includes(source) && !sourceTracked.current) {
-        console.log("source", source);
         // Track specific source access event
-        tracking.trackCustomEvent("source_accessed_page", {
-          source: source,
-          page: "negocio_viral",
+        tracking.trackCustomEvent("acessou_pagina_por_origem", {
           url: window.location.href,
         });
 
         // Send specific event format requested by user
         const formattedSource =
           source.charAt(0).toUpperCase() + source.slice(1);
-        tracking.trackCustomEvent(`${formattedSource}AccessedPage`, {
-          page: "negocio_viral",
-        });
+        tracking.trackCustomEvent(`Acessou_Pagina_Por_${formattedSource}`, {});
 
         sourceTracked.current = true;
       }
@@ -110,7 +96,7 @@ export default function NegocioViral() {
       // Mark as tracked
       initialPageViewTracked.current = true;
     }
-  }, []); // Empty dependency array - only runs once on mount
+  }, []);
 
   // Add/remove the class to html element on mount/unmount
   useEffect(() => {
@@ -151,11 +137,7 @@ export default function NegocioViral() {
       {/* Countdown Timer - Fixed at the top */}
       <CountdownTimer
         initialMinutes={10}
-        onExpire={() =>
-          tracking.trackCustomEvent("timer_expired", {
-            page: "negocio_viral",
-          })
-        }
+        onExpire={() => tracking.trackCustomEvent("temporizador_expirado", {})}
       />
 
       {/* Hero section with background */}
@@ -208,9 +190,8 @@ export default function NegocioViral() {
             >
               <TestimonialsSection
                 onTestimonialInteraction={(testimonialId) =>
-                  tracking.trackCustomEvent("testimonial_interaction", {
+                  tracking.trackCustomEvent("interagiu_depoimento", {
                     testimonial_id: testimonialId,
-                    page: "negocio_viral",
                   })
                 }
               />
@@ -269,13 +250,6 @@ export default function NegocioViral() {
                     value: price,
                     currency: "BRL",
                   });
-
-                  // Also track custom checkout click event
-                  tracking.trackCustomEvent("click_checkout_button", {
-                    plan_id: planId,
-                    price: price,
-                    currency: "BRL",
-                  });
                 }}
               />
             </SectionViewTracker>
@@ -287,9 +261,7 @@ export default function NegocioViral() {
             >
               <GuaranteeSection
                 onGuaranteeClick={() =>
-                  tracking.trackCustomEvent("guarantee_click", {
-                    page: "negocio_viral",
-                  })
+                  tracking.trackCustomEvent("clicou_garantia", {})
                 }
               />
             </SectionViewTracker>
@@ -309,9 +281,8 @@ export default function NegocioViral() {
             >
               <FaqSection
                 onFaqExpand={(faqId) =>
-                  tracking.trackCustomEvent("faq_expanded", {
+                  tracking.trackCustomEvent("expandiu_faq", {
                     faq_id: faqId,
-                    page: "negocio_viral",
                   })
                 }
               />
