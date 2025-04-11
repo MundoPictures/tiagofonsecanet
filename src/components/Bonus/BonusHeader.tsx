@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
-import { FaGift, FaLock, FaFire } from "react-icons/fa";
+import { FaGift, FaLock } from "react-icons/fa";
 import { BonusHeaderProps } from "./types";
 import { useState, useEffect } from "react";
 
 export const BonusHeader = ({
   formSubmitted,
   expirationTime,
-  remainingSpots,
 }: BonusHeaderProps) => {
   // Countdown timer state
   const [timeLeft, setTimeLeft] = useState({
@@ -60,38 +59,6 @@ export const BonusHeader = ({
           </div>
         </motion.div>
       )}
-
-      {/* Limited spots notification */}
-      <motion.div
-        className="max-w-xl mx-auto mb-8 bg-red-500/20 border border-red-500/30 rounded-lg p-3 flex items-center justify-center gap-2 text-white"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{
-          opacity: 1,
-          y: 0,
-          boxShadow: [
-            "0 0 0px rgba(239, 68, 68, 0)",
-            "0 0 15px rgba(239, 68, 68, 0.5)",
-            "0 0 0px rgba(239, 68, 68, 0)",
-          ],
-        }}
-        transition={{
-          duration: 0.5,
-          boxShadow: {
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-          },
-        }}
-      >
-        <FaFire className="text-red-400" />
-        <p className="font-medium text-sm">
-          <span className="font-bold">ATENÇÃO:</span> Restam apenas{" "}
-          <span className="font-extrabold text-red-300">
-            {remainingSpots} vagas
-          </span>{" "}
-          para hoje!
-        </p>
-      </motion.div>
 
       {/* Hero Section */}
       <motion.div
