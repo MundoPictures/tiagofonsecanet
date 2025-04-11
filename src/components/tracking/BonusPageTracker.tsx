@@ -5,12 +5,11 @@ import {
 } from "../../utils/bonusPageTracker";
 import useScrollTracker from "../../hooks/useScrollTracker";
 import { useInView } from "react-intersection-observer";
-import { FeatureItem, BenefitItem } from "../../components/Bonus";
+import { BenefitItem } from "../../components/Bonus";
 
 interface BonusPageTrackerProps {
   formSubmitted: boolean;
   remainingSpots: number;
-  features: FeatureItem[];
   benefits: BenefitItem[];
   expirationTime: Date;
 }
@@ -22,7 +21,6 @@ interface BonusPageTrackerProps {
 const BonusPageTracker: React.FC<BonusPageTrackerProps> = ({
   formSubmitted,
   remainingSpots,
-  features,
   benefits,
   expirationTime,
 }) => {
@@ -37,7 +35,7 @@ const BonusPageTracker: React.FC<BonusPageTrackerProps> = ({
     threshold: 0.5,
     triggerOnce: true,
   });
-  const [featuresRef, featuresInView] = useInView({
+  const [featuresRef] = useInView({
     threshold: 0.3,
     triggerOnce: true,
   });
@@ -109,19 +107,6 @@ const BonusPageTracker: React.FC<BonusPageTrackerProps> = ({
       spotsIndicatorTracked.current = true;
     }
   }, [spotsIndicatorInView, remainingSpots, tracking]);
-
-  // Rastrear visualização da seção de recursos
-  useEffect(() => {
-    if (featuresInView) {
-      features.forEach((feature, index) => {
-        tracking.trackFeatureViewed(feature.title, {
-          indice_recurso: index,
-          descricao_recurso: feature.description,
-          icone_recurso: feature.icon,
-        });
-      });
-    }
-  }, [featuresInView, features, tracking]);
 
   // Rastrear visualização da seção de benefícios
   useEffect(() => {

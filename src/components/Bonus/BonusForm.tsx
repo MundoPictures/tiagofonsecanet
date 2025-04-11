@@ -100,7 +100,7 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
           transition={{ duration: 0.5, delay: 0.4 }}
         >
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 text-white">
-            Garanta Seu Material Exclusivo{" "}
+            Garanta Seu Presente Exclusivo{" "}
             <span className="text-emerald-400">Gratuito</span>
           </h2>
 
@@ -411,7 +411,7 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
 
             {/* Button content */}
             <span className="text-lg md:text-xl font-bold relative z-10 tracking-wide group-hover:tracking-wider transition-all duration-300">
-              SOLICITAR MEU MATERIAL
+              SOLICITAR MEU PRESENTE
             </span>
 
             {/* Icon background flash */}

@@ -22,7 +22,7 @@ export const BonusHeader = ({
       if (difference > 0) {
         setTimeLeft({
           hours: Math.floor((difference / (1000 * 60 * 60)) % 1),
-          minutes: Math.floor((difference / 1000 / 60) % 30),
+          minutes: Math.floor((difference / 1000 / 60) % 5),
           seconds: Math.floor((difference / 1000) % 60),
         });
       }
@@ -54,7 +54,7 @@ export const BonusHeader = ({
         >
           <div className="flex items-center justify-center gap-3 text-lg md:text-xl font-bold">
             <FaGift className="text-yellow-300 animate-pulse" />
-            Enviamos o material exclusivo para seu WhatsApp
+            Enviamos o presente exclusivo para seu WhatsApp
             <FaGift className="text-yellow-300 animate-pulse" />
           </div>
         </motion.div>
@@ -83,29 +83,15 @@ export const BonusHeader = ({
               repeatType: "reverse",
             }}
           >
-            Material Exclusivo e Gratuito
+            Presente Exclusivo e Gratuito
           </motion.div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-white leading-tight">
-            Descubra O Segredo
+            Receba Seu
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">
-              Dos Negócios De Sucesso
+              Presente Exclusivo
             </span>
           </h1>
-
-          <motion.p
-            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <span className="font-semibold text-white">
-              Material completo revelando
-            </span>{" "}
-            as estratégias secretas que estão transformando negócios comuns em
-            máquinas de vendas. Preencha o formulário para ter acesso ao
-            conteúdo exclusivo.
-          </motion.p>
 
           {/* Countdown Timer */}
           <motion.div

@@ -29,11 +29,6 @@ export const BonusFooter = () => {
             reservados.
           </span>
         </p>
-
-        <p className="text-xs text-gray-600 mt-2 max-w-2xl mx-auto">
-          Este site não é afiliado ao WhatsApp ou Meta Platforms Inc. Ao
-          fornecer seus dados, você concorda com nossa política de privacidade.
-        </p>
       </div>
     </motion.footer>
   );

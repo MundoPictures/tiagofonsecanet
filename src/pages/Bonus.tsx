@@ -4,10 +4,8 @@ import {
   BonusBackground,
   BonusHeader,
   BonusForm,
-  BonusFeatures,
   BonusFooter,
   FormData,
-  FeatureItem,
   BenefitItem,
 } from "../components/Bonus";
 import BonusPageTracker from "../components/tracking/BonusPageTracker";
@@ -31,35 +29,13 @@ export default function Bonus() {
   const onSubmit = (_data: FormData) => {
     // Redirect to WhatsApp with message
     const message = encodeURIComponent(
-      "Olá, gostaria de solicitar o material exclusivo em PDF!"
+      "Olá, gostaria de solicitar o presente exclusivo!!!"
     );
-    window.location.href = `https://wa.me/551131350879?text=${message}`;
+    window.location.href = `https://wa.me/5511919735222?text=${message}`;
 
     // Show confirmation message
     setFormSubmitted(true);
   };
-
-  // Features data with enhanced descriptions
-  const features: FeatureItem[] = [
-    {
-      title: "Material Exclusivo",
-      description:
-        "Estratégias comprovadas que geram resultados consistentes para seu negócio",
-      icon: "🔥",
-    },
-    {
-      title: "Conteúdo Detalhado",
-      description:
-        "Receba o PDF completo com todo o material no seu WhatsApp após análise",
-      icon: "📑",
-    },
-    {
-      title: "Método Completo",
-      description:
-        "Descubra o passo a passo exato que transformou centenas de negócios",
-      icon: "🚀",
-    },
-  ];
 
   // Benefits data with enhanced copy
   const benefits: BenefitItem[] = [
@@ -89,8 +65,6 @@ export default function Bonus() {
 
           <BonusForm onSubmit={onSubmit} remainingSpots={remainingSpots} />
 
-          <BonusFeatures features={features} benefits={benefits} />
-
           <BonusFooter />
         </div>
 
@@ -98,7 +72,6 @@ export default function Bonus() {
         <BonusPageTracker
           formSubmitted={formSubmitted}
           remainingSpots={remainingSpots}
-          features={features}
           benefits={benefits}
           expirationTime={expirationTime}
         />
