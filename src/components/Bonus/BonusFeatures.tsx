@@ -168,9 +168,18 @@ export const BonusFeatures = ({ features, benefits }: BonusFeaturesProps) => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1 }}
             >
-              <motion.a
-                href="#form"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg"
+              <motion.button
+                onClick={(e) => {
+                  e.preventDefault();
+                  const formElement = document.getElementById("form");
+                  if (formElement) {
+                    formElement.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 animate={{
@@ -188,7 +197,7 @@ export const BonusFeatures = ({ features, benefits }: BonusFeaturesProps) => {
               >
                 <FaFire className="text-yellow-300" />
                 <span>Garantir Meu Acesso</span>
-              </motion.a>
+              </motion.button>
             </motion.div>
 
             {/* Trust indicators */}

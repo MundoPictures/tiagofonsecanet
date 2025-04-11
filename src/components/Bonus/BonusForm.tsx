@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import {
@@ -7,12 +7,17 @@ import {
   FaShieldAlt,
   FaLock,
   FaUsers,
+  FaEye,
 } from "react-icons/fa";
 import { FormData, BonusFormProps } from "./types";
 import { useBonusPageTracking } from "../../utils/bonusPageTracker";
+import { useState, useEffect } from "react";
 
 export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
   const tracking = useBonusPageTracking();
+  const [viewerCount, setViewerCount] = useState(12 + remainingSpots);
+  const [isIncreasing, setIsIncreasing] = useState(true);
+  const countAnimation = useAnimation();
 
   const {
     register,
@@ -37,6 +42,44 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
     // Call the original onSubmit handler
     onSubmit(data);
   };
+
+  // Dynamic viewer count logic
+  useEffect(() => {
+    // Initial base count linked to remaining spots
+    setViewerCount(12 + remainingSpots);
+
+    // Create random fluctuations in viewer count
+    const fluctuationInterval = setInterval(() => {
+      setViewerCount((prev) => {
+        // Determine direction (increasing or decreasing)
+        const shouldSwitch = Math.random() < 0.15; // 15% chance to switch direction
+        if (shouldSwitch) {
+          setIsIncreasing((current) => !current);
+        }
+
+        // Calculate the new count
+        if (isIncreasing) {
+          // Increase with randomness
+          const increase = Math.floor(Math.random() * 3) + 1; // 1-3 new viewers
+          return prev + increase;
+        } else {
+          // Decrease with randomness
+          const decrease = Math.floor(Math.random() * 2) + 1; // 1-2 viewers leave
+          // Ensure we don't go below base count minus 5
+          return Math.max(prev - decrease, 12 + remainingSpots - 5);
+        }
+      });
+
+      // Trigger count animation
+      countAnimation.start({
+        scale: [1, 1.25, 1],
+        color: ["#10b981", "#10b981", "#10b981"],
+        transition: { duration: 0.5 },
+      });
+    }, 3000 + Math.random() * 5000); // Random interval between 3-8 seconds
+
+    return () => clearInterval(fluctuationInterval);
+  }, [remainingSpots, isIncreasing, countAnimation]);
 
   return (
     <motion.div
@@ -67,21 +110,24 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
             análise
           </p>
 
-          {/* People viewing counter */}
+          {/* People viewing counter - simplified version */}
           <motion.div
-            className="flex items-center justify-center gap-2 text-sm text-emerald-300 mb-5"
+            className="flex items-center justify-center gap-2 text-sm text-emerald-300 mb-5 bg-gray-800/40 py-2 px-3 rounded-full shadow-inner border border-emerald-900/30"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <FaUsers className="text-emerald-400" />
-            <motion.span
-              animate={{ opacity: [1, 0.7, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <span className="font-medium">{12 + remainingSpots}</span> pessoas
-              estão vendo esta página
+            <FaEye className="text-emerald-400 animate-pulse" />
+            <motion.span animate={countAnimation} className="font-medium">
+              {viewerCount}
             </motion.span>
+            <motion.div
+              animate={{ opacity: [1, 0.7, 1] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="ml-1"
+            >
+              pessoas visualizando essa oferta neste momento
+            </motion.div>
           </motion.div>
 
           {/* Progress indicator */}
