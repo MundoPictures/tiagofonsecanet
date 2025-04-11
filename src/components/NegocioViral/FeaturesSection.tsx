@@ -4,29 +4,57 @@ import { motion } from "../../../src/utils/nonAnimatedComponents";
 const features = [
   {
     icon: "fire",
-    title: "Ações de Marketing Direto",
+    title: "Gatilhos de Ação Imediata",
     description:
-      "As estratégias mais poderosas do mercado para resultados imediatos",
+      "Aprenda por que esperar por oportunidades mata suas vendas — e como virar o jogo com ações diretas.",
   },
   {
     icon: "bolt",
-    title: "Estratégias de Venda Imediata",
-    description: "Técnicas que vendem sem depender de anúncios pagos",
+    title: "Fatos Brutalmente Interessantes",
+    description:
+      "A técnica que prende a atenção de qualquer público e faz seu produto se tornar impossível de ignorar.",
   },
   {
     icon: "target",
-    title: "Métodos para Gerar Fluxo",
-    description: "Atraia mais clientes e aumente seu ticket médio rapidamente",
+    title: "Venda Diária na Prática",
+    description:
+      "Descubra como vender todos os dias sem depender de seguidores ou calendário de postagens.",
   },
   {
     icon: "repeat",
-    title: "Ações Replicáveis",
-    description: "Estratégias que você pode aplicar semana após semana",
+    title: "Mentalidade Geradora de Caixa",
+    description:
+      "Treine sua mente para pensar como quem lucra todos os dias — e construa fontes reais de faturamento.",
   },
   {
     icon: "guide",
-    title: "Passo a Passo Direto",
-    description: "Explicações objetivas com exemplos reais e práticos",
+    title: "Explosão de Vendas em Qualquer Nicho",
+    description:
+      "Use ações comprovadas para multiplicar seu faturamento — servem para qualquer produto ou serviço.",
+  },
+  {
+    icon: "fire",
+    title: "Estratégias que Destravaram Milhares de Negócios",
+    description:
+      "Barreiras mínimas de entrada, combos irresistíveis, promoções relâmpago e muito mais para aplicar já.",
+  },
+  {
+    icon: "bolt",
+    title: "Método Exclusivo para Prestadores de Serviço",
+    description:
+      "Saiba como lotar sua agenda com estratégias simples, práticas e de aplicação imediata.",
+  },
+  {
+    icon: "target",
+    title: "Aumente Seu Ticket com Combos Imbatíveis",
+    description:
+      "Combine serviços e crie ofertas que seu cliente não consegue recusar.",
+  },
+  {
+    icon: "repeat",
+    title: "Diagnóstico que Vende por Você",
+    description:
+      "Aprenda a aplicar um método magnético que cria desejo e conduz o cliente até o 'sim'.",
   },
 ];
 
