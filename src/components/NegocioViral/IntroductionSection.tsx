@@ -227,8 +227,38 @@ const IntroductionSection: React.FC = () => {
     if (playerRef.current) {
       // Turn on sound and ensure playing
       playerRef.current.setVolume(1);
-      playerRef.current.play();
-      setIsPlaying(true);
+      playerRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error: Error) => {
+        console.error("Error playing video:", error);
+      });
+    } else if (window.Vimeo && videoRef.current) {
+      // If player isn't initialized yet, initialize it and play
+      playerRef.current = new window.Vimeo.Player(videoRef.current);
+      setupVideoTracking(playerRef.current);
+      playerRef.current.setVolume(1);
+      playerRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((error: Error) => {
+        console.error("Error playing video:", error);
+      });
+    } else {
+      // Fallback if Vimeo API isn't loaded yet
+      setIsPlaying(true); // At least hide the play button
+      console.log("Vimeo player not initialized yet, trying to load it");
+      // Force load Vimeo script
+      const script = document.createElement("script");
+      script.src = "https://player.vimeo.com/api/player.js";
+      script.async = true;
+      script.onload = () => {
+        if (window.Vimeo && videoRef.current) {
+          playerRef.current = new window.Vimeo.Player(videoRef.current);
+          setupVideoTracking(playerRef.current);
+          playerRef.current.setVolume(1);
+          playerRef.current.play().catch((e: Error) => console.error("Error playing video after script load:", e));
+        }
+      };
+      document.body.appendChild(script);
     }
   };
 
@@ -270,7 +300,7 @@ const IntroductionSection: React.FC = () => {
               >
                 <iframe
                   ref={videoRef}
-                  src="https://player.vimeo.com/video/1074076463?h=6f1cf79bbc&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata"
+                  src="https://player.vimeo.com/video/1074076463?h=6f1cf79bbc&badge=0&autopause=0&player_id=0&app_id=58479&quality=1080p&preload=metadata&dnt=1&transparent=0&portrait=0&title=0"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                   style={{
@@ -324,6 +354,73 @@ const IntroductionSection: React.FC = () => {
             {/* Decorative elements */}
             <div className="absolute cursir -bottom-3 -left-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
             <div className="absolute -top-3 -right-3 w-24 h-24 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
+          </motion.div>
+
+          {/* Video container for mobile only */}
+          <motion.div
+            className="md:hidden w-full max-w-2xl mx-auto mb-10 relative pt-5"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div
+              className="w-full rounded-xl overflow-hidden shadow-2xl shadow-green-500/20 cursor-pointer group"
+              style={{ aspectRatio: "16/9" }}
+              onClick={handleVideoClick}
+            >
+              <div
+                style={{
+                  padding: "56.25% 0 0 0",
+                  position: "relative",
+                  background: "#000",
+                }}
+                className="relative"
+              >
+                <iframe
+                  src="https://player.vimeo.com/video/1074076463?h=6f1cf79bbc&badge=0&autopause=0&player_id=0&app_id=58479&quality=720p&preload=metadata&dnt=1&transparent=0&portrait=0&title=0"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                  title="Copy Negocio Viral Mobile"
+                ></iframe>
+
+                {/* Play button overlay for mobile */}
+                {!isPlaying && (
+                  <div
+                    className="absolute inset-0 flex items-center justify-center z-10 bg-black/20 cursor-pointer active:bg-black/30 transition-all duration-300"
+                  >
+                    <div
+                      className="bg-green-500 h-16 w-16 rounded-full flex items-center justify-center cursor-pointer shadow-lg shadow-green-500/40"
+                    >
+                      <svg
+                        className="w-8 h-8 text-white"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M8 5v14l11-7z"></path>
+                      </svg>
+                    </div>
+                    <div
+                      className="absolute bottom-6 left-0 right-0 text-center"
+                    >
+                      <span className="bg-black/60 text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                        Assista o vídeo com áudio
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            {/* Decorative elements for mobile */}
+            <div className="absolute -bottom-2 -left-2 w-16 h-16 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
+            <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-br from-green-500/20 to-green-400/10 rounded-lg blur-xl z-0"></div>
           </motion.div>
 
           <motion.div
