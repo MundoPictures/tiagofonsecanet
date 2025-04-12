@@ -6,6 +6,7 @@ import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
   NegocioViralEvents,
 } from "../../utils/negocioViralTracker";
+import CtaButton from "./CtaButton";
 
 // Add type declaration for Vimeo
 declare global {
@@ -42,10 +43,12 @@ const videoTestimonials = [
 
 interface TestimonialsSectionProps {
   onTestimonialInteraction?: (testimonialId: string) => void;
+  onCtaClick?: (ctaText: string) => void;
 }
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   onTestimonialInteraction,
+  onCtaClick,
 }) => {
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
   const videoRefs = useRef<Array<HTMLIFrameElement | null>>([]);
@@ -287,6 +290,31 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* CTA Button Section */}
+        <div className="mt-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="w-full flex justify-center"
+          >
+            <CtaButton
+              text="QUERO VIRALIZAR MEU NEGÓCIO"
+              mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
+              size="medium"
+              withShine={true}
+              withArrow={true}
+              withPulse={true}
+              isPricingButton={false}
+              className="shadow-xl shadow-green-500/20 hover:shadow-green-500/30 text-base md:text-base w-full md:w-auto"
+              onClick={() =>
+                onCtaClick && onCtaClick("QUERO VIRALIZAR MEU NEGÓCIO")
+              }
+            />
+          </motion.div>
         </div>
       </div>
     </div>
