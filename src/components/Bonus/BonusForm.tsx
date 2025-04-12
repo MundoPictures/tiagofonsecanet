@@ -105,7 +105,7 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
           </h2>
 
           <p className="text-center text-gray-300 mb-4">
-            Preencha seus dados para receber o material no seu WhatsApp
+            Preencha seus dados para receber seu presente no seu WhatsApp
           </p>
 
           {/* People viewing counter - simplified version */}
