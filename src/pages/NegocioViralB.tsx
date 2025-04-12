@@ -16,8 +16,8 @@ const TargetAudienceSection = lazy(
 const TestimonialsSection = lazy(
   () => import("../components/NegocioViral/TestimonialsSection")
 );
-const PricingSection = lazy(
-  () => import("../components/NegocioViral/PricingSection")
+const PricingSectionB = lazy(
+  () => import("../components/NegocioViral/PricingSectionB")
 );
 const GuaranteeSection = lazy(
   () => import("../components/NegocioViral/GuaranteeSection")
@@ -267,7 +267,7 @@ export default function NegocioViral() {
               sectionName="pricing"
               onVisible={handleSectionVisible}
             >
-              <PricingSection
+              <PricingSectionB
                 onModalOpen={(modalName) =>
                   tracking.trackModalInteraction("open", modalName)
                 }

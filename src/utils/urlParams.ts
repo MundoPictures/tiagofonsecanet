@@ -28,6 +28,8 @@ export const getCheckoutUrl = (
     yt: "https://go.tiagofonseca.net/pay/lote-01-negocio-viral-youtube",
     ads: "https://go.tiagofonseca.net/pay/lote-01-negocio-viral-tpg",
     sts: "https://go.tiagofonseca.net/pay/lote-01-negocio-viral-sts",
+    YouTubecaptura:
+      "https://go.tiagofonseca.net/pay/lote-01-negocio-viral-youtube",
   };
 
   // Return the URL for the source or the default URL if source is not found

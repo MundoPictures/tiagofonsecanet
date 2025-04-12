@@ -14,6 +14,7 @@ interface CtaButtonProps {
   withPulse?: boolean;
   isPricingButton?: boolean; // Flag to determine if this is the pricing button
   id?: string; // Add ID prop
+  isViralB?: boolean;
 }
 
 const CtaButton: React.FC<CtaButtonProps> = ({
@@ -26,6 +27,7 @@ const CtaButton: React.FC<CtaButtonProps> = ({
   withShine = true,
   withPulse = true,
   isPricingButton = false,
+  isViralB = false,
   id, // Add ID parameter
 }) => {
   const { openModal, scrollToPricing } = useModal();
@@ -34,7 +36,11 @@ const CtaButton: React.FC<CtaButtonProps> = ({
 
   const handleClick = () => {
     if (isPricingButton) {
-      openModal(); // Only pricing button opens the modal
+      if (isViralB) {
+        console.log("Redirecting to checkout");
+      } else {
+        openModal(); // Only pricing button opens the modal
+      }
     } else {
       scrollToPricing(); // All other buttons scroll to pricing section
     }
