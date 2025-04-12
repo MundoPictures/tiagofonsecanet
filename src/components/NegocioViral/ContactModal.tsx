@@ -92,8 +92,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
       // Get dynamic checkout URL based on source parameter
       const checkoutUrl = getCheckoutUrl();
 
+      const finalCheckoutUrl = `${checkoutUrl}?name=${data.name}&email=${data.email}&phone=${data.whatsapp}&phone_local_code=55`;
+
       // Redirect to appropriate payment page based on source
-      window.location.href = checkoutUrl;
+      window.location.href = finalCheckoutUrl;
     } catch (error) {
       console.error("Error submitting form:", error);
 
