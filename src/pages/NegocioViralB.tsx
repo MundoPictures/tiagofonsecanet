@@ -5,6 +5,7 @@ import MainContent from "../components/NegocioViral/MainContent";
 // Import components that are visible above the fold directly
 import CountdownTimer from "../components/NegocioViral/CountdownTimer";
 import WhatsAppButton from "../components/NegocioViral/WhatsAppButton";
+import Notification from "../components/NegocioViral/Notification";
 // Lazy load components that are below the fold
 const BenefitsSection = lazy(
   () => import("../components/NegocioViral/BenefitsSection")
@@ -36,6 +37,7 @@ const BonusSection = lazy(
   () => import("../components/NegocioViral/BonusSection")
 );
 import "../styles/NegocioViralScrollbar.css";
+import "../styles/notification.css";
 // Import background images with explicit width/height
 import backgroundimage from "../assets/negocioViral/bg3.png";
 import backgroundimagemobile from "../assets/negocioViral/bg3.png";
@@ -146,6 +148,18 @@ export default function NegocioViral() {
       <WhatsAppButton
         phoneNumber="+551131350879"
         message="Olá! Tenho interesse em saber mais sobre o treinamento Negócio Viral, poderia me enviar mais informações?"
+      />
+
+      {/* Floating Notification */}
+      <Notification
+        message="Parabéns, você já recebeu seu presente no WhatsApp!"
+        duration={10000}
+        onDisappear={() =>
+          tracking.trackCustomEvent("notification_closed", {
+            notification_type: "welcome_gift",
+            page: "negocio_viral",
+          })
+        }
       />
 
       {/* Countdown Timer - Fixed at the top */}
