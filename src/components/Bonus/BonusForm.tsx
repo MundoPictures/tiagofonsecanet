@@ -105,8 +105,7 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
           </h2>
 
           <p className="text-center text-gray-300 mb-4">
-            Preencha seus dados para receber o material no seu WhatsApp após
-            análise
+            Preencha seus dados para receber o material no seu WhatsApp
           </p>
 
           {/* People viewing counter - simplified version */}
@@ -125,7 +124,7 @@ export const BonusForm = ({ onSubmit, remainingSpots }: BonusFormProps) => {
               transition={{ duration: 3, repeat: Infinity }}
               className="ml-1"
             >
-              pessoas visualizando essa oferta neste momento
+              pessoas preenchendo agora
             </motion.div>
           </motion.div>
 

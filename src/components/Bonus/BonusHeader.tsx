@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FaGift, FaLock } from "react-icons/fa";
+import { FaGift } from "react-icons/fa";
 import { BonusHeaderProps } from "./types";
 import { useState, useEffect } from "react";
 
@@ -86,10 +86,10 @@ export const BonusHeader = ({
             Presente Exclusivo e Gratuito
           </motion.div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-white leading-tight">
-            Receba Seu
+          <h1 className="text-3xl md:text-3xl lg:text-4xl font-extrabold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-100 to-white leading-tight">
+            Preencha Seus Dados
             <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500">
-              Presente Exclusivo
+              Para Receber Seu Presente
             </span>
           </h1>
 
@@ -100,13 +100,6 @@ export const BonusHeader = ({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            <p className="mb-3 text-emerald-300 flex items-center justify-center gap-2">
-              <FaLock size={14} />
-              <span className="text-sm uppercase tracking-wider font-semibold">
-                Esta oferta expira em:
-              </span>
-            </p>
-
             <div className="flex items-center justify-center gap-3 text-white">
               <div className="flex flex-col items-center">
                 <div className="bg-gradient-to-b from-emerald-900 to-gray-900 w-20 h-20 rounded-lg flex items-center justify-center border border-emerald-700/30 shadow-lg">
