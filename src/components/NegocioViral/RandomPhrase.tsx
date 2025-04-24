@@ -7,14 +7,14 @@ interface RandomPhraseProps {
 }
 
 const phrases = [
-  "Crie um Negócio Tão Irresistível Que Vira Máquina de Clientes Todos os Dias",
-  "Quando Seu Negócio Viraliza, Você não Corre atrás de Clientes — Eles Correm Até Você",
-  "Se o Mercado Não Fala de Você Ainda, É Porque seu negócio Não Viralizou",
-  "Negócios que Viralizam e Não Dão Conta de Atender",
-  "Viralize ou Fique Invisível: Como Criar um Negócio que Todo Mundo Vai Querer",
-  "O Mercado Vai Falar do muito do seu negócio",
-  "Você Está a um Passo de Ter um Negócio que Ninguém Consegue Ignorar",
-  "Aviso: Seu Negócio Pode Virar a Nova Obsessão do Mercado (Se Você Aplicar Isso)",
+  "Crie um negócio tão irresistível que vira máquina de clientes todos os dias",
+  "Quando seu negócio viraliza, você não corre atrás de clientes — eles correm até você",
+  "Se o mercado não fala de você ainda, é porque seu negócio não viralizou",
+  "Negócios que viralizam não dão conta de atender tantos clientes",
+  "Viralize ou fique invisível: como criar um negócio que todo mundo vai querer",
+  "O mercado vai falar muito do seu negócio",
+  "Você está a um passo de ter um negócio que ninguém consegue ignorar",
+  "Aviso: seu negócio pode virar a nova obsessão do mercado (se você aplicar isso)",
 ];
 
 const RandomPhrase: React.FC<RandomPhraseProps> = ({
