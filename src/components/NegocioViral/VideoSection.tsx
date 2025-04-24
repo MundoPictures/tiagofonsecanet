@@ -1,7 +1,7 @@
 import React from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 
 const VideoSection: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const VideoSection: React.FC = () => {
           </h2>
 
           <div className="w-full px-4 sm:px-0 max-w-md mx-auto">
-            <CtaButton
+            <CtaButtonWithPhrase
               text="QUERO VIRALIZAR MEU NEGÓCIO"
               mobileText="VIRALIZAR"
               size="large"
@@ -112,7 +112,7 @@ const VideoSection: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <div className="w-full px-4 sm:px-0">
-            <CtaButton
+            <CtaButtonWithPhrase
               text="QUERO VIRALIZAR MEU NEGÓCIO"
               mobileText="VIRALIZAR AGORA MEU"
               size="large"

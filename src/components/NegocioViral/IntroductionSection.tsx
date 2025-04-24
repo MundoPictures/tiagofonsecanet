@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
   NegocioViralEvents,
@@ -474,7 +474,7 @@ const IntroductionSection: React.FC = () => {
             </span>
           </p>
 
-          <CtaButton
+          <CtaButtonWithPhrase
             text="QUERO VENDER TODO DIA"
             mobileText="QUERO VENDER 3X MAIS"
             size="medium"

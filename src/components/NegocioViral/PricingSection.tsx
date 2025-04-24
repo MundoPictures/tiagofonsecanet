@@ -1,7 +1,7 @@
 import React from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 import { useModal } from "../../contexts/ModalContext";
 
 interface PricingSectionProps {
@@ -524,7 +524,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
 
                       {/* CTA Button - styled exactly like the reference image */}
                       <div className="px-6 py-6 relative z-10 flex flex-col items-center">
-                        <CtaButton
+                        <CtaButtonWithPhrase
                           id="pricing-cta-button"
                           text="QUERO GARANTIR MINHA VAGA"
                           size="small"
@@ -782,7 +782,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
-            <CtaButton
+            <CtaButtonWithPhrase
               text="QUERO GARANTIR MINHA VAGA"
               size="large"
               withShine={true}

@@ -1,7 +1,7 @@
 import React from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 
 interface GuaranteeSectionProps {
   onGuaranteeClick?: () => void;
@@ -279,7 +279,7 @@ const GuaranteeSection: React.FC<GuaranteeSectionProps> = ({
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <CtaButton
+                <CtaButtonWithPhrase
                   text="QUERO GARANTIR SEM RISCO"
                   mobileText="QUERO GARANTIR HOJE"
                   size="medium"

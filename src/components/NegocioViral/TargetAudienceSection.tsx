@@ -1,7 +1,7 @@
 import React from "react";
 // import { motion } from "framer-motion";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 
 const targetProfiles = [
   {
@@ -234,7 +234,7 @@ const TargetAudienceSection: React.FC = () => {
             , o Negócio Viral foi feito para você.
           </p>
 
-          <CtaButton
+          <CtaButtonWithPhrase
             text="QUERO ENTRAR NO NEGÓCIO VIRAL AGORA"
             mobileText="QUERO VENDER 3X MAIS"
             size="medium"

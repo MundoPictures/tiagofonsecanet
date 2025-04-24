@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 import tiago2 from "../../assets/negocioViral/tiago2.png";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
@@ -316,7 +316,7 @@ const MainContent: React.FC<MainContentProps> = ({
         </motion.p>
 
         <motion.div variants={itemVariants} className="w-full md:w-auto">
-          <CtaButton
+          <CtaButtonWithPhrase
             text="QUERO VIRALIZAR MEU NEGÓCIO"
             mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
             size="medium"

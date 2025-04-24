@@ -6,7 +6,7 @@ import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
   NegocioViralEvents,
 } from "../../utils/negocioViralTracker";
-import CtaButton from "./CtaButton";
+import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 
 // Add type declaration for Vimeo
 declare global {
@@ -301,7 +301,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             transition={{ duration: 0.5 }}
             className="w-full flex justify-center"
           >
-            <CtaButton
+            <CtaButtonWithPhrase
               text="QUERO VIRALIZAR MEU NEGÓCIO"
               mobileText="QUERO VIRALIZAR MEU NEGÓCIO"
               size="medium"
