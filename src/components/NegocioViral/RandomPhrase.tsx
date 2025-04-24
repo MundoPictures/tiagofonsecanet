@@ -51,7 +51,7 @@ const RandomPhrase: React.FC<RandomPhraseProps> = ({ className = "" }) => {
         {/* Triangle pointer for balloon effect */}
         <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[12px] border-t-green-500"></div>
 
-        <p className="text-sm font-semibold text-green-700 italic px-2">
+        <p className="text-sm md:text-base font-bold text-green-700 italic px-2">
           {phrase}
         </p>
 
