@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
-import tiago2 from "../../assets/negocioViral/tiago2.png";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import useNegocioViralTracking, {
   NegocioViralEvents,
@@ -289,8 +288,9 @@ const MainContent: React.FC<MainContentProps> = ({
           className="text-white text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-extrabold mb-4 md:mb-6 leading-tight"
           variants={itemVariants}
         >
-          Clientes loucos <span className="text-green-400">para comprar</span>, agenda cheia,
-          produto esgotando e fila de espera - Quando seu negócio viraliza, vira uma máquina de lucro.
+          Clientes loucos <span className="text-green-400">para comprar</span>,
+          agenda cheia, produto esgotando e fila de espera - Quando seu negócio
+          viraliza, vira uma máquina de lucro.
           <span className="text-gray-200 mt-3 md:mt-3 text-[11px] sm:text-sm md:text-2xl flex justify-center gap-3 md:gap-4 font-semibold">
             <span className="bg-green-800/40 p-1 text-white">SEM ANÚNCIOS</span>
             <span className="bg-green-800/40 p-1 text-white">
@@ -380,29 +380,14 @@ const MainContent: React.FC<MainContentProps> = ({
           >
             {/* Mobile-specific image with glow effect and video overlay */}
             <div className="relative w-[95%] mx-auto">
-              {/* Enhanced glow behind Tiago */}
+              {/* Enhanced glow behind video */}
               <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-green-500/30 via-green-400/15 to-transparent rounded-full filter blur-xl opacity-70 scale-110" />
 
-              <img
-                src={tiago2}
-                alt="Tiago"
-                className="w-full h-auto object-contain drop-shadow-2xl"
-                onLoad={() => setIsLoaded(true)}
-                style={{
-                  filter: "drop-shadow(0 0 15px rgba(74, 222, 128, 0.5))",
-                  transform: "scale(0.95)",
-                  maxHeight: "min(70vh, 500px)",
-                }}
-                width="400"
-                height="600"
-                loading="eager"
-              />
-
-              {/* Video overlay container positioned on top of the image, shifted down 20px */}
-              <div className="absolute inset-0 flex items-center justify-center translate-y-24">
+              {/* Video container */}
+              <div className="relative">
                 <div
                   ref={videoContainerRef}
-                  className="w-full h-full max-w-[100%] max-h-[75%] rounded-xl overflow-hidden shadow-2xl mt-8"
+                  className="w-full h-full max-w-[100%] rounded-xl overflow-hidden shadow-2xl mt-8"
                   style={{ aspectRatio: "16/9" }}
                   onClick={handleVideoClick}
                 >
