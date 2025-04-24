@@ -3,6 +3,7 @@ import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
 import tituloPagina from "../../assets/negocioViral/titulopagina.png";
+import tituloPaginaDesk from "../../assets/negocioViral/titulopagina-desk.png";
 import useNegocioViralTracking, {
   NegocioViralEvents,
 } from "../../utils/negocioViralTracker";
@@ -293,7 +294,13 @@ const MainContent: React.FC<MainContentProps> = ({
           alt="Negocio Viral"
           className="w-full md:hidden block h-auto"
         />
-        <motion.h2
+
+        <img
+          src={tituloPaginaDesk}
+          alt="Negocio Viral"
+          className="md:block hidden h-auto w-full"
+        />
+        {/* <motion.h2
           className="text-white md:block hidden text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-4 md:mb-6 leading-tight"
           variants={itemVariants}
         >
@@ -309,10 +316,10 @@ const MainContent: React.FC<MainContentProps> = ({
               SEM ENROLAÇÃO
             </span>
           </span>
-        </motion.h2>
+        </motion.h2> */}
 
         <motion.p
-          className="text-gray-200 text-base md:text-base mb-4 md:mb-8 w-full"
+          className="text-gray-200 text-base md:text-base mt-8 mb-4 md:mb-8 w-full"
           variants={itemVariants}
         >
           <span className="italic">
