@@ -15,6 +15,7 @@ interface CtaButtonWithPhraseProps {
   id?: string;
   isViralB?: boolean;
   phraseClassName?: string;
+  showPhrase?: boolean;
 }
 
 const CtaButtonWithPhrase: React.FC<CtaButtonWithPhraseProps> = ({
@@ -30,10 +31,11 @@ const CtaButtonWithPhrase: React.FC<CtaButtonWithPhraseProps> = ({
   isViralB = false,
   id,
   phraseClassName = "",
+  showPhrase = true,
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <RandomPhrase className={phraseClassName} />
+      {showPhrase && <RandomPhrase className={phraseClassName} />}
       <CtaButton
         text={text}
         mobileText={mobileText}

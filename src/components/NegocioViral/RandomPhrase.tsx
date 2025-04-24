@@ -3,6 +3,7 @@ import { useInView } from "react-intersection-observer";
 
 interface RandomPhraseProps {
   className?: string;
+  visible?: boolean;
 }
 
 const phrases = [
@@ -16,7 +17,10 @@ const phrases = [
   "Aviso: Seu Negócio Pode Virar a Nova Obsessão do Mercado (Se Você Aplicar Isso)",
 ];
 
-const RandomPhrase: React.FC<RandomPhraseProps> = ({ className = "" }) => {
+const RandomPhrase: React.FC<RandomPhraseProps> = ({
+  className = "",
+  visible = true,
+}) => {
   const [phrase, setPhrase] = useState<string>("");
   const [hasAnimated, setHasAnimated] = useState(false);
   const { ref, inView } = useInView({
@@ -35,6 +39,8 @@ const RandomPhrase: React.FC<RandomPhraseProps> = ({ className = "" }) => {
       setHasAnimated(true);
     }
   }, [inView, hasAnimated]);
+
+  if (!visible) return null;
 
   return (
     <div ref={ref} className={`mb-3 text-center ${className}`}>

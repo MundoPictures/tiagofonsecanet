@@ -337,6 +337,7 @@ const MainContent: React.FC<MainContentProps> = ({
             onClick={() =>
               onCtaClick && onCtaClick("QUERO VIRALIZAR MEU NEGÓCIO")
             }
+            showPhrase={false}
           />
         </motion.div>
 
