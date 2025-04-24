@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "../../../src/utils/nonAnimatedComponents";
 import CtaButtonWithPhrase from "./CtaButtonWithPhrase";
 import { useMetaPixel } from "../../contexts/MetaPixelContext";
+import tituloPagina from "../../assets/negocioViral/titulopagina.png";
 import useNegocioViralTracking, {
   NegocioViralEvents,
 } from "../../utils/negocioViralTracker";
@@ -287,8 +288,9 @@ const MainContent: React.FC<MainContentProps> = ({
         animate="visible"
         variants={containerVariants}
       >
+        <img src={tituloPagina} alt="Negocio Viral" className="w-full h-auto" />
         <motion.h2
-          className="text-white text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-4 md:mb-6 leading-tight"
+          className="text-white md:block hidden text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-4 md:mb-6 leading-tight"
           variants={itemVariants}
         >
           CLIENTES LOUCOS <span className="text-green-400">PARA COMPRAR</span>,
