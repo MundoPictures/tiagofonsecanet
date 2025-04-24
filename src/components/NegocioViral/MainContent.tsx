@@ -318,7 +318,7 @@ const MainContent: React.FC<MainContentProps> = ({
           <span className="italic">
             Mesmo que você esteja começando do zero ou vendendo pouco hoje.
           </span>
-          <span className="block mt-3 md:mt-4 font-medium text-green-300">
+          <span className="block mt-1 md:mt-4 font-medium text-green-300">
             Estratégias aplicáveis em qualquer negócio – com potencial de gerar
             vendas nas próximas 24h, mesmo sem experiência.
           </span>
@@ -341,7 +341,7 @@ const MainContent: React.FC<MainContentProps> = ({
         </motion.div>
 
         <motion.div
-          className="mt-4 md:mt-5 flex items-center justify-center md:justify-start space-x-5 md:space-x-5 w-full"
+          className="mt-2 md:mt-5 flex items-center justify-center md:justify-start space-x-5 md:space-x-5 w-full"
           variants={itemVariants}
         >
           <div className="flex items-center">
