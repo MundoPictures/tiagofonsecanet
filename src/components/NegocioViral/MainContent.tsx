@@ -288,7 +288,11 @@ const MainContent: React.FC<MainContentProps> = ({
         animate="visible"
         variants={containerVariants}
       >
-        <img src={tituloPagina} alt="Negocio Viral" className="w-full h-auto" />
+        <img
+          src={tituloPagina}
+          alt="Negocio Viral"
+          className="w-full md:hidden block h-auto"
+        />
         <motion.h2
           className="text-white md:block hidden text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-4 md:mb-6 leading-tight"
           variants={itemVariants}
