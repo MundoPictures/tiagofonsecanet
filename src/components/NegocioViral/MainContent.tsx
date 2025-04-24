@@ -289,8 +289,8 @@ const MainContent: React.FC<MainContentProps> = ({
           className="text-white text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-extrabold mb-4 md:mb-6 leading-tight"
           variants={itemVariants}
         >
-          Venda <span className="text-green-400">3x Mais</span> em 7 Dias
-          Aplicando as Ações de Marketing Que Geram Caixa Imediato
+          Clientes loucos <span className="text-green-400">para comprar</span>, agenda cheia,
+          produto esgotando e fila de espera - Quando seu negócio viraliza, vira uma máquina de lucro.
           <span className="text-gray-200 mt-3 md:mt-3 text-[11px] sm:text-sm md:text-2xl flex justify-center gap-3 md:gap-4 font-semibold">
             <span className="bg-green-800/40 p-1 text-white">SEM ANÚNCIOS</span>
             <span className="bg-green-800/40 p-1 text-white">
