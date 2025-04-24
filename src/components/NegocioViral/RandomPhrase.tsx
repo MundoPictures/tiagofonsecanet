@@ -37,23 +37,29 @@ const RandomPhrase: React.FC<RandomPhraseProps> = ({ className = "" }) => {
   }, [inView, hasAnimated]);
 
   return (
-    <div ref={ref} className={`mt-3 text-center ${className}`}>
+    <div ref={ref} className={`mb-3 text-center ${className}`}>
       <div
-        className={`relative inline-block max-w-lg mx-auto p-4 rounded-2xl bg-green-100 border-2 border-green-500 shadow-lg balloon-animation`}
+        className={`relative inline-block w-3/4 p-1 mx-auto rounded-2xl bg-green-100 border-2 border-green-500 shadow-lg balloon-animation`}
         style={{
           opacity: hasAnimated ? 1 : 0,
           transform: hasAnimated ? "translateY(0)" : "translateY(20px)",
           transition: "opacity 0.8s ease, transform 0.8s ease",
           visibility: hasAnimated ? "visible" : "hidden",
           animation: hasAnimated ? "pulse 2s ease-in-out" : "none",
+          marginBottom: "8px",
         }}
       >
-        {/* Triangle pointer for balloon effect */}
-        <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[12px] border-t-green-500"></div>
-
-        <p className="text-sm md:text-base font-bold text-green-700 italic px-2">
+        <p className="text-sm md:text-base font-bold text-green-700 italic px-2 py-1">
           {phrase}
         </p>
+
+        {/* Triangle pointer at the bottom pointing down */}
+        <div
+          className="absolute bottom-[-12px] left-1/2 transform -translate-x-1/2 w-0 h-0 
+                        border-l-[12px] border-l-transparent 
+                        border-r-[12px] border-r-transparent 
+                        border-t-[12px] border-t-green-500"
+        ></div>
 
         <style>
           {`

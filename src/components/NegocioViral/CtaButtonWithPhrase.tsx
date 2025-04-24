@@ -33,6 +33,7 @@ const CtaButtonWithPhrase: React.FC<CtaButtonWithPhraseProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
+      <RandomPhrase className={phraseClassName} />
       <CtaButton
         text={text}
         mobileText={mobileText}
@@ -46,9 +47,8 @@ const CtaButtonWithPhrase: React.FC<CtaButtonWithPhraseProps> = ({
         isViralB={isViralB}
         id={id}
       />
-      <RandomPhrase className={phraseClassName} />
     </div>
   );
 };
 
-export default CtaButtonWithPhrase; 
+export default CtaButtonWithPhrase;
