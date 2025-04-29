@@ -1,11 +1,8 @@
 import { motion } from "framer-motion";
 import { FaRegCopyright, FaGraduationCap } from "react-icons/fa";
-import { MentoryFooterProps } from "./types";
+import { ConselheiroFooterProps } from "./types";
 
-export const MentoryFooter = ({
-  customTitle,
-  customDescription,
-}: MentoryFooterProps = {}) => {
+export const ConselheiroFooter = ({}: ConselheiroFooterProps = {}) => {
   return (
     <motion.footer
       className="mt-16 py-8 text-center relative z-10 border-t border-gray-800"
@@ -17,13 +14,14 @@ export const MentoryFooter = ({
         <div className="flex items-center justify-center gap-2 mb-4">
           <FaGraduationCap className="text-emerald-500 text-xl" />
           <h3 className="text-lg font-semibold text-emerald-400">
-            {customTitle || "Mentoria Legacy"}
+            Programa Conselheiro
           </h3>
         </div>
 
         <p className="text-gray-400 mb-4 max-w-2xl mx-auto">
-          {customDescription ||
-            "Um programa exclusivo para empreendedores que desejam triplicar suas vendas e transformar seus negócios com estratégias comprovadas."}
+          Um programa exclusivo de mentoria pessoal de 1 ano com Tiago Fonseca
+          para empreendedores que desejam transformar seus negócios com
+          estratégias comprovadas.
         </p>
 
         <p className="text-sm text-gray-500 mb-2 flex items-center justify-center gap-1">

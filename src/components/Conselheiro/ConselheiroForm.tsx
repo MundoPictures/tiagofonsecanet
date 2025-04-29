@@ -2,21 +2,16 @@ import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import { FaArrowRight, FaLock } from "react-icons/fa";
-import { MentoryFormProps } from "./types";
-import { MentoryFormData } from "../../pages/MentoryLegacy";
+import { ConselheiroFormProps } from "./types";
+import { ConselheiroFormData } from "./types";
 
-export const MentoryForm = ({
-  onSubmit,
-  customPriceText,
-  customButtonText,
-  customFormTitle,
-}: MentoryFormProps) => {
+export const ConselheiroForm = ({ onSubmit }: ConselheiroFormProps) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<MentoryFormData>();
+  } = useForm<ConselheiroFormData>();
 
   // Format phone number
   const formatPhoneNumber = (value: string) => {
@@ -27,11 +22,11 @@ export const MentoryForm = ({
     <div className="max-w-3xl mx-auto my-12 bg-gray-800/30 p-6 sm:p-8 lg:p-10 backdrop-blur-sm rounded-2xl border border-emerald-500/10 shadow-xl relative z-10">
       <div className="mb-8">
         <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-white text-center">
-          {customFormTitle || "Formulário de Inscrição"}
+          Formulário de Inscrição - Programa Conselheiro
         </h2>
         <p className="text-emerald-400/90 font-medium text-center mb-4">
-          Preencha os dados abaixo para se candidatar à{" "}
-          <span className="text-white font-bold">Mentoria Legacy</span> com
+          Preencha os dados abaixo para se candidatar ao{" "}
+          <span className="text-white font-bold">Programa Conselheiro</span> com
           Tiago Fonseca
         </p>
       </div>
@@ -430,8 +425,8 @@ export const MentoryForm = ({
         {/* Disposição para investir */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            {customPriceText ||
-              "Você está disposto investir até 10Mil, para você aprender com o Tiago Fonseca a Triplicar suas vendas?"}{" "}
+            Você está disposto investir até 100Mil, para você ter Tiago Fonseca
+            como seu mentor pessoal por 1 ano?{" "}
             <span className="text-red-500">*</span>
           </label>
           <div className="space-y-2">
@@ -501,7 +496,7 @@ export const MentoryForm = ({
             className="w-full relative py-4 px-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-lg rounded-xl shadow-lg overflow-hidden group flex items-center justify-center transition-all duration-300 ease-out hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
           >
             <span className="mr-1">
-              {customButtonText || "QUERO FAZER PARTE DA MENTORIA LEGACY"}
+              QUERO FAZER PARTE DO PROGRAMA CONSELHEIRO
             </span>
             <span>
               <FaArrowRight className="ml-1" />
