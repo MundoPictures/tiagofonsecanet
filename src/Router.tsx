@@ -7,6 +7,7 @@ import NegocioViral from "./pages/NegocioViral";
 import NegocioViralB from "./pages/NegocioViralB";
 import RouterTracker from "./components/RouterTracker";
 import Bonus from "./pages/Bonus";
+import MentoryLegacy from "./pages/MentoryLegacy";
 
 const AppRouter: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter: React.FC = () => {
         <Route path="/negocio-viral" element={<NegocioViral />} />
         <Route path="/negocioviral" element={<NegocioViralB />} />
         <Route path="/bonus" element={<Bonus />} />
+        <Route path="/mentoria-legacy" element={<MentoryLegacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
