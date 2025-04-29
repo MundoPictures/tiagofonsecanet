@@ -7,7 +7,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
-import assTiago from "../assets/assTiago.png";
+import assTiago from "../assets/foto-circulo-tiagolink.jpg";
 
 function Home() {
   const links = [
@@ -67,11 +67,23 @@ function Home() {
   ];
 
   const contactInfo = [
-    { title: "Contato", email: "assessoria@mundopictures.com.br" },
-    { title: "Contrate palestra", email: "assessoria@mundopictures.com.br" },
+    { 
+      id: 4,
+      title: "Contato", 
+      url: "mailto:assessoria@mundopictures.com.br",
+      image: "https://placehold.co/800x300/262626/FFB700/png?text=Contato"
+    },
+    { 
+      id: 5,
+      title: "Contrate palestra", 
+      url: "mailto:assessoria@mundopictures.com.br",
+      image: "https://placehold.co/800x300/262626/FF4500/png?text=Contrate+Palestra"
+    },
     {
+      id: 6,
       title: "Publicidade e parcerias",
-      email: "assessoria@mundopictures.com.br",
+      url: "mailto:assessoria@mundopictures.com.br",
+      image: "https://placehold.co/800x300/262626/9333EA/png?text=Publicidade+e+Parcerias"
     },
   ];
 
@@ -207,6 +219,41 @@ function Home() {
               />
             </motion.a>
           ))}
+          
+          {/* Contact Cards */}
+          {contactInfo.map((contact, index) => (
+            <motion.a
+              key={contact.id}
+              href={contact.url}
+              className="block w-full rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  delay: (index + links.length) * 0.1,
+                  duration: 0.3,
+                },
+              }}
+              whileHover={{
+                y: -5,
+                scale: 1.02,
+                boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.5)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
+            >
+              <img
+                src={contact.image}
+                alt={contact.title}
+                className="w-full h-auto object-cover rounded-xl"
+              />
+            </motion.a>
+          ))}
         </motion.div>
 
         {/* Social Links */}
@@ -229,8 +276,8 @@ function Home() {
           ))}
         </motion.div>
 
-        {/* Contact Information */}
-        <motion.div className="w-full mb-10 space-y-3" variants={itemVariants}>
+        {/* Contact Information - Removed and replaced with cards above */}
+        {/* <motion.div className="w-full mb-10 space-y-3" variants={itemVariants}>
           {contactInfo.map((contact, index) => (
             <motion.div
               key={index}
@@ -265,7 +312,7 @@ function Home() {
               </a>
             </motion.div>
           ))}
-        </motion.div>
+        </motion.div> */}
 
         {/* Footer */}
         <motion.div
