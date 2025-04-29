@@ -14,51 +14,62 @@ function Home() {
     {
       id: 1,
       title: "Mentoria Legacy",
-      image: "https://placehold.co/800x450/1a1a1a/1a1a1a",
       url: "#",
-      gradient: "from-yellow-500 to-orange-600",
+      image:
+        "https://placehold.co/800x300/262626/FFA500/png?text=Mentoria+Legacy",
     },
     {
       id: 2,
       title: "Negócio Viral",
-      image: "https://placehold.co/800x450/1a1a1a/1a1a1a",
       url: "https://www.tiagofonseca.net/negocio-viral?source=bio",
-      gradient: "from-blue-600 to-purple-600",
+      image:
+        "https://placehold.co/800x300/262626/4F46E5/png?text=Negócio+Viral",
     },
     {
       id: 3,
       title: "Conselheiro",
-      image: "https://placehold.co/800x450/1a1a1a/1a1a1a",
       url: "#",
-      gradient: "from-green-600 to-teal-600",
+      image: "https://placehold.co/800x300/262626/10B981/png?text=Conselheiro",
+    },
+    {
+      id: 4,
+      title: "Palestra",
+      url: "#",
+      image:
+        "https://placehold.co/800x300/262626/F59E0B/png?text=Contrate+Palestrante",
     },
   ];
 
   const socialLinks = [
     {
-      icon: <FaInstagram size={24} />,
+      icon: <FaInstagram size={22} />,
       url: "https://instagram.com/",
       label: "Instagram",
+      color: "hover:text-pink-500",
     },
     {
-      icon: <FaYoutube size={24} />,
+      icon: <FaYoutube size={22} />,
       url: "https://youtube.com/",
       label: "YouTube",
+      color: "hover:text-red-500",
     },
     {
-      icon: <FaLinkedin size={24} />,
+      icon: <FaLinkedin size={22} />,
       url: "https://linkedin.com/",
       label: "LinkedIn",
+      color: "hover:text-blue-500",
     },
     {
-      icon: <FaTiktok size={24} />,
+      icon: <FaTiktok size={22} />,
       url: "https://tiktok.com/",
       label: "TikTok",
+      color: "hover:text-gray-200",
     },
     {
-      icon: <FaWhatsapp size={24} />,
+      icon: <FaWhatsapp size={22} />,
       url: "https://wa.me/",
       label: "WhatsApp",
+      color: "hover:text-green-500",
     },
   ];
 
@@ -74,8 +85,8 @@ function Home() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
+        delayChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -85,13 +96,38 @@ function Home() {
     visible: {
       y: 0,
       opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12,
+      },
+    },
+  };
+
+  const profileVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        delay: 0.1,
+      },
     },
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen px-4 py-8 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-black via-gray-950 to-gray-900 text-white font-sans overflow-x-hidden">
+      {/* Background decoration */}
+      <div className="fixed inset-0 z-0 opacity-10 pointer-events-none">
+        <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-amber-500 blur-[120px]" />
+        <div className="absolute top-1/3 -left-20 w-60 h-60 rounded-full bg-blue-600 blur-[100px]" />
+        <div className="absolute bottom-0 right-1/4 w-60 h-60 rounded-full bg-purple-600 blur-[100px]" />
+      </div>
+
       <motion.div
-        className="w-full max-w-md mx-auto flex flex-col items-center"
+        className="w-full max-w-md mx-auto flex flex-col items-center py-10 px-4 sm:px-6 relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -99,65 +135,98 @@ function Home() {
         {/* Profile Section */}
         <motion.div
           className="flex flex-col items-center mb-8"
-          variants={itemVariants}
+          variants={profileVariants}
         >
-          <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-white mb-4 shadow-lg">
+          <motion.div
+            className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden mb-6 shadow-2xl ring-2 ring-amber-500/40"
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              transition: {
+                type: "spring",
+                stiffness: 100,
+              },
+            }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+          >
             <img
               src={assTiago}
               alt="Tiago Fonseca"
               className="w-full h-full object-cover"
             />
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold mb-1">Tiago Fonseca</h1>
-          <p className="text-gray-300 text-center mb-4 max-w-xs">
+          </motion.div>
+          <motion.p
+            className="text-center text-lg font-bold text-amber-500 mb-1"
+            variants={itemVariants}
+          >
+            @TIAGOFONSECA
+          </motion.p>
+          <motion.h1
+            className="text-2xl sm:text-3xl font-bold mb-2 text-center"
+            variants={itemVariants}
+          >
+            Tiago Fonseca
+          </motion.h1>
+          <motion.p
+            className="text-gray-300 text-center mb-8 max-w-xs font-medium px-4"
+            variants={itemVariants}
+          >
             Especialista em Marketing Digital & Crescimento de Negócios
-          </p>
+          </motion.p>
         </motion.div>
 
-        {/* Links Section */}
-        <div className="w-full space-y-5 mb-8">
-          {links.map((link) => (
+        {/* Links Section - Full Image Cards */}
+        <motion.div className="w-full space-y-4 mb-10" variants={itemVariants}>
+          {links.map((link, index) => (
             <motion.a
               key={link.id}
               href={link.url}
-              className="w-full block rounded-lg overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
+              className="block w-full rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  delay: index * 0.1,
+                  duration: 0.3,
+                },
+              }}
+              whileHover={{
+                y: -5,
+                scale: 1.02,
+                boxShadow: "0 15px 30px -10px rgba(0, 0, 0, 0.5)",
+              }}
               whileTap={{ scale: 0.98 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 10,
+              }}
             >
-              <div className="relative aspect-[16/9] w-full">
-                <div
-                  className={`absolute inset-0 bg-gradient-to-r ${link.gradient}`}
-                ></div>
-                <img
-                  src={link.image}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-cover opacity-0"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white font-bold text-lg sm:text-xl text-center">
-                    {link.title}
-                  </span>
-                </div>
-              </div>
+              <img
+                src={link.image}
+                alt={link.title}
+                className="w-full h-auto object-cover rounded-xl"
+              />
             </motion.a>
           ))}
-        </div>
+        </motion.div>
 
         {/* Social Links */}
         <motion.div
-          className="flex justify-center space-x-6 mb-8"
+          className="flex justify-center space-x-5 mb-10 bg-white/5 backdrop-blur-sm px-8 py-4 rounded-full border border-white/10 shadow-lg"
           variants={itemVariants}
         >
           {socialLinks.map((social, index) => (
             <motion.a
               key={index}
               href={social.url}
-              className="text-white hover:text-gray-300 transition-colors"
+              className={`p-3 rounded-full text-white ${social.color} transition-all bg-black/30`}
               aria-label={social.label}
-              whileHover={{ scale: 1.2 }}
+              whileHover={{ scale: 1.15, y: -4 }}
               whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400 }}
             >
               {social.icon}
             </motion.a>
@@ -165,22 +234,36 @@ function Home() {
         </motion.div>
 
         {/* Contact Information */}
-        <motion.div className="w-full mb-8" variants={itemVariants}>
+        <motion.div className="w-full mb-10 space-y-3" variants={itemVariants}>
           {contactInfo.map((contact, index) => (
             <motion.div
               key={index}
-              className="flex flex-col sm:flex-row items-center justify-center mb-4 text-center sm:text-left px-3"
-              whileHover={{ scale: 1.02 }}
+              className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: {
+                  delay: 0.2 + index * 0.1,
+                  duration: 0.3,
+                },
+              }}
+              whileHover={{
+                scale: 1.02,
+                backgroundColor: "rgba(255,255,255,0.05)",
+              }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <a
                 href={`mailto:${contact.email}`}
-                className="flex flex-col sm:flex-row items-center text-gray-300 hover:text-white transition-colors"
+                className="flex flex-col sm:flex-row items-center justify-between p-3.5 text-gray-200 hover:text-white"
               >
-                <div className="flex items-center mb-1 sm:mb-0">
-                  <FaEnvelope className="mr-2" />
+                <div className="flex items-center mb-2 sm:mb-0">
+                  <FaEnvelope className="mr-3 text-amber-500/80" />
                   <span className="font-medium">{contact.title}</span>
                 </div>
-                <span className="text-gray-400 hover:text-gray-200 transition-colors text-sm sm:ml-2 break-all">
+                <span className="text-gray-300 hover:text-white transition-colors text-sm break-all">
                   {contact.email}
                 </span>
               </a>
@@ -190,7 +273,7 @@ function Home() {
 
         {/* Footer */}
         <motion.div
-          className="text-center text-sm text-gray-400"
+          className="text-center text-sm text-gray-400 border-t border-white/10 pt-6 w-full"
           variants={itemVariants}
         >
           <p>
