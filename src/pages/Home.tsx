@@ -14,7 +14,7 @@ function Home() {
     {
       id: 1,
       title: "Mentoria Legacy",
-      url: "#",
+      url: "/mentoria-legacy",
       image:
         "https://placehold.co/800x300/262626/FFA500/png?text=Mentoria+Legacy",
     },
@@ -28,15 +28,8 @@ function Home() {
     {
       id: 3,
       title: "Conselheiro",
-      url: "#",
+      url: "/conselheiro",
       image: "https://placehold.co/800x300/262626/10B981/png?text=Conselheiro",
-    },
-    {
-      id: 4,
-      title: "Palestra",
-      url: "#",
-      image:
-        "https://placehold.co/800x300/262626/F59E0B/png?text=Contrate+Palestrante",
     },
   ];
 
@@ -74,9 +67,12 @@ function Home() {
   ];
 
   const contactInfo = [
-    { title: "Contato", email: "contato@mundopictures.com.br" },
-    { title: "Contrate palestra", email: "contato@mundopictures.com.br" },
-    { title: "Publicidade e parcerias", email: "contato@mundopictures.com.br" },
+    { title: "Contato", email: "assessoria@mundopictures.com.br" },
+    { title: "Contrate palestra", email: "assessoria@mundopictures.com.br" },
+    {
+      title: "Publicidade e parcerias",
+      email: "assessoria@mundopictures.com.br",
+    },
   ];
 
   // Animation variants
