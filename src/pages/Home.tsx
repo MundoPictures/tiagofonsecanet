@@ -4,7 +4,6 @@ import {
   FaLinkedin,
   FaTiktok,
   FaWhatsapp,
-  FaEnvelope,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import assTiago from "../assets/foto-circulo-tiagolink.jpg";

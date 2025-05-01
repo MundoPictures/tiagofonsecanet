@@ -7,7 +7,6 @@ import { MentoryFormData } from "../../pages/MentoryLegacy";
 
 export const MentoryForm = ({
   onSubmit,
-  customPriceText,
   customButtonText,
   customFormTitle,
 }: MentoryFormProps) => {
