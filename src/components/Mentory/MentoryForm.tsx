@@ -43,38 +43,6 @@ export const MentoryForm = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.6 }}
       >
-        {/* Email */}
-        <div className="form-group">
-          <label className="block text-white font-medium mb-2">
-            E-mail <span className="text-red-500">*</span>
-          </label>
-          <motion.div
-            whileFocus={{ scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 300, damping: 10 }}
-            className="relative"
-          >
-            <input
-              type="email"
-              {...register("email", {
-                required: "E-mail é obrigatório",
-                pattern: {
-                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Formato de e-mail inválido",
-                },
-              })}
-              className={`w-full px-4 py-3 border rounded-xl bg-gray-800/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
-                errors.email
-                  ? "border-red-500/50 focus:ring-red-500/50"
-                  : "border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
-              }`}
-              placeholder="seu@email.com"
-            />
-          </motion.div>
-          {errors.email && (
-            <p className="text-red-400 text-sm mt-2">{errors.email.message}</p>
-          )}
-        </div>
-
         {/* Nome e sobrenome */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
@@ -129,16 +97,14 @@ export const MentoryForm = ({
             />
           </motion.div>
           {errors.bestEmail && (
-            <p className="text-red-400 text-sm mt-2">
-              {errors.bestEmail.message}
-            </p>
+            <p className="text-red-400 text-sm mt-2">{errors.bestEmail.message}</p>
           )}
         </div>
 
-        {/* Whatsapp - celular com DDD */}
+        {/* Telefone */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            Whatsapp - celular com DDD <span className="text-red-500">*</span>
+            Telefone <span className="text-red-500">*</span>
           </label>
           <motion.div
             whileFocus={{ scale: 1.01 }}
@@ -150,21 +116,18 @@ export const MentoryForm = ({
               control={control}
               rules={{ required: "Telefone é obrigatório" }}
               render={({ field }) => (
-                <div className="relative">
-                  <IMaskInput
-                    mask="(00) 00000-0000"
-                    {...field}
-                    onAccept={(value) => {
-                      field.onChange(formatPhoneNumber(value));
-                    }}
-                    className={`w-full px-4 py-3 border rounded-xl bg-gray-800/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
-                      errors.phone
-                        ? "border-red-500/50 focus:ring-red-500/50"
-                        : "border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
-                    }`}
-                    placeholder="(11) 91234-5678"
-                  />
-                </div>
+                <IMaskInput
+                  mask="(00) 00000-0000"
+                  unmask={true}
+                  value={field.value}
+                  onAccept={(value) => field.onChange(formatPhoneNumber(value))}
+                  placeholder="(00) 00000-0000"
+                  className={`w-full px-4 py-3 border rounded-xl bg-gray-800/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                    errors.phone
+                      ? "border-red-500/50 focus:ring-red-500/50"
+                      : "border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
+                  }`}
+                />
               )}
             />
           </motion.div>
@@ -176,7 +139,7 @@ export const MentoryForm = ({
         {/* Instagram */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            Me informe o @ do seu Instagram
+            Instagram <span className="text-red-500">*</span>
           </label>
           <motion.div
             whileFocus={{ scale: 1.01 }}
@@ -185,17 +148,28 @@ export const MentoryForm = ({
           >
             <input
               type="text"
-              {...register("instagram")}
-              className="w-full px-4 py-3 border rounded-xl bg-gray-800/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
+              {...register("instagram", {
+                required: "Instagram é obrigatório",
+              })}
+              className={`w-full px-4 py-3 border rounded-xl bg-gray-800/70 text-white placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                errors.instagram
+                  ? "border-red-500/50 focus:ring-red-500/50"
+                  : "border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
+              }`}
               placeholder="@seuinstagram"
             />
           </motion.div>
+          {errors.instagram && (
+            <p className="text-red-400 text-sm mt-2">
+              {errors.instagram.message}
+            </p>
+          )}
         </div>
 
         {/* Ramo de atuação */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            Qual seu ramo de atuação <span className="text-red-500">*</span>
+            Ramo de atuação <span className="text-red-500">*</span>
           </label>
           <motion.div
             whileFocus={{ scale: 1.01 }}
@@ -366,13 +340,6 @@ export const MentoryForm = ({
             }`}
           >
             <option value="">Selecione seu faturamento</option>
-            <option value="Até 5 mil por mês">Até 5 mil por mês</option>
-            <option value="5 mil a 10 mil por mês">
-              5 mil a 10 mil por mês
-            </option>
-            <option value="10 mil a 20 mil por mês">
-              10 mil a 20 mil por mês
-            </option>
             <option value="30 mil a 50 mil por mês">
               30 mil a 50 mil por mês
             </option>
@@ -399,7 +366,7 @@ export const MentoryForm = ({
         {/* Descrição do negócio */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            Me conte sobre o seu negócio.{" "}
+            Descreva seu negócio em poucas palavras{" "}
             <span className="text-red-500">*</span>
           </label>
           <motion.div
@@ -416,8 +383,8 @@ export const MentoryForm = ({
                   ? "border-red-500/50 focus:ring-red-500/50"
                   : "border-emerald-600/30 focus:ring-emerald-500/50 hover:border-emerald-400/50"
               }`}
-              placeholder="Descreva aqui seu negócio, objetivos e desafios"
-              rows={4}
+              placeholder="Descreva seu negócio"
+              rows={3}
             />
           </motion.div>
           {errors.businessDescription && (
@@ -427,11 +394,10 @@ export const MentoryForm = ({
           )}
         </div>
 
-        {/* Disposição para investir */}
+        {/* Disposto a investir */}
         <div className="form-group">
           <label className="block text-white font-medium mb-2">
-            {customPriceText ||
-              "Você está disposto investir até 10Mil, para você aprender com o Tiago Fonseca a Triplicar suas vendas?"}{" "}
+            Você está disposto a investir 60 Mil em sua empresa para alcançar resultados?{" "}
             <span className="text-red-500">*</span>
           </label>
           <div className="space-y-2">

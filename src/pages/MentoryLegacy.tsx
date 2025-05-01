@@ -8,7 +8,6 @@ import {
 } from "../components/Mentory";
 
 export type MentoryFormData = {
-  email: string;
   name: string;
   bestEmail: string;
   phone: string;
@@ -18,9 +17,6 @@ export type MentoryFormData = {
   employeeCount: "Menos de 5 Funcionários" | "Acima de 5 Funcionários";
   happyWithRevenue: "SIM" | "NÃO";
   monthlyRevenue:
-    | "Até 5 mil por mês"
-    | "5 mil a 10 mil por mês"
-    | "10 mil a 20 mil por mês"
     | "30 mil a 50 mil por mês"
     | "50 mil a 100 mil por mês"
     | "100 mil a 500 mil por mês"
@@ -56,6 +52,7 @@ export default function MentoryLegacy() {
         <div className="container mx-auto px-4 py-12 md:py-16 relative z-10">
           <MentoryHeader formSubmitted={formSubmitted} />
 
+          {/* Você está disposto a investir 60 Mil em sua empresa para alcançar resultados? */}
           <MentoryForm onSubmit={onSubmit} />
 
           <MentoryFooter />

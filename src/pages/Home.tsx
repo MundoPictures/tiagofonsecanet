@@ -8,6 +8,11 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import assTiago from "../assets/foto-circulo-tiagolink.jpg";
+import mentoriaLegacyImg from "../assets/mentoria legacy.png";
+import negocioViralImg from "../assets/negocio viral 2.png";
+import conselheiroImg from "../assets/conselheiro.png";
+import contratePalestraImg from "../assets/contrate palestra.png";
+import publicidadeImg from "../assets/publicidade e parcerias.png";
 
 function Home() {
   const links = [
@@ -15,21 +20,19 @@ function Home() {
       id: 1,
       title: "Mentoria Legacy",
       url: "/mentoria-legacy",
-      image:
-        "https://placehold.co/800x300/262626/FFA500/png?text=Mentoria+Legacy",
+      image: mentoriaLegacyImg,
     },
     {
       id: 2,
       title: "Negócio Viral",
       url: "https://www.tiagofonseca.net/negocio-viral?source=bio",
-      image:
-        "https://placehold.co/800x300/262626/4F46E5/png?text=Negócio+Viral",
+      image: negocioViralImg,
     },
     {
       id: 3,
       title: "Conselheiro",
       url: "/conselheiro",
-      image: "https://placehold.co/800x300/262626/10B981/png?text=Conselheiro",
+      image: conselheiroImg,
     },
   ];
 
@@ -68,22 +71,16 @@ function Home() {
 
   const contactInfo = [
     { 
-      id: 4,
-      title: "Contato", 
-      url: "mailto:assessoria@mundopictures.com.br",
-      image: "https://placehold.co/800x300/262626/FFB700/png?text=Contato"
-    },
-    { 
       id: 5,
       title: "Contrate palestra", 
       url: "mailto:assessoria@mundopictures.com.br",
-      image: "https://placehold.co/800x300/262626/FF4500/png?text=Contrate+Palestra"
+      image: contratePalestraImg
     },
     {
       id: 6,
       title: "Publicidade e parcerias",
       url: "mailto:assessoria@mundopictures.com.br",
-      image: "https://placehold.co/800x300/262626/9333EA/png?text=Publicidade+e+Parcerias"
+      image: publicidadeImg
     },
   ];
 
@@ -320,7 +317,7 @@ function Home() {
           variants={itemVariants}
         >
           <p>
-            © {new Date().getFullYear()} Tiago Fonseca - Todos os direitos
+            {new Date().getFullYear()} Tiago Fonseca - Todos os direitos
             reservados
           </p>
         </motion.div>
