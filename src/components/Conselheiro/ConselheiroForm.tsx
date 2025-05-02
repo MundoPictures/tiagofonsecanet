@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { useForm, Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
-import { FaArrowRight, FaLock } from "react-icons/fa";
+import { FaArrowRight, FaLock, FaSpinner } from "react-icons/fa";
 import { ConselheiroFormProps } from "./types";
 import { ConselheiroFormData } from "./types";
 
-export const ConselheiroForm = ({ onSubmit, InvestmentQuestionField }: ConselheiroFormProps) => {
+export const ConselheiroForm = ({ onSubmit, InvestmentQuestionField, isSubmitting = false }: ConselheiroFormProps) => {
   const {
     register,
     handleSubmit,
@@ -463,14 +463,24 @@ export const ConselheiroForm = ({ onSubmit, InvestmentQuestionField }: Conselhei
         <div className="mt-8 relative">
           <button
             type="submit"
-            className="w-full relative py-4 px-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-lg rounded-xl shadow-lg overflow-hidden group flex items-center justify-center transition-all duration-300 ease-out hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-gray-900"
+            disabled={isSubmitting}
+            className={`w-full relative py-4 px-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white font-bold text-lg rounded-xl shadow-lg overflow-hidden group flex items-center justify-center transition-all duration-300 ease-out hover:from-emerald-500 hover:to-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:ring-offset-2 focus:ring-offset-gray-900 ${isSubmitting ? 'opacity-80 cursor-not-allowed' : ''}`}
           >
-            <span className="mr-1">
-              QUERO FAZER PARTE DO PROGRAMA CONSELHEIRO
-            </span>
-            <span>
-              <FaArrowRight className="ml-1" />
-            </span>
+            {isSubmitting ? (
+              <>
+                <FaSpinner className="animate-spin mr-2" />
+                <span>ENVIANDO...</span>
+              </>
+            ) : (
+              <>
+                <span className="mr-1">
+                  QUERO FAZER PARTE DO PROGRAMA CONSELHEIRO
+                </span>
+                <span>
+                  <FaArrowRight className="ml-1" />
+                </span>
+              </>
+            )}
 
             {/* Button effects */}
             <motion.div
