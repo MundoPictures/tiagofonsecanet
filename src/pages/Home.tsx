@@ -38,21 +38,15 @@ function Home() {
   const socialLinks = [
     {
       icon: <FaInstagram size={22} />,
-      url: "https://instagram.com/",
+      url: "https://instagram.com/tiagofonsecaoficial",
       label: "Instagram",
       color: "hover:text-pink-500",
     },
     {
       icon: <FaYoutube size={22} />,
-      url: "https://youtube.com/",
+      url: "https://youtube.https://www.youtube.com/channel/UCUxz2Q4j4bU1wasCDQTLibQ/",
       label: "YouTube",
       color: "hover:text-red-500",
-    },
-    {
-      icon: <FaLinkedin size={22} />,
-      url: "https://linkedin.com/",
-      label: "LinkedIn",
-      color: "hover:text-blue-500",
     },
     {
       icon: <FaTiktok size={22} />,
@@ -62,7 +56,7 @@ function Home() {
     },
     {
       icon: <FaWhatsapp size={22} />,
-      url: "https://wa.me/",
+      url: "https://api.whatsapp.com/send?phone=551131350879",
       label: "WhatsApp",
       color: "hover:text-green-500",
     },
