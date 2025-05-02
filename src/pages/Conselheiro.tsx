@@ -1,7 +1,7 @@
 import { ConselheiroFooter } from "../components/Conselheiro/ConselheiroFooter";
 import { ConselheiroBackground } from "../components/Conselheiro/ConselheiroBackground";
 import { motion } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { FaArrowRight, FaLock, FaSpinner } from "react-icons/fa";
 
 export default function Conselheiro() {
@@ -23,12 +23,6 @@ export default function Conselheiro() {
     setHasSubmitted(true);
     
     if (formRef.current) {
-      const formData = new FormData(formRef.current);
-      const fullName = formData.get('fullName') as string;
-      const email = formData.get('email') as string;
-      const whatsapp = formData.get('whatsapp') as string;
-      const instagram = formData.get('instagram') as string;
-      
       const iframe = document.createElement('iframe');
       iframe.name = 'hidden-iframe';
       iframe.style.display = 'none';
